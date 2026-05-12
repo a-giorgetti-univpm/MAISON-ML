@@ -1,0 +1,614 @@
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1776316902.908807   13012 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1776316908.449209   13012 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+regression
+ohs
+1
+[ 2  3  4  5  6  7  8  9 10]
+LightGBM
+LOPO
+DecisionTree (DT)
+LOPO
+SVR
+LOPO
+2
+[ 1  3  4  5  6  7  8  9 10]
+LightGBM
+LOPO
+DecisionTree (DT)
+LOPO
+SVR
+LOPO
+3
+[ 1  2  4  5  6  7  8  9 10]
+LightGBM
+LOPO
+DecisionTree (DT)
+LOPO
+SVR
+LOPO
+4
+[ 1  2  3  5  6  7  8  9 10]
+LightGBM
+LOPO
+DecisionTree (DT)
+LOPO
+SVR
+LOPO
+5
+[ 1  2  3  4  6  7  8  9 10]
+LightGBM
+LOPO
+DecisionTree (DT)
+LOPO
+SVR
+LOPO
+6
+[ 1  2  3  4  5  7  8  9 10]
+LightGBM
+LOPO
+DecisionTree (DT)
+LOPO
+SVR
+LOPO
+7
+[ 1  2  3  4  5  6  8  9 10]
+LightGBM
+LOPO
+DecisionTree (DT)
+LOPO
+SVR
+LOPO
+8
+[ 1  2  3  4  5  6  7  9 10]
+LightGBM
+LOPO
+DecisionTree (DT)
+LOPO
+SVR
+LOPO
+9
+[ 1  2  3  4  5  6  7  8 10]
+LightGBM
+LOPO
+DecisionTree (DT)
+LOPO
+SVR
+LOPO
+10
+[1 2 3 4 5 6 7 8 9]
+LightGBM
+LOPO
+DecisionTree (DT)
+LOPO
+SVR
+LOPO
+sis
+1
+[ 2  3  4  5  6  7  8  9 10]
+LightGBM
+LOPO
+DecisionTree (DT)
+LOPO
+SVR
+LOPO
+2
+[ 1  3  4  5  6  7  8  9 10]
+LightGBM
+LOPO
+DecisionTree (DT)
+LOPO
+SVR
+LOPO
+3
+[ 1  2  4  5  6  7  8  9 10]
+LightGBM
+LOPO
+DecisionTree (DT)
+LOPO
+SVR
+LOPO
+4
+[ 1  2  3  5  6  7  8  9 10]
+LightGBM
+LOPO
+DecisionTree (DT)
+LOPO
+SVR
+LOPO
+5
+[ 1  2  3  4  6  7  8  9 10]
+LightGBM
+LOPO
+DecisionTree (DT)
+LOPO
+SVR
+LOPO
+6
+[ 1  2  3  4  5  7  8  9 10]
+LightGBM
+LOPO
+DecisionTree (DT)
+LOPO
+SVR
+LOPO
+7
+[ 1  2  3  4  5  6  8  9 10]
+LightGBM
+LOPO
+DecisionTree (DT)
+LOPO
+SVR
+LOPO
+8
+[ 1  2  3  4  5  6  7  9 10]
+LightGBM
+LOPO
+DecisionTree (DT)
+LOPO
+SVR
+LOPO
+9
+[ 1  2  3  4  5  6  7  8 10]
+LightGBM
+LOPO
+DecisionTree (DT)
+LOPO
+SVR
+LOPO
+10
+[1 2 3 4 5 6 7 8 9]
+LightGBM
+LOPO
+DecisionTree (DT)
+LOPO
+SVR
+LOPO
+oks
+1
+[ 2  3  4  5  6  7  8  9 10]
+LightGBM
+LOPO
+DecisionTree (DT)
+LOPO
+SVR
+LOPO
+2
+[ 1  3  4  5  6  7  8  9 10]
+LightGBM
+LOPO
+DecisionTree (DT)
+LOPO
+SVR
+LOPO
+3
+[ 1  2  4  5  6  7  8  9 10]
+LightGBM
+LOPO
+DecisionTree (DT)
+LOPO
+SVR
+LOPO
+4
+[ 1  2  3  5  6  7  8  9 10]
+LightGBM
+LOPO
+DecisionTree (DT)
+LOPO
+SVR
+LOPO
+5
+[ 1  2  3  4  6  7  8  9 10]
+LightGBM
+LOPO
+DecisionTree (DT)
+LOPO
+SVR
+LOPO
+6
+[ 1  2  3  4  5  7  8  9 10]
+LightGBM
+LOPO
+DecisionTree (DT)
+LOPO
+SVR
+LOPO
+7
+[ 1  2  3  4  5  6  8  9 10]
+LightGBM
+LOPO
+DecisionTree (DT)
+LOPO
+SVR
+LOPO
+8
+[ 1  2  3  4  5  6  7  9 10]
+LightGBM
+LOPO
+DecisionTree (DT)
+LOPO
+SVR
+LOPO
+9
+[ 1  2  3  4  5  6  7  8 10]
+LightGBM
+LOPO
+DecisionTree (DT)
+LOPO
+SVR
+LOPO
+10
+[1 2 3 4 5 6 7 8 9]
+LightGBM
+LOPO
+DecisionTree (DT)
+LOPO
+SVR
+LOPO
+classification
+OHSS_Category_Q
+1
+[ 2  3  4  5  6  7  8  9 10]
+XGBoost
+LOPO
+CatBoost
+LOPO
+LightGBM
+LOPO
+DecisionTree (DT)
+LOPO
+SVC
+LOPO
+2
+[ 1  3  4  5  6  7  8  9 10]
+XGBoost
+LOPO
+CatBoost
+LOPO
+LightGBM
+LOPO
+DecisionTree (DT)
+LOPO
+SVC
+LOPO
+3
+[ 1  2  4  5  6  7  8  9 10]
+XGBoost
+LOPO
+CatBoost
+LOPO
+LightGBM
+LOPO
+DecisionTree (DT)
+LOPO
+SVC
+LOPO
+4
+[ 1  2  3  5  6  7  8  9 10]
+XGBoost
+LOPO
+CatBoost
+LOPO
+LightGBM
+LOPO
+DecisionTree (DT)
+LOPO
+SVC
+LOPO
+5
+[ 1  2  3  4  6  7  8  9 10]
+XGBoost
+LOPO
+CatBoost
+LOPO
+LightGBM
+LOPO
+DecisionTree (DT)
+LOPO
+SVC
+LOPO
+6
+[ 1  2  3  4  5  7  8  9 10]
+XGBoost
+LOPO
+Errore: Invalid classes inferred from unique values of `y`.  Expected: [0 1 2], got [0 1 3]
+CatBoost
+LOPO
+LightGBM
+LOPO
+DecisionTree (DT)
+LOPO
+SVC
+LOPO
+7
+[ 1  2  3  4  5  6  8  9 10]
+XGBoost
+LOPO
+Errore: Invalid classes inferred from unique values of `y`.  Expected: [0 1 2], got [0 1 3]
+CatBoost
+LOPO
+LightGBM
+LOPO
+DecisionTree (DT)
+LOPO
+SVC
+LOPO
+8
+[ 1  2  3  4  5  6  7  9 10]
+XGBoost
+LOPO
+CatBoost
+LOPO
+LightGBM
+LOPO
+DecisionTree (DT)
+LOPO
+SVC
+LOPO
+9
+[ 1  2  3  4  5  6  7  8 10]
+XGBoost
+LOPO
+CatBoost
+LOPO
+LightGBM
+LOPO
+DecisionTree (DT)
+LOPO
+SVC
+LOPO
+10
+[1 2 3 4 5 6 7 8 9]
+XGBoost
+LOPO
+CatBoost
+LOPO
+LightGBM
+LOPO
+DecisionTree (DT)
+LOPO
+SVC
+LOPO
+SISS_Category_Q
+1
+[ 2  3  4  5  6  7  8  9 10]
+XGBoost
+LOPO
+CatBoost
+LOPO
+LightGBM
+LOPO
+DecisionTree (DT)
+LOPO
+SVC
+LOPO
+2
+[ 1  3  4  5  6  7  8  9 10]
+XGBoost
+LOPO
+CatBoost
+LOPO
+LightGBM
+LOPO
+DecisionTree (DT)
+LOPO
+SVC
+LOPO
+3
+[ 1  2  4  5  6  7  8  9 10]
+XGBoost
+LOPO
+CatBoost
+LOPO
+LightGBM
+LOPO
+DecisionTree (DT)
+LOPO
+SVC
+LOPO
+4
+[ 1  2  3  5  6  7  8  9 10]
+XGBoost
+LOPO
+CatBoost
+LOPO
+LightGBM
+LOPO
+DecisionTree (DT)
+LOPO
+SVC
+LOPO
+5
+[ 1  2  3  4  6  7  8  9 10]
+XGBoost
+LOPO
+CatBoost
+LOPO
+LightGBM
+LOPO
+DecisionTree (DT)
+LOPO
+SVC
+LOPO
+6
+[ 1  2  3  4  5  7  8  9 10]
+XGBoost
+LOPO
+CatBoost
+LOPO
+LightGBM
+LOPO
+DecisionTree (DT)
+LOPO
+SVC
+LOPO
+7
+[ 1  2  3  4  5  6  8  9 10]
+XGBoost
+LOPO
+CatBoost
+LOPO
+LightGBM
+LOPO
+DecisionTree (DT)
+LOPO
+SVC
+LOPO
+8
+[ 1  2  3  4  5  6  7  9 10]
+XGBoost
+LOPO
+CatBoost
+LOPO
+LightGBM
+LOPO
+DecisionTree (DT)
+LOPO
+SVC
+LOPO
+9
+[ 1  2  3  4  5  6  7  8 10]
+XGBoost
+LOPO
+CatBoost
+LOPO
+LightGBM
+LOPO
+DecisionTree (DT)
+LOPO
+SVC
+LOPO
+10
+[1 2 3 4 5 6 7 8 9]
+XGBoost
+LOPO
+CatBoost
+LOPO
+LightGBM
+LOPO
+DecisionTree (DT)
+LOPO
+SVC
+LOPO
+OKSS_Category_Q
+1
+[ 2  3  4  5  6  7  8  9 10]
+XGBoost
+LOPO
+CatBoost
+LOPO
+LightGBM
+LOPO
+DecisionTree (DT)
+LOPO
+SVC
+LOPO
+2
+[ 1  3  4  5  6  7  8  9 10]
+XGBoost
+LOPO
+CatBoost
+LOPO
+LightGBM
+LOPO
+DecisionTree (DT)
+LOPO
+SVC
+LOPO
+3
+[ 1  2  4  5  6  7  8  9 10]
+XGBoost
+LOPO
+CatBoost
+LOPO
+LightGBM
+LOPO
+DecisionTree (DT)
+LOPO
+SVC
+LOPO
+4
+[ 1  2  3  5  6  7  8  9 10]
+XGBoost
+LOPO
+CatBoost
+LOPO
+LightGBM
+LOPO
+DecisionTree (DT)
+LOPO
+SVC
+LOPO
+5
+[ 1  2  3  4  6  7  8  9 10]
+XGBoost
+LOPO
+CatBoost
+LOPO
+LightGBM
+LOPO
+DecisionTree (DT)
+LOPO
+SVC
+LOPO
+6
+[ 1  2  3  4  5  7  8  9 10]
+XGBoost
+LOPO
+CatBoost
+LOPO
+LightGBM
+LOPO
+DecisionTree (DT)
+LOPO
+SVC
+LOPO
+7
+[ 1  2  3  4  5  6  8  9 10]
+XGBoost
+LOPO
+CatBoost
+LOPO
+LightGBM
+LOPO
+DecisionTree (DT)
+LOPO
+SVC
+LOPO
+8
+[ 1  2  3  4  5  6  7  9 10]
+XGBoost
+LOPO
+CatBoost
+LOPO
+LightGBM
+LOPO
+DecisionTree (DT)
+LOPO
+SVC
+LOPO
+9
+[ 1  2  3  4  5  6  7  8 10]
+XGBoost
+LOPO
+CatBoost
+LOPO
+LightGBM
+LOPO
+DecisionTree (DT)
+LOPO
+SVC
+LOPO
+10
+[1 2 3 4 5 6 7 8 9]
+XGBoost
+LOPO
+CatBoost
+LOPO
+LightGBM
+LOPO
+DecisionTree (DT)
+LOPO
+SVC
+LOPO
