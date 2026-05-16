@@ -1,2 +1,5 @@
 conda activate ml_env
 python Comparative_Analysis_v5.py > log.txt 2>&1
+
+
+tasklist | findstr python

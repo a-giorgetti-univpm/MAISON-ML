@@ -614,6 +614,7 @@ for mod in modes:
             performance_df.to_excel(writer, sheet_name=resp, index=False)
 
             ## nel dataset finale posso avere lo stesso modello con diversi parametri che risultano ottimi su fold/pazienti diversi
+            # non ho un modello per paziente perchè: groupby(["Model", "CV", "Parameters"])
 
 
 
