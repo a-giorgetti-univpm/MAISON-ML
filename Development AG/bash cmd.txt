@@ -3,3 +3,7 @@ python Comparative_Analysis_v5.py > log.txt 2>&1
 
 
 tasklist | findstr python
+
+
+conda activate ml_env
+pip freeze > requirements.txt
