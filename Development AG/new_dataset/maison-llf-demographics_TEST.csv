@@ -1,0 +1,5 @@
+participant,sex,age,fracture-type,relationship,education,work,ethnicity
+1,female,74,hip fracture,widowed,undergraduate degree,retired,black
+2,female,66,hip fracture,separated,undergraduate degree,employed part-time,caucasian
+3,female,70,pelvis fracture,single,secondary education,retired,caucasian
+4,female,60,femur fracture,divorced,secondary education,retired,caucasian

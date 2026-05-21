@@ -11,7 +11,7 @@ from sklearn.model_selection import LeaveOneGroupOut, ParameterGrid, KFold, Grou
 from sklearn.model_selection import GridSearchCV
 from sklearn.metrics import f1_score, balanced_accuracy_score, recall_score, precision_score, confusion_matrix
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
-from xgboost import XGBClassifier
+from xgboost import XGBClassifier, XGBRegressor
 from sklearn.metrics import (
     mean_absolute_error,
     mean_squared_error,
@@ -24,8 +24,6 @@ import catboost as cb
 from catboost import CatBoostClassifier
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.svm import SVR, SVC
-# XGBoost
-from xgboost import XGBClassifier
 # CatBoost
 from catboost import CatBoostClassifier
 # LightGBM
@@ -213,9 +211,9 @@ np.random.seed(seed)
 # Define root directory
 root = '.'
 
-df = pd.read_csv('./new_dataset/maison-llf-features.CSV', sep=",")
+df = pd.read_csv('./new_dataset/maison-llf-features.CSV', sep=",")  ### maison-llf-features_TEST.CSV
 
-ana = pd.read_csv('./new_dataset/maison-llf-demographics.CSV', sep=",")
+ana = pd.read_csv('./new_dataset/maison-llf-demographics.CSV', sep=",")  ### maison-llf-demographics_TEST
 
 ana_col = list(ana.columns)
 
@@ -281,8 +279,8 @@ exclude_cols = [
     "participant",
     "timestamp",
     "clinical-timestamp",
-    "motion-max-timestamp",
-    "step-max-timestamp",
+    #"motion-max-timestamp",
+    #"step-max-timestamp",
     "SISS_Category_Q",
     "OHSS_Category_Q",
     "OKSS_Category_Q",
@@ -310,12 +308,28 @@ TABULAR_MODELS = [
             random_state=seed
         ),
         "param_grid": {
-            "n_estimators": [20],  ## 50, 100
-            "max_depth": [3],   ## 6, 8
+            "n_estimators": [20, 50],  ## 20, 50, 100
+            "max_depth": [5, 10, 20, 50],   ## 3, 6, 8
             "learning_rate": [0.3]   ## 0.001, 0.01, 0.1
             #"subsample": [0.8, 1.0],
             #"colsample_bytree": [0.8, 1.0],
             #"reg_lambda": [1.0, 5.0],
+        },
+    },
+
+    {
+    "name": "XGBoost",
+    "mode": ["regression"],
+    "data_kind": "tabular",
+    "estimator": XGBRegressor(
+        eval_metric="rmse",      # oppure "mae"
+        tree_method="hist",
+        random_state=seed
+    ),
+    "param_grid": {
+        "n_estimators": [20, 50],
+        "max_depth": [5, 10, 20, 50],
+        "learning_rate": [0.001, 0.01]   ### 0.3
         },
     },
     
@@ -348,7 +362,7 @@ TABULAR_MODELS = [
             "n_estimators": [20, 50],   ### 80
             #"num_leaves": [15, 31, 63],
             "max_depth": [5, 10, 20, 50],   ## 8
-            "learning_rate": [0.001, 0.3]  ### 0.01, 0.1
+            "learning_rate": [0.001, 0.01]  ### 0.01, 0.1, 0.3
             #"subsample": [0.8, 1.0],
             #"colsample_bytree": [0.8, 1.0],
         },
@@ -358,7 +372,7 @@ TABULAR_MODELS = [
         "name": "DecisionTree (DT)",
         "mode": ["classification", "regression"],
         "data_kind": "tabular",
-        "estimator": DecisionTreeClassifier(random_state=42),
+        "estimator": DecisionTreeClassifier(random_state=seed),
         "param_grid": {
             "max_depth": [5, 10, 20, 50]  ### 8
             #"min_samples_split": [2, 5, 10],
@@ -458,7 +472,7 @@ OTHER_MODELS = [
 MODELS = TABULAR_MODELS #+ ANN_MODELS + OTHER_MODELS
 
 #class_responses = ["OHSS_Category_Q", "SISS_Category_Q", "OKSS_Category_Q"]
-reg_responses = ["ohs", "sis", "oks"]
+reg_responses = ["sis", "oks"]   ### "ohs" temporaly escluded
 
 target = {#"classification": class_responses,
           "regression": reg_responses}
@@ -496,18 +510,21 @@ for mod in modes:
             performance_metrics_cla = []
             performance_metrics_reg = []
 
-            count=0
+            #count=0
 
             for train_idx, test_idx in outer_logo.split(X, y, groups):
                     #print(train_idx)
-                    count=count+1
-                    print(count)
+                    #count=count+1
+                    #print(count)
                     # ogni ciclo tengo fuori un paziente, su cui vado a fare la validation del best
             
                     X_train_outer, X_test = X.iloc[train_idx].to_numpy(), X.iloc[test_idx].to_numpy()
                     y_train_outer, y_test = y.iloc[train_idx].to_numpy(), y.iloc[test_idx].to_numpy()
                     groups_train_outer = groups.iloc[train_idx]
-                    print(groups_train_outer.unique())    
+                    groups_test_outer = groups.iloc[test_idx]
+                    patient = groups_test_outer.unique()[0]
+                    print(patient)
+                    print(groups_train_outer.unique())
                     
                     for model_dict in TABULAR_MODELS:
             
@@ -579,7 +596,7 @@ for mod in modes:
                                     evs = explained_variance_score(y_test, y_pred)
                 
                                     # Store results
-                                    performance_metrics_reg.append([model_dict['name'], param_opt, mae, mse, rmse, r2, mape, medae, evs, json.dumps(best_params, sort_keys=True)])
+                                    performance_metrics_reg.append([patient, model_dict['name'], param_opt, mae, mse, rmse, r2, mape, medae, evs, json.dumps(best_params, sort_keys=True)])
 
                                 end_time = time.time()
                                 duration = end_time - start_time
@@ -604,14 +621,18 @@ for mod in modes:
 
             if mod == "regression":
                 #print('group_by')
-                performance_df_raw = pd.DataFrame(performance_metrics_reg, columns=["Model", "CV", "MAE", "MSE", "RMSE", "R2", "MAPE", "MEDAE", "EVS", "Parameters"])
-                performance_df = (performance_df_raw.groupby(["Model", "CV", "Parameters"])[["MAE", "MSE", "RMSE", "R2", "MAPE", "MEDAE", "EVS"]]
-                                                                .mean()
-                                                                .reset_index()
-                                                                #.rename(columns={"score": "mean_score"})
-                                                                )
+                
+                performance_df_raw = pd.DataFrame(performance_metrics_reg, columns=["Patient", "Model", "CV", "MAE", "MSE", "RMSE", "R2", "MAPE", "MEDAE", "EVS", "Parameters"])
+                
+                
+                
+                #performance_df = (performance_df_raw.groupby(["Model", "CV", "Parameters"])[["MAE", "MSE", "RMSE", "R2", "MAPE", "MEDAE", "EVS"]]
+                #                                                .mean()
+                #                                                 .reset_index()
+                #                                                #.rename(columns={"score": "mean_score"})
+                #                                                )
 
-            performance_df.to_excel(writer, sheet_name=resp, index=False)
+            performance_df_raw.to_excel(writer, sheet_name=resp, index=False)
 
             ## nel dataset finale posso avere lo stesso modello con diversi parametri che risultano ottimi su fold/pazienti diversi
             # non ho un modello per paziente perchè: groupby(["Model", "CV", "Parameters"])
