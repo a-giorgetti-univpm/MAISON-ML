@@ -204,7 +204,7 @@ warnings.filterwarnings('ignore')
 
 # Set random seed for reproducibility
 seed = 69
-torch.manual_seed(seed)
+#torch.manual_seed(seed)
 np.random.seed(seed)
 
 # Define root directory
