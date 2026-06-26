@@ -6,7 +6,7 @@ import pandas as pd
 import openpyxl
 import matplotlib.pyplot as plt
 import json
-import torch
+#import torch
 from sklearn.model_selection import LeaveOneGroupOut, ParameterGrid, KFold, GroupKFold, StratifiedKFold
 from sklearn.model_selection import GridSearchCV
 from sklearn.metrics import f1_score, balanced_accuracy_score, recall_score, precision_score, confusion_matrix
@@ -31,13 +31,13 @@ from sklearn.pipeline import Pipeline
 from sklearn.feature_extraction.text import TfidfVectorizer
 from gensim.models import Word2Vec
 from sklearn.linear_model import LogisticRegression
-import tensorflow as tf
-from scikeras.wrappers import KerasClassifier
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Dense
-from tcn import TCN
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import LSTM, Dense
+#import tensorflow as tf
+#from scikeras.wrappers import KerasClassifier
+#from tensorflow.keras.models import Sequential
+#from tensorflow.keras.layers import Dense
+#from tcn import TCN
+#from tensorflow.keras.models import Sequential
+#from tensorflow.keras.layers import LSTM, Dense
 from sklearn.linear_model import RidgeClassifier
 from sklearn.pipeline import Pipeline
 
@@ -461,63 +461,7 @@ TABULAR_MODELS = [
 
 n_features = X.shape[1]
 
-ANN_MODELS = [
-    {
-        "name": "LSTM",
-        "mode": ["classification", "regression"],
-        "data_kind": "time_series",
-        "estimator": KerasClassifier(
-            model=build_lstm_model,
-            n_features=n_features,
-            epochs=10,
-            batch_size=32,
-            verbose=0
-        ),
-        "param_grid": {
-            "model__n_units": [16, 32, 64],
-            "model__dropout": [0.0, 0.2],
-            "model__lr": [1e-3, 3e-4],
-            "batch_size": [16, 32],
-            "epochs": [10, 20],
-        },
-    },
-    {
-        "name": "TCN",                                 ##Temporal Convolutional Network
-        "mode": ["classification", "regression"],
-        "data_kind": "time_series",
-        "estimator": KerasClassifier(
-            model=build_tcn_model,
-            n_features=n_features,
-            epochs=10,
-            batch_size=32,
-            verbose=0
-        ),
-        "param_grid": {
-            "model__n_filters": [16, 32, 64],
-            "model__kernel_size": [3, 5],
-            "model__lr": [1e-3, 3e-4],
-            "batch_size": [16, 32],
-            "epochs": [10, 20],
-        },
-    },
-]
-
-OTHER_MODELS = [
-    {
-        "name": "ROCKET + RidgeClassifier",
-        "mode": ["classification", "regression"],
-        "estimator": Pipeline(steps=[
-            ("rocket", Rocket(random_state=seed)),
-            ("clf", RidgeClassifier())
-        ]),
-        "param_grid": {
-            "rocket__num_kernels": [2000, 10000],
-            "clf__alpha": [0.1, 1.0, 10.0],
-        },
-    }
-]
-
-MODELS = TABULAR_MODELS #+ ANN_MODELS + OTHER_MODELS
+MODELS = TABULAR_MODELS
 
 #class_responses = ["OHSS_Category_Q", "SISS_Category_Q", "OKSS_Category_Q"]
 reg_responses = ["sis", "oks"]   ### "ohs" temporaly escluded
