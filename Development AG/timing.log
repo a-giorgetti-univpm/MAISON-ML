@@ -1,0 +1,82 @@
+2026-05-22 12:44:29,198 - Model=XGBoost | Resp=sis | Time=57.60s
+2026-05-22 12:52:14,974 - Model=CatBoost | Resp=sis | Time=465.77s
+2026-05-22 13:07:21,306 - Model=LightGBM | Resp=sis | Time=906.33s
+2026-05-22 13:07:26,120 - Model=DecisionTree (DT) | Resp=sis | Time=4.81s
+2026-05-22 13:07:43,553 - Model=SVR | Resp=sis | Time=17.43s
+2026-05-22 13:08:41,298 - Model=XGBoost | Resp=sis | Time=57.71s
+2026-05-22 13:15:31,244 - Model=CatBoost | Resp=sis | Time=409.94s
+2026-05-22 13:29:55,498 - Model=LightGBM | Resp=sis | Time=864.25s
+2026-05-22 13:29:57,966 - Model=DecisionTree (DT) | Resp=sis | Time=2.42s
+2026-05-22 13:30:04,397 - Model=SVR | Resp=sis | Time=6.43s
+2026-05-22 13:30:50,776 - Model=XGBoost | Resp=sis | Time=46.36s
+2026-05-22 13:39:41,181 - Model=CatBoost | Resp=sis | Time=530.40s
+2026-05-22 13:45:37,458 - Model=LightGBM | Resp=sis | Time=356.28s
+2026-05-22 13:45:38,610 - Model=DecisionTree (DT) | Resp=sis | Time=1.15s
+2026-05-22 13:45:40,817 - Model=SVR | Resp=sis | Time=2.21s
+2026-05-22 13:46:10,177 - Model=XGBoost | Resp=sis | Time=29.35s
+2026-05-22 13:50:40,593 - Model=CatBoost | Resp=sis | Time=270.42s
+2026-05-22 13:59:24,406 - Model=LightGBM | Resp=sis | Time=523.81s
+2026-05-22 13:59:25,917 - Model=DecisionTree (DT) | Resp=sis | Time=1.51s
+2026-05-22 13:59:28,984 - Model=SVR | Resp=sis | Time=3.07s
+2026-05-22 14:00:03,422 - Model=XGBoost | Resp=sis | Time=34.44s
+2026-05-22 14:04:46,297 - Model=CatBoost | Resp=sis | Time=282.87s
+2026-05-22 14:10:04,386 - Model=LightGBM | Resp=sis | Time=318.09s
+2026-05-22 14:10:07,247 - Model=DecisionTree (DT) | Resp=sis | Time=2.86s
+2026-05-22 14:10:14,334 - Model=SVR | Resp=sis | Time=7.09s
+2026-05-22 14:10:53,136 - Model=XGBoost | Resp=sis | Time=38.80s
+2026-05-22 14:15:57,253 - Model=CatBoost | Resp=sis | Time=304.12s
+2026-05-22 14:21:37,725 - Model=LightGBM | Resp=sis | Time=340.47s
+2026-05-22 14:21:40,383 - Model=DecisionTree (DT) | Resp=sis | Time=2.66s
+2026-05-22 14:21:48,091 - Model=SVR | Resp=sis | Time=7.71s
+2026-05-22 14:22:29,311 - Model=XGBoost | Resp=sis | Time=41.22s
+2026-05-22 14:28:39,270 - Model=CatBoost | Resp=sis | Time=369.96s
+2026-05-22 14:40:26,322 - Model=LightGBM | Resp=sis | Time=707.05s
+2026-05-22 14:40:28,652 - Model=DecisionTree (DT) | Resp=sis | Time=2.33s
+2026-05-22 14:40:36,482 - Model=SVR | Resp=sis | Time=7.83s
+2026-05-22 14:41:08,417 - Model=XGBoost | Resp=sis | Time=31.94s
+2026-05-22 14:45:31,865 - Model=CatBoost | Resp=sis | Time=263.45s
+2026-05-22 14:56:41,753 - Model=LightGBM | Resp=sis | Time=669.89s
+2026-05-22 14:56:44,023 - Model=DecisionTree (DT) | Resp=sis | Time=2.27s
+2026-05-22 14:56:51,752 - Model=SVR | Resp=sis | Time=7.73s
+2026-05-22 14:57:23,277 - Model=XGBoost | Resp=sis | Time=31.52s
+2026-05-22 15:01:32,351 - Model=CatBoost | Resp=sis | Time=249.07s
+2026-05-22 15:13:37,488 - Model=LightGBM | Resp=sis | Time=725.14s
+2026-05-22 15:13:39,668 - Model=DecisionTree (DT) | Resp=sis | Time=2.18s
+2026-05-22 15:13:47,223 - Model=SVR | Resp=sis | Time=7.55s
+2026-05-22 15:14:17,602 - Model=XGBoost | Resp=sis | Time=30.37s
+2026-05-22 15:19:46,188 - Model=CatBoost | Resp=sis | Time=328.59s
+2026-05-22 15:26:56,885 - Model=LightGBM | Resp=sis | Time=430.70s
+2026-05-22 15:26:58,412 - Model=DecisionTree (DT) | Resp=sis | Time=1.53s
+2026-05-22 15:27:05,865 - Model=SVR | Resp=sis | Time=7.45s
+2026-05-22 15:27:37,927 - Model=XGBoost | Resp=sis | Time=32.06s
+2026-05-22 15:35:05,603 - Model=CatBoost | Resp=sis | Time=447.68s
+2026-05-22 15:47:51,786 - Model=LightGBM | Resp=sis | Time=766.18s
+2026-05-22 15:47:56,102 - Model=DecisionTree (DT) | Resp=sis | Time=4.32s
+2026-05-22 15:48:11,516 - Model=SVR | Resp=sis | Time=15.41s
+2026-05-22 15:49:04,630 - Model=XGBoost | Resp=sis | Time=53.11s
+2026-05-22 15:56:25,360 - Model=CatBoost | Resp=sis | Time=440.73s
+2026-05-22 16:08:24,862 - Model=LightGBM | Resp=sis | Time=719.50s
+2026-05-22 16:08:25,899 - Model=DecisionTree (DT) | Resp=sis | Time=1.04s
+2026-05-22 16:08:27,944 - Model=SVR | Resp=sis | Time=2.05s
+2026-05-22 16:08:46,240 - Model=XGBoost | Resp=sis | Time=18.30s
+2026-05-22 16:11:51,694 - Model=CatBoost | Resp=sis | Time=185.45s
+2026-05-22 16:16:56,037 - Model=LightGBM | Resp=sis | Time=304.34s
+2026-05-22 16:16:58,263 - Model=DecisionTree (DT) | Resp=sis | Time=2.23s
+2026-05-22 16:17:06,152 - Model=SVR | Resp=sis | Time=7.89s
+2026-05-22 16:17:39,075 - Model=XGBoost | Resp=sis | Time=32.92s
+2026-05-22 16:21:47,041 - Model=CatBoost | Resp=sis | Time=247.97s
+2026-05-22 16:29:17,613 - Model=LightGBM | Resp=sis | Time=450.57s
+2026-05-22 16:29:18,783 - Model=DecisionTree (DT) | Resp=sis | Time=1.17s
+2026-05-22 16:29:20,939 - Model=SVR | Resp=sis | Time=2.16s
+2026-05-22 16:29:46,436 - Model=XGBoost | Resp=sis | Time=25.50s
+2026-05-22 16:34:49,130 - Model=CatBoost | Resp=sis | Time=302.69s
+2026-05-22 16:39:55,395 - Model=LightGBM | Resp=sis | Time=306.26s
+2026-05-22 16:39:56,462 - Model=DecisionTree (DT) | Resp=sis | Time=1.07s
+2026-05-22 16:39:58,622 - Model=SVR | Resp=sis | Time=2.16s
+2026-05-22 16:40:24,819 - Model=XGBoost | Resp=sis | Time=26.20s
+2026-05-22 16:44:43,606 - Model=CatBoost | Resp=sis | Time=258.79s
+2026-05-22 16:56:17,333 - Model=LightGBM | Resp=sis | Time=693.72s
+2026-05-22 16:56:19,572 - Model=DecisionTree (DT) | Resp=sis | Time=2.24s
+2026-05-22 16:56:26,977 - Model=SVR | Resp=sis | Time=7.41s
+2026-05-22 16:56:59,392 - Model=XGBoost | Resp=sis | Time=32.41s
+2026-05-22 17:00:34,741 - Model=CatBoost | Resp=sis | Time=215.35s
