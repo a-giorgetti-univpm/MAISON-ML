@@ -210,9 +210,9 @@ np.random.seed(seed)
 # Define root directory
 root = '.'
 
-df = pd.read_csv('./new_dataset/maison-llf-features.csv', sep=",")  ### maison-llf-features_TEST.CSV
+df = pd.read_csv('./dataset/maison-llf-features.csv', sep=",")  ### maison-llf-features_TEST.CSV
 
-ana = pd.read_csv('./new_dataset/maison-llf-demographics.csv', sep=",")  ### maison-llf-demographics_TEST
+ana = pd.read_csv('./dataset/maison-llf-demographics.csv', sep=",")  ### maison-llf-demographics_TEST
 
 ana_col = list(ana.columns)
 
@@ -491,7 +491,7 @@ for mod in modes:
 
     responses = target[mod]
 
-    output_path = os.path.join(root, "new_results/" + "run_v5.1" + "/results_" + mod + ".xlsx")
+    output_path = os.path.join(root, "results/" + "run_v5.1" + "/results_" + mod + ".xlsx")
     with pd.ExcelWriter(output_path) as writer:
 
         for resp in responses:
