@@ -1,82 +1,180 @@
-2026-05-22 12:44:29,198 - Model=XGBoost | Resp=sis | Time=57.60s
-2026-05-22 12:52:14,974 - Model=CatBoost | Resp=sis | Time=465.77s
-2026-05-22 13:07:21,306 - Model=LightGBM | Resp=sis | Time=906.33s
-2026-05-22 13:07:26,120 - Model=DecisionTree (DT) | Resp=sis | Time=4.81s
-2026-05-22 13:07:43,553 - Model=SVR | Resp=sis | Time=17.43s
-2026-05-22 13:08:41,298 - Model=XGBoost | Resp=sis | Time=57.71s
-2026-05-22 13:15:31,244 - Model=CatBoost | Resp=sis | Time=409.94s
-2026-05-22 13:29:55,498 - Model=LightGBM | Resp=sis | Time=864.25s
-2026-05-22 13:29:57,966 - Model=DecisionTree (DT) | Resp=sis | Time=2.42s
-2026-05-22 13:30:04,397 - Model=SVR | Resp=sis | Time=6.43s
-2026-05-22 13:30:50,776 - Model=XGBoost | Resp=sis | Time=46.36s
-2026-05-22 13:39:41,181 - Model=CatBoost | Resp=sis | Time=530.40s
-2026-05-22 13:45:37,458 - Model=LightGBM | Resp=sis | Time=356.28s
-2026-05-22 13:45:38,610 - Model=DecisionTree (DT) | Resp=sis | Time=1.15s
-2026-05-22 13:45:40,817 - Model=SVR | Resp=sis | Time=2.21s
-2026-05-22 13:46:10,177 - Model=XGBoost | Resp=sis | Time=29.35s
-2026-05-22 13:50:40,593 - Model=CatBoost | Resp=sis | Time=270.42s
-2026-05-22 13:59:24,406 - Model=LightGBM | Resp=sis | Time=523.81s
-2026-05-22 13:59:25,917 - Model=DecisionTree (DT) | Resp=sis | Time=1.51s
-2026-05-22 13:59:28,984 - Model=SVR | Resp=sis | Time=3.07s
-2026-05-22 14:00:03,422 - Model=XGBoost | Resp=sis | Time=34.44s
-2026-05-22 14:04:46,297 - Model=CatBoost | Resp=sis | Time=282.87s
-2026-05-22 14:10:04,386 - Model=LightGBM | Resp=sis | Time=318.09s
-2026-05-22 14:10:07,247 - Model=DecisionTree (DT) | Resp=sis | Time=2.86s
-2026-05-22 14:10:14,334 - Model=SVR | Resp=sis | Time=7.09s
-2026-05-22 14:10:53,136 - Model=XGBoost | Resp=sis | Time=38.80s
-2026-05-22 14:15:57,253 - Model=CatBoost | Resp=sis | Time=304.12s
-2026-05-22 14:21:37,725 - Model=LightGBM | Resp=sis | Time=340.47s
-2026-05-22 14:21:40,383 - Model=DecisionTree (DT) | Resp=sis | Time=2.66s
-2026-05-22 14:21:48,091 - Model=SVR | Resp=sis | Time=7.71s
-2026-05-22 14:22:29,311 - Model=XGBoost | Resp=sis | Time=41.22s
-2026-05-22 14:28:39,270 - Model=CatBoost | Resp=sis | Time=369.96s
-2026-05-22 14:40:26,322 - Model=LightGBM | Resp=sis | Time=707.05s
-2026-05-22 14:40:28,652 - Model=DecisionTree (DT) | Resp=sis | Time=2.33s
-2026-05-22 14:40:36,482 - Model=SVR | Resp=sis | Time=7.83s
-2026-05-22 14:41:08,417 - Model=XGBoost | Resp=sis | Time=31.94s
-2026-05-22 14:45:31,865 - Model=CatBoost | Resp=sis | Time=263.45s
-2026-05-22 14:56:41,753 - Model=LightGBM | Resp=sis | Time=669.89s
-2026-05-22 14:56:44,023 - Model=DecisionTree (DT) | Resp=sis | Time=2.27s
-2026-05-22 14:56:51,752 - Model=SVR | Resp=sis | Time=7.73s
-2026-05-22 14:57:23,277 - Model=XGBoost | Resp=sis | Time=31.52s
-2026-05-22 15:01:32,351 - Model=CatBoost | Resp=sis | Time=249.07s
-2026-05-22 15:13:37,488 - Model=LightGBM | Resp=sis | Time=725.14s
-2026-05-22 15:13:39,668 - Model=DecisionTree (DT) | Resp=sis | Time=2.18s
-2026-05-22 15:13:47,223 - Model=SVR | Resp=sis | Time=7.55s
-2026-05-22 15:14:17,602 - Model=XGBoost | Resp=sis | Time=30.37s
-2026-05-22 15:19:46,188 - Model=CatBoost | Resp=sis | Time=328.59s
-2026-05-22 15:26:56,885 - Model=LightGBM | Resp=sis | Time=430.70s
-2026-05-22 15:26:58,412 - Model=DecisionTree (DT) | Resp=sis | Time=1.53s
-2026-05-22 15:27:05,865 - Model=SVR | Resp=sis | Time=7.45s
-2026-05-22 15:27:37,927 - Model=XGBoost | Resp=sis | Time=32.06s
-2026-05-22 15:35:05,603 - Model=CatBoost | Resp=sis | Time=447.68s
-2026-05-22 15:47:51,786 - Model=LightGBM | Resp=sis | Time=766.18s
-2026-05-22 15:47:56,102 - Model=DecisionTree (DT) | Resp=sis | Time=4.32s
-2026-05-22 15:48:11,516 - Model=SVR | Resp=sis | Time=15.41s
-2026-05-22 15:49:04,630 - Model=XGBoost | Resp=sis | Time=53.11s
-2026-05-22 15:56:25,360 - Model=CatBoost | Resp=sis | Time=440.73s
-2026-05-22 16:08:24,862 - Model=LightGBM | Resp=sis | Time=719.50s
-2026-05-22 16:08:25,899 - Model=DecisionTree (DT) | Resp=sis | Time=1.04s
-2026-05-22 16:08:27,944 - Model=SVR | Resp=sis | Time=2.05s
-2026-05-22 16:08:46,240 - Model=XGBoost | Resp=sis | Time=18.30s
-2026-05-22 16:11:51,694 - Model=CatBoost | Resp=sis | Time=185.45s
-2026-05-22 16:16:56,037 - Model=LightGBM | Resp=sis | Time=304.34s
-2026-05-22 16:16:58,263 - Model=DecisionTree (DT) | Resp=sis | Time=2.23s
-2026-05-22 16:17:06,152 - Model=SVR | Resp=sis | Time=7.89s
-2026-05-22 16:17:39,075 - Model=XGBoost | Resp=sis | Time=32.92s
-2026-05-22 16:21:47,041 - Model=CatBoost | Resp=sis | Time=247.97s
-2026-05-22 16:29:17,613 - Model=LightGBM | Resp=sis | Time=450.57s
-2026-05-22 16:29:18,783 - Model=DecisionTree (DT) | Resp=sis | Time=1.17s
-2026-05-22 16:29:20,939 - Model=SVR | Resp=sis | Time=2.16s
-2026-05-22 16:29:46,436 - Model=XGBoost | Resp=sis | Time=25.50s
-2026-05-22 16:34:49,130 - Model=CatBoost | Resp=sis | Time=302.69s
-2026-05-22 16:39:55,395 - Model=LightGBM | Resp=sis | Time=306.26s
-2026-05-22 16:39:56,462 - Model=DecisionTree (DT) | Resp=sis | Time=1.07s
-2026-05-22 16:39:58,622 - Model=SVR | Resp=sis | Time=2.16s
-2026-05-22 16:40:24,819 - Model=XGBoost | Resp=sis | Time=26.20s
-2026-05-22 16:44:43,606 - Model=CatBoost | Resp=sis | Time=258.79s
-2026-05-22 16:56:17,333 - Model=LightGBM | Resp=sis | Time=693.72s
-2026-05-22 16:56:19,572 - Model=DecisionTree (DT) | Resp=sis | Time=2.24s
-2026-05-22 16:56:26,977 - Model=SVR | Resp=sis | Time=7.41s
-2026-05-22 16:56:59,392 - Model=XGBoost | Resp=sis | Time=32.41s
-2026-05-22 17:00:34,741 - Model=CatBoost | Resp=sis | Time=215.35s
+2026-06-26 15:53:49,600 - Model=XGBoost | Resp=sis | Time=10.64s
+2026-06-26 15:54:15,293 - Model=CatBoost | Resp=sis | Time=25.69s
+2026-06-26 15:54:23,719 - Model=LightGBM | Resp=sis | Time=8.43s
+2026-06-26 15:54:24,482 - Model=DecisionTreeRegressor (DT) | Resp=sis | Time=0.76s
+2026-06-26 15:54:26,339 - Model=SVR | Resp=sis | Time=1.86s
+2026-06-26 15:54:36,869 - Model=XGBoost | Resp=sis | Time=10.53s
+2026-06-26 15:55:01,403 - Model=CatBoost | Resp=sis | Time=24.53s
+2026-06-26 15:55:10,218 - Model=LightGBM | Resp=sis | Time=8.81s
+2026-06-26 15:55:10,983 - Model=DecisionTreeRegressor (DT) | Resp=sis | Time=0.77s
+2026-06-26 15:55:12,857 - Model=SVR | Resp=sis | Time=1.87s
+2026-06-26 15:55:23,371 - Model=XGBoost | Resp=sis | Time=10.51s
+2026-06-26 15:55:49,696 - Model=CatBoost | Resp=sis | Time=26.32s
+2026-06-26 15:55:58,695 - Model=LightGBM | Resp=sis | Time=9.00s
+2026-06-26 15:55:59,460 - Model=DecisionTreeRegressor (DT) | Resp=sis | Time=0.76s
+2026-06-26 15:56:01,337 - Model=SVR | Resp=sis | Time=1.88s
+2026-06-26 15:56:11,993 - Model=XGBoost | Resp=sis | Time=10.66s
+2026-06-26 15:56:38,708 - Model=CatBoost | Resp=sis | Time=26.71s
+2026-06-26 15:56:46,982 - Model=LightGBM | Resp=sis | Time=8.27s
+2026-06-26 15:56:47,738 - Model=DecisionTreeRegressor (DT) | Resp=sis | Time=0.76s
+2026-06-26 15:56:49,609 - Model=SVR | Resp=sis | Time=1.87s
+2026-06-26 15:56:59,685 - Model=XGBoost | Resp=sis | Time=10.07s
+2026-06-26 15:57:24,040 - Model=CatBoost | Resp=sis | Time=24.35s
+2026-06-26 15:57:32,276 - Model=LightGBM | Resp=sis | Time=8.24s
+2026-06-26 15:57:33,043 - Model=DecisionTreeRegressor (DT) | Resp=sis | Time=0.77s
+2026-06-26 15:57:34,943 - Model=SVR | Resp=sis | Time=1.90s
+2026-06-26 15:57:45,054 - Model=XGBoost | Resp=sis | Time=10.11s
+2026-06-26 15:58:09,344 - Model=CatBoost | Resp=sis | Time=24.29s
+2026-06-26 15:58:18,568 - Model=LightGBM | Resp=sis | Time=9.22s
+2026-06-26 15:58:19,330 - Model=DecisionTreeRegressor (DT) | Resp=sis | Time=0.76s
+2026-06-26 15:58:21,187 - Model=SVR | Resp=sis | Time=1.86s
+2026-06-26 15:58:31,740 - Model=XGBoost | Resp=sis | Time=10.55s
+2026-06-26 15:58:58,566 - Model=CatBoost | Resp=sis | Time=26.83s
+2026-06-26 15:59:07,883 - Model=LightGBM | Resp=sis | Time=9.32s
+2026-06-26 15:59:08,643 - Model=DecisionTreeRegressor (DT) | Resp=sis | Time=0.76s
+2026-06-26 15:59:10,506 - Model=SVR | Resp=sis | Time=1.86s
+2026-06-26 15:59:21,148 - Model=XGBoost | Resp=sis | Time=10.64s
+2026-06-26 15:59:48,516 - Model=CatBoost | Resp=sis | Time=27.37s
+2026-06-26 15:59:58,156 - Model=LightGBM | Resp=sis | Time=9.64s
+2026-06-26 15:59:58,940 - Model=DecisionTreeRegressor (DT) | Resp=sis | Time=0.78s
+2026-06-26 16:00:00,821 - Model=SVR | Resp=sis | Time=1.88s
+2026-06-26 16:00:11,114 - Model=XGBoost | Resp=sis | Time=10.29s
+2026-06-26 16:00:37,832 - Model=CatBoost | Resp=sis | Time=26.72s
+2026-06-26 16:00:46,748 - Model=LightGBM | Resp=sis | Time=8.92s
+2026-06-26 16:00:47,511 - Model=DecisionTreeRegressor (DT) | Resp=sis | Time=0.76s
+2026-06-26 16:00:49,401 - Model=SVR | Resp=sis | Time=1.89s
+2026-06-26 16:00:59,902 - Model=XGBoost | Resp=sis | Time=10.50s
+2026-06-26 16:01:26,891 - Model=CatBoost | Resp=sis | Time=26.99s
+2026-06-26 16:01:35,125 - Model=LightGBM | Resp=sis | Time=8.23s
+2026-06-26 16:01:35,879 - Model=DecisionTreeRegressor (DT) | Resp=sis | Time=0.75s
+2026-06-26 16:01:37,777 - Model=SVR | Resp=sis | Time=1.90s
+2026-06-26 16:01:47,743 - Model=XGBoost | Resp=sis | Time=9.97s
+2026-06-26 16:02:14,060 - Model=CatBoost | Resp=sis | Time=26.32s
+2026-06-26 16:02:23,476 - Model=LightGBM | Resp=sis | Time=9.42s
+2026-06-26 16:02:24,226 - Model=DecisionTreeRegressor (DT) | Resp=sis | Time=0.75s
+2026-06-26 16:02:26,126 - Model=SVR | Resp=sis | Time=1.90s
+2026-06-26 16:02:36,277 - Model=XGBoost | Resp=sis | Time=10.15s
+2026-06-26 16:03:02,891 - Model=CatBoost | Resp=sis | Time=26.61s
+2026-06-26 16:03:12,315 - Model=LightGBM | Resp=sis | Time=9.42s
+2026-06-26 16:03:13,089 - Model=DecisionTreeRegressor (DT) | Resp=sis | Time=0.77s
+2026-06-26 16:03:15,001 - Model=SVR | Resp=sis | Time=1.91s
+2026-06-26 16:03:25,508 - Model=XGBoost | Resp=sis | Time=10.51s
+2026-06-26 16:03:52,770 - Model=CatBoost | Resp=sis | Time=27.26s
+2026-06-26 16:04:01,512 - Model=LightGBM | Resp=sis | Time=8.74s
+2026-06-26 16:04:02,295 - Model=DecisionTreeRegressor (DT) | Resp=sis | Time=0.78s
+2026-06-26 16:04:04,249 - Model=SVR | Resp=sis | Time=1.95s
+2026-06-26 16:04:14,794 - Model=XGBoost | Resp=sis | Time=10.54s
+2026-06-26 16:04:42,026 - Model=CatBoost | Resp=sis | Time=27.23s
+2026-06-26 16:04:50,882 - Model=LightGBM | Resp=sis | Time=8.86s
+2026-06-26 16:04:51,700 - Model=DecisionTreeRegressor (DT) | Resp=sis | Time=0.82s
+2026-06-26 16:04:53,737 - Model=SVR | Resp=sis | Time=2.04s
+2026-06-26 16:05:04,356 - Model=XGBoost | Resp=sis | Time=10.62s
+2026-06-26 16:05:32,533 - Model=CatBoost | Resp=sis | Time=28.18s
+2026-06-26 16:05:41,317 - Model=LightGBM | Resp=sis | Time=8.78s
+2026-06-26 16:05:42,122 - Model=DecisionTreeRegressor (DT) | Resp=sis | Time=0.80s
+2026-06-26 16:05:44,173 - Model=SVR | Resp=sis | Time=2.05s
+2026-06-26 16:05:55,241 - Model=XGBoost | Resp=sis | Time=11.07s
+2026-06-26 16:06:22,418 - Model=CatBoost | Resp=sis | Time=27.18s
+2026-06-26 16:06:31,521 - Model=LightGBM | Resp=sis | Time=9.10s
+2026-06-26 16:06:32,322 - Model=DecisionTreeRegressor (DT) | Resp=sis | Time=0.80s
+2026-06-26 16:06:34,314 - Model=SVR | Resp=sis | Time=1.99s
+2026-06-26 16:06:45,516 - Model=XGBoost | Resp=sis | Time=11.20s
+2026-06-26 16:07:12,477 - Model=CatBoost | Resp=sis | Time=26.96s
+2026-06-26 16:07:21,560 - Model=LightGBM | Resp=sis | Time=9.08s
+2026-06-26 16:07:22,360 - Model=DecisionTreeRegressor (DT) | Resp=sis | Time=0.80s
+2026-06-26 16:07:24,308 - Model=SVR | Resp=sis | Time=1.95s
+2026-06-26 16:07:35,678 - Model=XGBoost | Resp=sis | Time=11.37s
+2026-06-26 16:08:02,723 - Model=CatBoost | Resp=sis | Time=27.04s
+2026-06-26 16:08:11,735 - Model=LightGBM | Resp=sis | Time=9.01s
+2026-06-26 16:08:12,509 - Model=DecisionTreeRegressor (DT) | Resp=sis | Time=0.77s
+2026-06-26 16:08:14,440 - Model=SVR | Resp=sis | Time=1.93s
+2026-06-26 16:08:26,566 - Model=XGBoost | Resp=oks | Time=12.12s
+2026-06-26 16:08:54,002 - Model=CatBoost | Resp=oks | Time=27.44s
+2026-06-26 16:09:04,990 - Model=LightGBM | Resp=oks | Time=10.99s
+2026-06-26 16:09:05,921 - Model=DecisionTreeRegressor (DT) | Resp=oks | Time=0.93s
+2026-06-26 16:09:07,854 - Model=SVR | Resp=oks | Time=1.93s
+2026-06-26 16:09:20,479 - Model=XGBoost | Resp=oks | Time=12.62s
+2026-06-26 16:09:46,753 - Model=CatBoost | Resp=oks | Time=26.27s
+2026-06-26 16:09:57,351 - Model=LightGBM | Resp=oks | Time=10.60s
+2026-06-26 16:09:58,318 - Model=DecisionTreeRegressor (DT) | Resp=oks | Time=0.97s
+2026-06-26 16:10:00,387 - Model=SVR | Resp=oks | Time=2.07s
+2026-06-26 16:10:13,100 - Model=XGBoost | Resp=oks | Time=12.71s
+2026-06-26 16:10:41,237 - Model=CatBoost | Resp=oks | Time=28.14s
+2026-06-26 16:10:52,361 - Model=LightGBM | Resp=oks | Time=11.12s
+2026-06-26 16:10:53,324 - Model=DecisionTreeRegressor (DT) | Resp=oks | Time=0.96s
+2026-06-26 16:10:55,359 - Model=SVR | Resp=oks | Time=2.03s
+2026-06-26 16:11:08,245 - Model=XGBoost | Resp=oks | Time=12.88s
+2026-06-26 16:11:36,902 - Model=CatBoost | Resp=oks | Time=28.66s
+2026-06-26 16:11:47,820 - Model=LightGBM | Resp=oks | Time=10.92s
+2026-06-26 16:11:48,773 - Model=DecisionTreeRegressor (DT) | Resp=oks | Time=0.95s
+2026-06-26 16:11:50,751 - Model=SVR | Resp=oks | Time=1.98s
+2026-06-26 16:12:03,809 - Model=XGBoost | Resp=oks | Time=13.06s
+2026-06-26 16:12:30,091 - Model=CatBoost | Resp=oks | Time=26.28s
+2026-06-26 16:12:39,242 - Model=LightGBM | Resp=oks | Time=9.15s
+2026-06-26 16:12:40,180 - Model=DecisionTreeRegressor (DT) | Resp=oks | Time=0.94s
+2026-06-26 16:12:42,128 - Model=SVR | Resp=oks | Time=1.95s
+2026-06-26 16:12:53,971 - Model=XGBoost | Resp=oks | Time=11.84s
+2026-06-26 16:13:20,315 - Model=CatBoost | Resp=oks | Time=26.34s
+2026-06-26 16:13:30,069 - Model=LightGBM | Resp=oks | Time=9.75s
+2026-06-26 16:13:31,004 - Model=DecisionTreeRegressor (DT) | Resp=oks | Time=0.93s
+2026-06-26 16:13:32,923 - Model=SVR | Resp=oks | Time=1.92s
+2026-06-26 16:13:44,706 - Model=XGBoost | Resp=oks | Time=11.78s
+2026-06-26 16:14:12,901 - Model=CatBoost | Resp=oks | Time=28.19s
+2026-06-26 16:14:23,005 - Model=LightGBM | Resp=oks | Time=10.10s
+2026-06-26 16:14:23,938 - Model=DecisionTreeRegressor (DT) | Resp=oks | Time=0.93s
+2026-06-26 16:14:25,862 - Model=SVR | Resp=oks | Time=1.92s
+2026-06-26 16:14:38,061 - Model=XGBoost | Resp=oks | Time=12.20s
+2026-06-26 16:15:06,339 - Model=CatBoost | Resp=oks | Time=28.28s
+2026-06-26 16:15:17,904 - Model=LightGBM | Resp=oks | Time=11.57s
+2026-06-26 16:15:18,837 - Model=DecisionTreeRegressor (DT) | Resp=oks | Time=0.93s
+2026-06-26 16:15:20,729 - Model=SVR | Resp=oks | Time=1.89s
+2026-06-26 16:15:33,171 - Model=XGBoost | Resp=oks | Time=12.44s
+2026-06-26 16:16:01,679 - Model=CatBoost | Resp=oks | Time=28.51s
+2026-06-26 16:16:12,866 - Model=LightGBM | Resp=oks | Time=11.19s
+2026-06-26 16:16:13,768 - Model=DecisionTreeRegressor (DT) | Resp=oks | Time=0.90s
+2026-06-26 16:16:15,662 - Model=SVR | Resp=oks | Time=1.89s
+2026-06-26 16:16:27,809 - Model=XGBoost | Resp=oks | Time=12.14s
+2026-06-26 16:16:55,980 - Model=CatBoost | Resp=oks | Time=28.17s
+2026-06-26 16:17:06,493 - Model=LightGBM | Resp=oks | Time=10.51s
+2026-06-26 16:17:07,374 - Model=DecisionTreeRegressor (DT) | Resp=oks | Time=0.88s
+2026-06-26 16:17:09,251 - Model=SVR | Resp=oks | Time=1.88s
+2026-06-26 16:17:21,717 - Model=XGBoost | Resp=oks | Time=12.46s
+2026-06-26 16:17:49,819 - Model=CatBoost | Resp=oks | Time=28.10s
+2026-06-26 16:18:00,457 - Model=LightGBM | Resp=oks | Time=10.64s
+2026-06-26 16:18:01,382 - Model=DecisionTreeRegressor (DT) | Resp=oks | Time=0.93s
+2026-06-26 16:18:03,282 - Model=SVR | Resp=oks | Time=1.90s
+2026-06-26 16:18:15,551 - Model=XGBoost | Resp=oks | Time=12.27s
+2026-06-26 16:18:43,609 - Model=CatBoost | Resp=oks | Time=28.06s
+2026-06-26 16:18:55,408 - Model=LightGBM | Resp=oks | Time=11.80s
+2026-06-26 16:18:56,325 - Model=DecisionTreeRegressor (DT) | Resp=oks | Time=0.92s
+2026-06-26 16:18:58,211 - Model=SVR | Resp=oks | Time=1.89s
+2026-06-26 16:19:10,293 - Model=XGBoost | Resp=oks | Time=12.08s
+2026-06-26 16:19:38,130 - Model=CatBoost | Resp=oks | Time=27.84s
+2026-06-26 16:19:48,749 - Model=LightGBM | Resp=oks | Time=10.62s
+2026-06-26 16:19:49,666 - Model=DecisionTreeRegressor (DT) | Resp=oks | Time=0.92s
+2026-06-26 16:19:51,581 - Model=SVR | Resp=oks | Time=1.91s
+2026-06-26 16:20:03,285 - Model=XGBoost | Resp=oks | Time=11.70s
+2026-06-26 16:20:31,076 - Model=CatBoost | Resp=oks | Time=27.79s
+2026-06-26 16:20:41,751 - Model=LightGBM | Resp=oks | Time=10.67s
+2026-06-26 16:20:42,656 - Model=DecisionTreeRegressor (DT) | Resp=oks | Time=0.90s
+2026-06-26 16:20:44,537 - Model=SVR | Resp=oks | Time=1.88s
+2026-06-26 16:20:56,331 - Model=XGBoost | Resp=oks | Time=11.79s
+2026-06-26 16:21:24,184 - Model=CatBoost | Resp=oks | Time=27.85s
+2026-06-26 16:21:35,598 - Model=LightGBM | Resp=oks | Time=11.41s
+2026-06-26 16:21:36,538 - Model=DecisionTreeRegressor (DT) | Resp=oks | Time=0.94s
+2026-06-26 16:21:38,396 - Model=SVR | Resp=oks | Time=1.86s
+2026-06-26 16:21:50,918 - Model=XGBoost | Resp=oks | Time=12.52s
+2026-06-26 16:22:19,661 - Model=CatBoost | Resp=oks | Time=28.74s
+2026-06-26 16:22:30,615 - Model=LightGBM | Resp=oks | Time=10.95s
+2026-06-26 16:22:31,536 - Model=DecisionTreeRegressor (DT) | Resp=oks | Time=0.92s
+2026-06-26 16:22:33,428 - Model=SVR | Resp=oks | Time=1.89s
+2026-06-26 16:22:45,863 - Model=XGBoost | Resp=oks | Time=12.43s
+2026-06-26 16:23:14,473 - Model=CatBoost | Resp=oks | Time=28.61s
+2026-06-26 16:23:25,677 - Model=LightGBM | Resp=oks | Time=11.20s
+2026-06-26 16:23:26,579 - Model=DecisionTreeRegressor (DT) | Resp=oks | Time=0.90s
+2026-06-26 16:23:28,436 - Model=SVR | Resp=oks | Time=1.86s
+2026-06-26 16:23:40,198 - Model=XGBoost | Resp=oks | Time=11.76s
+2026-06-26 16:24:08,059 - Model=CatBoost | Resp=oks | Time=27.86s
+2026-06-26 16:24:17,701 - Model=LightGBM | Resp=oks | Time=9.64s
+2026-06-26 16:24:18,603 - Model=DecisionTreeRegressor (DT) | Resp=oks | Time=0.90s
+2026-06-26 16:24:20,455 - Model=SVR | Resp=oks | Time=1.85s
