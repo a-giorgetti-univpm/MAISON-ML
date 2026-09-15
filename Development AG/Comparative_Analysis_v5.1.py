@@ -283,10 +283,14 @@ exclude_cols = [
     "SISS_Category_Q",
     "OHSS_Category_Q",
     "OKSS_Category_Q",
+    "sis",
+    "ohs",
+    "oks"
 ]
 
 feature_cols = [c for c in data.columns if c not in exclude_cols]
 X = data[feature_cols].select_dtypes(include=[np.number]).copy()
+print(X.columns)
 groups = data["participant"]
 
 # Conta i record per ogni partecipante

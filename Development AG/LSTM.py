@@ -130,6 +130,7 @@ data["OKSS_Category_Q"] = pd.cut(data["oks"], bins=[data["oks"].min(), okss_q1, 
                                labels=quartile_labels, include_lowest=True).astype(int)
 
 # Extract only numeric features for LOPO (drop timestamps/string columns).
+
 exclude_cols = [
     "participant",
     "timestamp",
@@ -138,7 +139,10 @@ exclude_cols = [
     "step-max-timestamp",
     "SISS_Category_Q",
     "OHSS_Category_Q",
-    "OKSS_Category_Q",
+    "OKSS_Category_Q"
+    #"sis",
+    #"ohs",
+    #"oks"
 ]
 
 feature_cols = [c for c in data.columns if c not in exclude_cols]
