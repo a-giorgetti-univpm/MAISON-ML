@@ -237,9 +237,9 @@ for train_idx, test_idx in outer_logo.split(X_input, y_input, groups_input):
 
     mae_each = mean_absolute_error(y_test, y_pred, multioutput="raw_values")  #### [MAE_SIS, MAE_OHS, MAE_OKS]
     rmse_avg = np.sqrt(mean_squared_error(y_test, y_pred, multioutput="raw_values"))  ##uniform_average
-    r2_avg = r2_score(y_test, y_pred, multioutput="raw_values")
+    r2_avg = r2_score(y_test, y_pred, multioutput="raw_values")   ##uniform_average
 
-    performance_metrics.append(np.concatenate([mae_each, [rmse_avg, r2_avg]]))
+    performance_metrics.append(np.concatenate([mae_each, rmse_avg, r2_avg]))
 
 metric_cols = [f"MAE_{n}" for n in SCORE_TARGETS] + [f"RMSE_{n}" for n in SCORE_TARGETS] + [f"R2_{n}" for n in SCORE_TARGETS]  ### ["RMSE_avg", "R2_avg"]
 performance_df = pd.DataFrame(performance_metrics, columns=metric_cols)
