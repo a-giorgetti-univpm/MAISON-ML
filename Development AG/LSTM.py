@@ -66,9 +66,9 @@ np.random.seed(seed)
 # Define root directory
 root = '.'
 
-df = pd.read_csv('./new_dataset/maison-llf-features.CSV', sep=",")
+df = pd.read_csv('./new_dataset/maison-llf-features.csv', sep=",")
 
-ana = pd.read_csv('./new_dataset/maison-llf-demographics.CSV', sep=",")
+ana = pd.read_csv('./new_dataset/maison-llf-demographics.csv', sep=",")
 
 ana_col = list(ana.columns)
 
