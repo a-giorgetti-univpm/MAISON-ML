@@ -244,7 +244,6 @@ for train_idx, test_idx in outer_logo.split(X_input, y_input, groups_input):
 metric_cols = [f"MAE_{n}" for n in SCORE_TARGETS] + [f"RMSE_{n}" for n in SCORE_TARGETS] + [f"R2_{n}" for n in SCORE_TARGETS]  ### ["RMSE_avg", "R2_avg"]
 performance_df = pd.DataFrame(performance_metrics, columns=metric_cols)
 
-# Salva metriche di regressione (SIS, OHS, OKS)
-output_path = os.path.join(root, "new_results/LSTM_scores.xlsx")
-with pd.ExcelWriter(output_path) as writer:
-    performance_df.to_excel(writer, sheet_name="All_Folds")
+# Salva metriche di regressione in CSV
+output_path = os.path.join(root, "new_results/LSTM_scores.csv")
+performance_df.to_csv(output_path, index=False)
