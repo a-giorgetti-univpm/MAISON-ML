@@ -187,7 +187,9 @@ X_input, y_input, groups_input = create_sequences_by_participant(
 
 # Outer LOPO Loop
 count=0
-y_input = y_input 
+y_input = y_input
+
+print("start outer LOPO")
 
 for train_idx, test_idx in outer_logo.split(X_input, y_input, groups_input):
     #print(train_idx) index
@@ -240,6 +242,8 @@ for train_idx, test_idx in outer_logo.split(X_input, y_input, groups_input):
     r2_avg = r2_score(y_test, y_pred, multioutput="raw_values")   ##uniform_average
 
     performance_metrics.append(np.concatenate([mae_each, rmse_avg, r2_avg]))
+
+print("end outer LOPO and performance metrics collected")
 
 metric_cols = [f"MAE_{n}" for n in SCORE_TARGETS] + [f"RMSE_{n}" for n in SCORE_TARGETS] + [f"R2_{n}" for n in SCORE_TARGETS]  ### ["RMSE_avg", "R2_avg"]
 performance_df = pd.DataFrame(performance_metrics, columns=metric_cols)
