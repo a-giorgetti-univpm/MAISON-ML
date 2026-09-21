@@ -468,7 +468,7 @@ n_features = X.shape[1]
 MODELS = TABULAR_MODELS
 
 #class_responses = ["OHSS_Category_Q", "SISS_Category_Q", "OKSS_Category_Q"]
-reg_responses = ["sis", "oks"]   ### "ohs" temporaly escluded
+reg_responses = ["sis", "oks", "ohs"]   ### "ohs" temporaly escluded
 
 target = {#"classification": class_responses,
           "regression": reg_responses}
