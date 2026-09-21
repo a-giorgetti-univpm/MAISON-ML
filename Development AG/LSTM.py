@@ -17,6 +17,8 @@ from scikeras.wrappers import KerasRegressor   ### KerasClassifier
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import LSTM, Dense, Dropout
 from tensorflow.keras.optimizers import Adam
+import tensorflow as tf
+import gc
 
 
 def create_sequences_by_participant(df, window_size, feature_cols, target_col):
@@ -140,9 +142,9 @@ exclude_cols = [
     "SISS_Category_Q",
     "OHSS_Category_Q",
     "OKSS_Category_Q"
-    #"sis",
-    #"ohs",
-    #"oks"
+    "sis",
+    "ohs",
+    "oks"
 ]
 
 feature_cols = [c for c in data.columns if c not in exclude_cols]
@@ -231,9 +233,21 @@ for train_idx, test_idx in outer_logo.split(X_input, y_input, groups_input):
 
             if score > best_score:
                 best_score = score
-                best_model = model
-                best_params = params
+                #best_model = model
+                best_params = params.copy()
 
+            # Free up memory
+            del model, y_val_pred
+            tf.keras.backend.clear_session()
+            gc.collect()
+
+    best_model = KerasRegressor(
+    model=build_lstm_model,
+    n_features=len(lista_features),
+    timesteps=WINDOW_SIZE,
+    n_outputs=y_input.shape[1],
+    verbose=0)
+    best_model.set_params(**best_params)
     best_model.fit(X_train_outer, y_train_outer)
     y_pred = best_model.predict(X_test)
 
@@ -242,6 +256,10 @@ for train_idx, test_idx in outer_logo.split(X_input, y_input, groups_input):
     r2_avg = r2_score(y_test, y_pred, multioutput="raw_values")   ##uniform_average
 
     performance_metrics.append(np.concatenate([mae_each, rmse_avg, r2_avg]))
+
+    del best_model
+    tf.keras.backend.clear_session()
+    gc.collect()
 
 print("end outer LOPO and performance metrics collected")
 
