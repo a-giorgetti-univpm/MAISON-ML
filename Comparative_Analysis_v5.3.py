@@ -181,20 +181,6 @@ def inner_GridSearch_ParOpt(estimator, param_grid, X_train_outer, y_train_outer,
     return grid.best_estimator_, grid.best_params_, grid.best_score_
 
 
-def save_ConfMat(overall_conf_matrix, root):
-
-    # Plot overall confusion matrix
-    plt.figure(figsize=(6, 5))
-    sns.heatmap(overall_conf_matrix, annot=True, cmap="coolwarm", xticklabels=[0, 1, 2, 3], yticklabels=[0, 1, 2, 3])
-    plt.xlabel("Predicted")
-    plt.ylabel("Actual")
-    plt.title("Overall Confusion Matrix OHSS")
-    conf_matrix_path = os.path.join(root, "results/overall_confusion_matrix_ohss.pdf")
-    plt.savefig(conf_matrix_path, dpi=300, bbox_inches='tight')
-    plt.close()
-
-    return 0
-
 #print(f"\n✅ Performance metrics saved as: {output_path}")
 #print(f"✅ Overall Confusion Matrix saved as: {conf_matrix_path}")
 
@@ -283,7 +269,40 @@ exclude_cols = [
     "SISS_Category_Q",
     "OHSS_Category_Q",
     "OKSS_Category_Q",
-]
+    "sis-01",
+    "sis-02",
+    "sis-03",
+    "sis-04",
+    "sis-05",
+    "sis-06",
+    "sis",
+    "ohs-01",
+    "ohs-02",
+    "ohs-03",
+    "ohs-04",
+    "ohs-05",
+    "ohs-06",
+    "ohs-07",
+    "ohs-08",
+    "ohs-09",
+    "ohs-10",
+    "ohs-11",
+    "ohs-12",
+    "ohs",
+    "oks-01",
+    "oks-02",
+    "oks-03",
+    "oks-04",
+    "oks-05",
+    "oks-06",
+    "oks-07",
+    "oks-08",
+    "oks-09",
+    "oks-10",
+    "oks-11",
+    "oks-12",
+    "oks"
+    ]
 
 feature_cols = [c for c in data.columns if c not in exclude_cols]
 X = data[feature_cols].select_dtypes(include=[np.number]).copy()
@@ -464,7 +483,7 @@ n_features = X.shape[1]
 MODELS = TABULAR_MODELS
 
 #class_responses = ["OHSS_Category_Q", "SISS_Category_Q", "OKSS_Category_Q"]
-reg_responses = ["sis", "oks"]   ### "ohs" temporaly escluded
+reg_responses = ["sis", "oks", "ohs"]   ### "ohs" temporaly escluded
 
 target = {#"classification": class_responses,
           "regression": reg_responses}
@@ -491,7 +510,7 @@ for mod in modes:
 
     responses = target[mod]
 
-    output_path = os.path.join(root, "results/" + "run_v5.1" + "/results_" + mod + ".xlsx")
+    output_path = os.path.join(root, "results/" + "run_v5.3" + "/results_" + mod + ".xlsx")
     with pd.ExcelWriter(output_path) as writer:
 
         for resp in responses:
