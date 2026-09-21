@@ -1,11 +1,680 @@
-WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
-I0000 00:00:1789750676.691855 1778396 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
-I0000 00:00:1789750676.733443 1778396 cpu_feature_guard.cc:227] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
-To enable the following instructions: AVX2 AVX512F AVX512_VNNI AVX512_BF16 AVX512_FP16 AVX_VNNI AMX_TILE AMX_INT8 AMX_BF16 FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
-WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
-I0000 00:00:1789750678.409190 1778396 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
-I0000 00:00:1789750678.409494 1778396 cudart_stub.cc:31] Could not find cuda drivers on your machine, GPU will not be used.
-start outer LOPO
-E0000 00:00:1789750678.800965 1778396 cuda_platform.cc:52] failed call to cuInit: INTERNAL: CUDA error: Failed call to cuInit: UNKNOWN ERROR (303)
-WARNING:tensorflow:5 out of the last 9 calls to <function TensorFlowTrainer.make_predict_function.<locals>.one_step_on_data_distributed at 0x7f2965dcb2e0> triggered tf.function retracing. Tracing is expensive and the excessive number of tracings could be due to (1) creating @tf.function repeatedly in a loop, (2) passing tensors with different shapes, (3) passing Python objects instead of tensors. For (1), please define your @tf.function outside of the loop. For (2), @tf.function has reduce_retracing=True option that can avoid unnecessary retracing. For (3), please refer to https://www.tensorflow.org/guide/function#controlling_retracing and https://www.tensorflow.org/api_docs/python/tf/function for  more details.
-WARNING:tensorflow:6 out of the last 12 calls to <function TensorFlowTrainer.make_predict_function.<locals>.one_step_on_data_distributed at 0x7f2965dcb2e0> triggered tf.function retracing. Tracing is expensive and the excessive number of tracings could be due to (1) creating @tf.function repeatedly in a loop, (2) passing tensors with different shapes, (3) passing Python objects instead of tensors. For (1), please define your @tf.function outside of the loop. For (2), @tf.function has reduce_retracing=True option that can avoid unnecessary retracing. For (3), please refer to https://www.tensorflow.org/guide/function#controlling_retracing and https://www.tensorflow.org/api_docs/python/tf/function for  more details.
+Index(['sis-01', 'sis-02', 'sis-03', 'sis-04', 'sis-05', 'sis-06', 'ohs-01',
+       'ohs-02', 'ohs-03', 'ohs-04', 'ohs-05', 'ohs-06', 'ohs-07', 'ohs-08',
+       'ohs-09', 'ohs-10', 'ohs-11', 'ohs-12', 'oks-01', 'oks-02', 'oks-03',
+       'oks-04', 'oks-05', 'oks-06', 'oks-07', 'oks-08', 'oks-09', 'oks-10',
+       'oks-11', 'oks-12', 'tug', 'chairstand', 'acceleration-count',
+       'acceleration-mean', 'acceleration-std', 'acceleration-sum',
+       'acceleration-entropy', 'acceleration-kurtosis', 'acceleration-skew',
+       'acceleration-coefficient-of-variation',
+       'acceleration-minutes-with-data', 'acceleration-hours-with-data',
+       'acceleration-movement-events-00to06',
+       'acceleration-movement-events-06to12',
+       'acceleration-movement-events-12to18',
+       'acceleration-movement-events-18to24',
+       'acceleration-movement-events-24h',
+       'acceleration-intradaily-variability', 'heartrate-count',
+       'heartrate-min', 'heartrate-max', 'heartrate-mean', 'heartrate-std',
+       'heartrate-hours-with-data', 'motion-count', 'motion-ratio',
+       'motion-mean', 'motion-max', 'motion-max-timestamp', 'position-count',
+       'position-duration', 'position-distance-travelled', 'sleep-total',
+       'sleep-deep', 'sleep-light', 'sleep-rem', 'sleep-snoring',
+       'sleep-duration-to-sleep', 'sleep-duration-to-wakeup',
+       'sleep-wakeup-count', 'sleep-heartrate-mean', 'sleep-heartrate-min',
+       'sleep-heartrate-max', 'step-count', 'step-ratio', 'step-mean',
+       'step-max', 'step-max-timestamp', 'age', 'sex_male', 'education_label',
+       'work_part_time', 'fracture_femur fracture', 'fracture_hip fracture',
+       'fracture_hip replacement', 'fracture_pelvis fracture',
+       'ethnicity_black', 'ethnicity_caucasian', 'ethnicity_south asian'],
+      dtype='object')
+regression
+sis
+1
+[ 2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18]
+XGBoost
+LOPO
+CatBoost
+LOPO
+LightGBM
+LOPO
+DecisionTreeRegressor (DT)
+LOPO
+SVR
+LOPO
+2
+[ 1  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18]
+XGBoost
+LOPO
+CatBoost
+LOPO
+LightGBM
+LOPO
+DecisionTreeRegressor (DT)
+LOPO
+SVR
+LOPO
+3
+[ 1  2  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18]
+XGBoost
+LOPO
+CatBoost
+LOPO
+LightGBM
+LOPO
+DecisionTreeRegressor (DT)
+LOPO
+SVR
+LOPO
+4
+[ 1  2  3  5  6  7  8  9 10 11 12 13 14 15 16 17 18]
+XGBoost
+LOPO
+CatBoost
+LOPO
+LightGBM
+LOPO
+DecisionTreeRegressor (DT)
+LOPO
+SVR
+LOPO
+5
+[ 1  2  3  4  6  7  8  9 10 11 12 13 14 15 16 17 18]
+XGBoost
+LOPO
+CatBoost
+LOPO
+LightGBM
+LOPO
+DecisionTreeRegressor (DT)
+LOPO
+SVR
+LOPO
+6
+[ 1  2  3  4  5  7  8  9 10 11 12 13 14 15 16 17 18]
+XGBoost
+LOPO
+CatBoost
+LOPO
+LightGBM
+LOPO
+DecisionTreeRegressor (DT)
+LOPO
+SVR
+LOPO
+7
+[ 1  2  3  4  5  6  8  9 10 11 12 13 14 15 16 17 18]
+XGBoost
+LOPO
+CatBoost
+LOPO
+LightGBM
+LOPO
+DecisionTreeRegressor (DT)
+LOPO
+SVR
+LOPO
+8
+[ 1  2  3  4  5  6  7  9 10 11 12 13 14 15 16 17 18]
+XGBoost
+LOPO
+CatBoost
+LOPO
+LightGBM
+LOPO
+DecisionTreeRegressor (DT)
+LOPO
+SVR
+LOPO
+9
+[ 1  2  3  4  5  6  7  8 10 11 12 13 14 15 16 17 18]
+XGBoost
+LOPO
+CatBoost
+LOPO
+LightGBM
+LOPO
+DecisionTreeRegressor (DT)
+LOPO
+SVR
+LOPO
+10
+[ 1  2  3  4  5  6  7  8  9 11 12 13 14 15 16 17 18]
+XGBoost
+LOPO
+CatBoost
+LOPO
+LightGBM
+LOPO
+DecisionTreeRegressor (DT)
+LOPO
+SVR
+LOPO
+11
+[ 1  2  3  4  5  6  7  8  9 10 12 13 14 15 16 17 18]
+XGBoost
+LOPO
+CatBoost
+LOPO
+LightGBM
+LOPO
+DecisionTreeRegressor (DT)
+LOPO
+SVR
+LOPO
+12
+[ 1  2  3  4  5  6  7  8  9 10 11 13 14 15 16 17 18]
+XGBoost
+LOPO
+CatBoost
+LOPO
+LightGBM
+LOPO
+DecisionTreeRegressor (DT)
+LOPO
+SVR
+LOPO
+13
+[ 1  2  3  4  5  6  7  8  9 10 11 12 14 15 16 17 18]
+XGBoost
+LOPO
+CatBoost
+LOPO
+LightGBM
+LOPO
+DecisionTreeRegressor (DT)
+LOPO
+SVR
+LOPO
+14
+[ 1  2  3  4  5  6  7  8  9 10 11 12 13 15 16 17 18]
+XGBoost
+LOPO
+CatBoost
+LOPO
+LightGBM
+LOPO
+DecisionTreeRegressor (DT)
+LOPO
+SVR
+LOPO
+15
+[ 1  2  3  4  5  6  7  8  9 10 11 12 13 14 16 17 18]
+XGBoost
+LOPO
+CatBoost
+LOPO
+LightGBM
+LOPO
+DecisionTreeRegressor (DT)
+LOPO
+SVR
+LOPO
+16
+[ 1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 17 18]
+XGBoost
+LOPO
+CatBoost
+LOPO
+LightGBM
+LOPO
+DecisionTreeRegressor (DT)
+LOPO
+SVR
+LOPO
+17
+[ 1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 18]
+XGBoost
+LOPO
+CatBoost
+LOPO
+LightGBM
+LOPO
+DecisionTreeRegressor (DT)
+LOPO
+SVR
+LOPO
+18
+[ 1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17]
+XGBoost
+LOPO
+CatBoost
+LOPO
+LightGBM
+LOPO
+DecisionTreeRegressor (DT)
+LOPO
+SVR
+LOPO
+oks
+1
+[ 2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18]
+XGBoost
+LOPO
+CatBoost
+LOPO
+LightGBM
+LOPO
+DecisionTreeRegressor (DT)
+LOPO
+SVR
+LOPO
+2
+[ 1  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18]
+XGBoost
+LOPO
+CatBoost
+LOPO
+LightGBM
+LOPO
+DecisionTreeRegressor (DT)
+LOPO
+SVR
+LOPO
+3
+[ 1  2  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18]
+XGBoost
+LOPO
+CatBoost
+LOPO
+LightGBM
+LOPO
+DecisionTreeRegressor (DT)
+LOPO
+SVR
+LOPO
+4
+[ 1  2  3  5  6  7  8  9 10 11 12 13 14 15 16 17 18]
+XGBoost
+LOPO
+CatBoost
+LOPO
+LightGBM
+LOPO
+DecisionTreeRegressor (DT)
+LOPO
+SVR
+LOPO
+5
+[ 1  2  3  4  6  7  8  9 10 11 12 13 14 15 16 17 18]
+XGBoost
+LOPO
+CatBoost
+LOPO
+LightGBM
+LOPO
+DecisionTreeRegressor (DT)
+LOPO
+SVR
+LOPO
+6
+[ 1  2  3  4  5  7  8  9 10 11 12 13 14 15 16 17 18]
+XGBoost
+LOPO
+CatBoost
+LOPO
+LightGBM
+LOPO
+DecisionTreeRegressor (DT)
+LOPO
+SVR
+LOPO
+7
+[ 1  2  3  4  5  6  8  9 10 11 12 13 14 15 16 17 18]
+XGBoost
+LOPO
+CatBoost
+LOPO
+LightGBM
+LOPO
+DecisionTreeRegressor (DT)
+LOPO
+SVR
+LOPO
+8
+[ 1  2  3  4  5  6  7  9 10 11 12 13 14 15 16 17 18]
+XGBoost
+LOPO
+CatBoost
+LOPO
+LightGBM
+LOPO
+DecisionTreeRegressor (DT)
+LOPO
+SVR
+LOPO
+9
+[ 1  2  3  4  5  6  7  8 10 11 12 13 14 15 16 17 18]
+XGBoost
+LOPO
+CatBoost
+LOPO
+LightGBM
+LOPO
+DecisionTreeRegressor (DT)
+LOPO
+SVR
+LOPO
+10
+[ 1  2  3  4  5  6  7  8  9 11 12 13 14 15 16 17 18]
+XGBoost
+LOPO
+CatBoost
+LOPO
+LightGBM
+LOPO
+DecisionTreeRegressor (DT)
+LOPO
+SVR
+LOPO
+11
+[ 1  2  3  4  5  6  7  8  9 10 12 13 14 15 16 17 18]
+XGBoost
+LOPO
+CatBoost
+LOPO
+LightGBM
+LOPO
+DecisionTreeRegressor (DT)
+LOPO
+SVR
+LOPO
+12
+[ 1  2  3  4  5  6  7  8  9 10 11 13 14 15 16 17 18]
+XGBoost
+LOPO
+CatBoost
+LOPO
+LightGBM
+LOPO
+DecisionTreeRegressor (DT)
+LOPO
+SVR
+LOPO
+13
+[ 1  2  3  4  5  6  7  8  9 10 11 12 14 15 16 17 18]
+XGBoost
+LOPO
+CatBoost
+LOPO
+LightGBM
+LOPO
+DecisionTreeRegressor (DT)
+LOPO
+SVR
+LOPO
+14
+[ 1  2  3  4  5  6  7  8  9 10 11 12 13 15 16 17 18]
+XGBoost
+LOPO
+CatBoost
+LOPO
+LightGBM
+LOPO
+DecisionTreeRegressor (DT)
+LOPO
+SVR
+LOPO
+15
+[ 1  2  3  4  5  6  7  8  9 10 11 12 13 14 16 17 18]
+XGBoost
+LOPO
+CatBoost
+LOPO
+LightGBM
+LOPO
+DecisionTreeRegressor (DT)
+LOPO
+SVR
+LOPO
+16
+[ 1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 17 18]
+XGBoost
+LOPO
+CatBoost
+LOPO
+LightGBM
+LOPO
+DecisionTreeRegressor (DT)
+LOPO
+SVR
+LOPO
+17
+[ 1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 18]
+XGBoost
+LOPO
+CatBoost
+LOPO
+LightGBM
+LOPO
+DecisionTreeRegressor (DT)
+LOPO
+SVR
+LOPO
+18
+[ 1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17]
+XGBoost
+LOPO
+CatBoost
+LOPO
+LightGBM
+LOPO
+DecisionTreeRegressor (DT)
+LOPO
+SVR
+LOPO
+ohs
+1
+[ 2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18]
+XGBoost
+LOPO
+CatBoost
+LOPO
+LightGBM
+LOPO
+DecisionTreeRegressor (DT)
+LOPO
+SVR
+LOPO
+2
+[ 1  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18]
+XGBoost
+LOPO
+CatBoost
+LOPO
+LightGBM
+LOPO
+DecisionTreeRegressor (DT)
+LOPO
+SVR
+LOPO
+3
+[ 1  2  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18]
+XGBoost
+LOPO
+CatBoost
+LOPO
+LightGBM
+LOPO
+DecisionTreeRegressor (DT)
+LOPO
+SVR
+LOPO
+4
+[ 1  2  3  5  6  7  8  9 10 11 12 13 14 15 16 17 18]
+XGBoost
+LOPO
+CatBoost
+LOPO
+LightGBM
+LOPO
+DecisionTreeRegressor (DT)
+LOPO
+SVR
+LOPO
+5
+[ 1  2  3  4  6  7  8  9 10 11 12 13 14 15 16 17 18]
+XGBoost
+LOPO
+CatBoost
+LOPO
+LightGBM
+LOPO
+DecisionTreeRegressor (DT)
+LOPO
+SVR
+LOPO
+6
+[ 1  2  3  4  5  7  8  9 10 11 12 13 14 15 16 17 18]
+XGBoost
+LOPO
+CatBoost
+LOPO
+LightGBM
+LOPO
+DecisionTreeRegressor (DT)
+LOPO
+SVR
+LOPO
+7
+[ 1  2  3  4  5  6  8  9 10 11 12 13 14 15 16 17 18]
+XGBoost
+LOPO
+CatBoost
+LOPO
+LightGBM
+LOPO
+DecisionTreeRegressor (DT)
+LOPO
+SVR
+LOPO
+8
+[ 1  2  3  4  5  6  7  9 10 11 12 13 14 15 16 17 18]
+XGBoost
+LOPO
+CatBoost
+LOPO
+LightGBM
+LOPO
+DecisionTreeRegressor (DT)
+LOPO
+SVR
+LOPO
+9
+[ 1  2  3  4  5  6  7  8 10 11 12 13 14 15 16 17 18]
+XGBoost
+LOPO
+CatBoost
+LOPO
+LightGBM
+LOPO
+DecisionTreeRegressor (DT)
+LOPO
+SVR
+LOPO
+10
+[ 1  2  3  4  5  6  7  8  9 11 12 13 14 15 16 17 18]
+XGBoost
+LOPO
+CatBoost
+LOPO
+LightGBM
+LOPO
+DecisionTreeRegressor (DT)
+LOPO
+SVR
+LOPO
+11
+[ 1  2  3  4  5  6  7  8  9 10 12 13 14 15 16 17 18]
+XGBoost
+LOPO
+CatBoost
+LOPO
+LightGBM
+LOPO
+DecisionTreeRegressor (DT)
+LOPO
+SVR
+LOPO
+12
+[ 1  2  3  4  5  6  7  8  9 10 11 13 14 15 16 17 18]
+XGBoost
+LOPO
+CatBoost
+LOPO
+LightGBM
+LOPO
+DecisionTreeRegressor (DT)
+LOPO
+SVR
+LOPO
+13
+[ 1  2  3  4  5  6  7  8  9 10 11 12 14 15 16 17 18]
+XGBoost
+LOPO
+CatBoost
+LOPO
+LightGBM
+LOPO
+DecisionTreeRegressor (DT)
+LOPO
+SVR
+LOPO
+14
+[ 1  2  3  4  5  6  7  8  9 10 11 12 13 15 16 17 18]
+XGBoost
+LOPO
+CatBoost
+LOPO
+LightGBM
+LOPO
+DecisionTreeRegressor (DT)
+LOPO
+SVR
+LOPO
+15
+[ 1  2  3  4  5  6  7  8  9 10 11 12 13 14 16 17 18]
+XGBoost
+LOPO
+CatBoost
+LOPO
+LightGBM
+LOPO
+DecisionTreeRegressor (DT)
+LOPO
+SVR
+LOPO
+16
+[ 1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 17 18]
+XGBoost
+LOPO
+CatBoost
+LOPO
+LightGBM
+LOPO
+DecisionTreeRegressor (DT)
+LOPO
+SVR
+LOPO
+17
+[ 1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 18]
+XGBoost
+LOPO
+CatBoost
+LOPO
+LightGBM
+LOPO
+DecisionTreeRegressor (DT)
+LOPO
+SVR
+LOPO
+18
+[ 1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17]
+XGBoost
+LOPO
+CatBoost
+LOPO
+LightGBM
+LOPO
+DecisionTreeRegressor (DT)
+LOPO
+SVR
+LOPO
