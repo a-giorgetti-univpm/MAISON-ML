@@ -1,0 +1,2 @@
+Terminated                 python -u LSTM.py > output.log 2>&1
+bash: line 1: 1778396 Killed                     python -u LSTM.py > output.log 2>&1
