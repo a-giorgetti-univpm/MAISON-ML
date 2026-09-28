@@ -141,10 +141,40 @@ exclude_cols = [
     "step-max-timestamp",
     "SISS_Category_Q",
     "OHSS_Category_Q",
-    "OKSS_Category_Q"
+    "OKSS_Category_Q",
     "sis",
-    "ohs",
-    "oks"
+    "sis-01",
+    "sis-02",
+    "sis-03",
+    "sis-04",
+    "sis-05",
+    "sis-06",
+    "ohs",                                 
+    "ohs-01",
+    "ohs-02",
+    "ohs-03",
+    "ohs-04",
+    "ohs-05",
+    "ohs-06",
+    "ohs-07",
+    "ohs-08",
+    "ohs-09",
+    "ohs-10",
+    "ohs-11",
+    "ohs-12",
+    "oks",
+    "oks-01",
+    "oks-02",
+    "oks-03",
+    "oks-04",
+    "oks-05",
+    "oks-06",
+    "oks-07",
+    "oks-08",
+    "oks-09",
+    "oks-10",
+    "oks-11",
+    "oks-12"    
 ]
 
 feature_cols = [c for c in data.columns if c not in exclude_cols]
@@ -160,11 +190,11 @@ nct = df.groupby('participant')['clinical-timestamp'].nunique()
 
 # Define classifier and hyperparameter grid
 param_grid = {
-            "model__n_units": [16, 32, 64],
+            "model__n_units": [16, 32],
             "model__dropout": [0.0, 0.2],
-            "model__lr": [1e-3, 3e-4],
-            "batch_size": [16, 32],
-            "epochs": [10, 20],
+            "model__lr": [1e-3],
+            "batch_size": [32],
+            "epochs": [10],
         }
 
 # Leave-One-Patient-Out CV (LOPO)
