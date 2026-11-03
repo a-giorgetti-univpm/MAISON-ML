@@ -1,0 +1,8 @@
+{
+  "seed": 69,
+  "data_dir": "data",
+  "features_file": "maison-llf-features.csv",
+  "demographics_file": "maison-llf-demographics.csv",
+  "timing_log": "timing.log",
+  "outputs_dir": "outputs/run_v8"
+}

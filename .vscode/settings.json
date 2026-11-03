@@ -1,0 +1,13 @@
+{
+    "python-envs.defaultEnvManager": "ms-python.python:conda",
+    "python-envs.defaultPackageManager": "ms-python.python:conda",
+    "terminal.integrated.profiles.windows": {
+    "Anaconda Prompt": {
+    "path": "C:\\Windows\\System32\\cmd.exe",
+    "args": [
+      "/K",
+      "C:\\Users\\Alessio\\anaconda3\\Scripts\\activate.bat C:\\Users\\Alessio\\anaconda3 && conda activate ml_env"
+    ]
+  }
+}
+}

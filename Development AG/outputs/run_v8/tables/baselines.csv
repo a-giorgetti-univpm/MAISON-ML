@@ -1,0 +1,7 @@
+model,target,fold,held_out_pid,n_train_rows,n_test_rows,mae,r2
+baseline_demo_ridge,sis,1,1,952,56,1.4943,-0.6516
+baseline_demo_ridge,ohs,1,1,952,56,13.7505,-126.0499
+baseline_demo_ridge,oks,1,1,952,56,11.4444,-3.3158
+baseline_naive_mean,sis,1,1,952,56,1.0735,-0.0144
+baseline_naive_mean,ohs,1,1,952,56,2.2941,-3.5087
+baseline_naive_mean,oks,1,1,952,56,5.0,-0.1402

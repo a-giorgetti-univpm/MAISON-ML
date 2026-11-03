@@ -1,0 +1,16 @@
+model,target,mae_mean,mae_std,r2_mean,r2_std
+baseline_naive_mean,ohs_delta,2.4264,0.1872,-2.6422,1.2255
+baseline_naive_mean,oks_delta,4.9853,0.0208,-1.8114,2.2996
+baseline_naive_mean,sis_delta,1.8824,0.8735,-0.9746,0.1297
+lgbm,ohs_delta,2.7521,1.4668,-2.8494,1.6433
+lgbm,oks_delta,5.084,0.8704,-1.4586,1.4274
+lgbm,sis_delta,2.4712,0.6034,-2.4074,1.8133
+rf,ohs_delta,3.1094,2.0791,-3.9488,3.5464
+rf,oks_delta,5.0913,0.4007,-1.6945,1.87
+rf,sis_delta,2.1445,0.8905,-1.4962,0.5742
+tuned_elasticnet,ohs_delta,2.4464,0.0797,-2.8016,1.425
+tuned_elasticnet,oks_delta,4.9871,0.0212,-1.841,2.3561
+tuned_elasticnet,sis_delta,1.9114,0.907,-0.992,0.1379
+tuned_ridge,ohs_delta,3.7635,0.1121,-9.6602,2.7119
+tuned_ridge,oks_delta,8.3958,2.5,-8.3788,10.565
+tuned_ridge,sis_delta,2.5795,1.1826,-1.9324,0.2268
