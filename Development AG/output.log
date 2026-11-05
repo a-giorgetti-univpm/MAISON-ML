@@ -1,12 +1,1215 @@
-WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
-I0000 00:00:1790603565.580115 4020553 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
-I0000 00:00:1790603565.623608 4020553 cpu_feature_guard.cc:227] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
-To enable the following instructions: AVX2 AVX512F AVX512_VNNI AVX512_BF16 AVX512_FP16 AVX_VNNI AMX_TILE AMX_INT8 AMX_BF16 FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
-WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
-I0000 00:00:1790603566.623645 4020553 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
-I0000 00:00:1790603566.623934 4020553 cudart_stub.cc:31] Could not find cuda drivers on your machine, GPU will not be used.
-start outer LOPO
-E0000 00:00:1790603566.765878 4020553 cuda_platform.cc:52] failed call to cuInit: INTERNAL: CUDA error: Failed call to cuInit: UNKNOWN ERROR (303)
-WARNING:tensorflow:5 out of the last 5 calls to <function TensorFlowTrainer.make_predict_function.<locals>.one_step_on_data_distributed at 0x75c150a7f420> triggered tf.function retracing. Tracing is expensive and the excessive number of tracings could be due to (1) creating @tf.function repeatedly in a loop, (2) passing tensors with different shapes, (3) passing Python objects instead of tensors. For (1), please define your @tf.function outside of the loop. For (2), @tf.function has reduce_retracing=True option that can avoid unnecessary retracing. For (3), please refer to https://www.tensorflow.org/guide/function#controlling_retracing and https://www.tensorflow.org/api_docs/python/tf/function for  more details.
-WARNING:tensorflow:6 out of the last 6 calls to <function TensorFlowTrainer.make_predict_function.<locals>.one_step_on_data_distributed at 0x75c150a7f420> triggered tf.function retracing. Tracing is expensive and the excessive number of tracings could be due to (1) creating @tf.function repeatedly in a loop, (2) passing tensors with different shapes, (3) passing Python objects instead of tensors. For (1), please define your @tf.function outside of the loop. For (2), @tf.function has reduce_retracing=True option that can avoid unnecessary retracing. For (3), please refer to https://www.tensorflow.org/guide/function#controlling_retracing and https://www.tensorflow.org/api_docs/python/tf/function for  more details.
-end outer LOPO and performance metrics collected
+=== Files loaded ===
+  features.csv       : 1008 rows x 84 cols
+  demographics.csv   : 18 rows x 8 cols
+
+=== Merge result ===
+  df_raw shape    : (1008, 84)
+  df_merged shape : (1008, 91)
+
+============================================================
+BASIC INPUT DATA CHECKS
+============================================================
+
+--- Shape ---
+  features  : 1008 rows x 84 cols
+              18 participants x 56 days per participant
+  ana      : 18 rows x 8 cols
+
+--- Missingness ---
+  features.csv  : 0 total NaN values
+  demographics.csv  : 0 total NaN values
+  [OK] No missing values in features
+  [OK] No missing values in demographics
+
+--- Duplicate Keys ---
+  features full-row duplicates           : 0
+  features (participant, timestamp) dupes: 0
+  demographics participant duplicates    : 0
+
+--- Participant Balance ---
+  Rows per participant: min=56, max=56, all equal=True
+
+--- Timestamp Coverage ---
+  Global date range: 2022-03-31 to 2025-10-29
+
+--- Target Distributions ---
+  sis: min=  15 max=  30 mean=23.86 std=3.84 nulls=0
+  ohs: min=  13 max=  47 mean=28.17 std=8.06 nulls=0
+  oks: min=  15 max=  48 mean=30.22 std=9.69 nulls=0
+=== Column constants set ===
+  COLS_DROP_ALWAYS: 33 columns
+  Safe sensor cols: 46 across 6 modalities
+    acceleration  : 16 features
+    heartrate     : 6 features
+    motion        : 5 features
+    position      : 3 features
+    sleep         : 11 features
+    step          : 5 features
+  ANA qualitative cols   : ['sex', 'fracture-type', 'relationship', 'education', 'work', 'ethnicity']
+  ANA quantitative cols   : ['age']
+  [FLAG] Participant 10: unique SIS/OHS/OKS counts per clinical-timestamp block:
+                    sis  ohs  oks
+clinical-timestamp               
+2024-11-06            2    2    2
+2024-11-20            2    2    2
+2024-12-04            1    1    1
+2024-12-18            1    1    1
+     Actual SIS/OHS/OKS values within each block:
+                        sis  ohs  oks
+clinical-timestamp                   
+2024-11-06         504   19   19   26
+                   517   21   13   27
+2024-11-20         518   19   19   26
+                   519   21   13   27
+2024-12-04         532   20   18   25
+2024-12-18         546   18   28   34
+
+  [FLAG] Participant 11: unique SIS/OHS/OKS counts per clinical-timestamp block:
+                    sis  ohs  oks
+clinical-timestamp               
+2024-11-12            1    1    1
+2024-11-26            1    1    1
+2024-12-10            1    1    2
+2024-12-24            1    1    2
+     Actual SIS/OHS/OKS values within each block:
+                        sis  ohs  oks
+clinical-timestamp                   
+2024-11-12         560   15   47   48
+2024-11-26         574   21   41   38
+2024-12-10         588   20   46   45
+                   600   20   46   48
+2024-12-24         602   20   46   48
+                   604   20   46   45
+
+  [FLAG] Participant 12: unique SIS/OHS/OKS counts per clinical-timestamp block:
+                    sis  ohs  oks
+clinical-timestamp               
+2024-12-18            1    2    2
+2025-01-01            1    2    2
+2025-01-15            2    2    2
+2025-01-29            2    2    2
+     Actual SIS/OHS/OKS values within each block:
+                        sis  ohs  oks
+clinical-timestamp                   
+2024-12-18         616   29   31   16
+                   629   29   32   18
+2025-01-01         630   29   31   16
+                   631   29   32   18
+2025-01-15         644   28   22   30
+                   657   29   16   21
+2025-01-29         658   28   22   30
+                   659   29   16   21
+
+  [FLAG] Participant 15: unique SIS/OHS/OKS counts per clinical-timestamp block:
+                    sis  ohs  oks
+clinical-timestamp               
+2025-04-04            2    2    2
+2025-04-18            2    2    2
+2025-05-02            1    1    1
+2025-05-16            1    1    1
+     Actual SIS/OHS/OKS values within each block:
+                        sis  ohs  oks
+clinical-timestamp                   
+2025-04-04         784   17   28   19
+                   797   22   25   18
+2025-04-18         798   17   28   19
+                   799   22   25   18
+2025-05-02         812   15   26   15
+2025-05-16         826   17   24   17
+
+Participants with inconsistencies: [np.int64(10), np.int64(11), np.int64(12), np.int64(15)]
+=== Post-Resolution Verification ===
+  [OK] All {participant, clinical-timestamp} blocks have exactly 1 unique SIS/OHS/OKS value.
+Updated target stats after median-resolution:
+  sis: min=15 max=30 mean=23.86 std=3.84
+  ohs: min=13 max=47 mean=28.17 std=8.06
+  oks: min=15 max=48 mean=30.22 std=9.69
+
+[OK] df_model shape: (1008, 58) (rows, cols)
+=== Final Leakage Gate ===
+  Forbidden columns in df_model : [] -> PASS
+  Targets present               : sis, ohs, oks -> PASS
+  Sensor cols present           : 46 / 46 -> PASS
+
+=== df_model Column Inventory ===
+  Total columns: 58
+  Metadata     : participant, timestamp
+  Targets      : sis, ohs, oks
+  Sensor feats : 46 across 6 modalities
+    acceleration  : 16
+    heartrate     : 6
+    motion        : 5
+    position      : 3
+    sleep         : 11
+    step          : 5
+
+   participant  timestamp  sis  ...             education     work  ethnicity
+0            1 2022-03-31   25  ...  undergraduate degree  retired      black
+1            1 2022-04-01   25  ...  undergraduate degree  retired      black
+2            1 2022-04-02   25  ...  undergraduate degree  retired      black
+
+[3 rows x 58 columns]
+=== LOPO-CV Outer Loop (Steps 4-7) ===
+  Total participants  : 18
+  Folds to run        : 18
+  Rolling windows     : [3, 7, 14] days
+=== Hyperparameter Grids ===
+
+PARAM_GRID_RIDGE:
+  model__alpha: [0.01, 0.1, 1.0, 10.0, 100.0]
+  PARAM_GRID_RIDGE: 5 combination(s)
+
+PARAM_GRID_RF:
+  model__n_estimators: [200]
+  model__max_depth: [5, 10, None]
+  model__min_samples_leaf: [2, 5]
+  PARAM_GRID_RF: 6 combination(s)
+
+PARAM_GRID_LGB:
+  model__n_estimators: [100, 300]
+  model__learning_rate: [0.05, 0.1]
+  model__num_leaves: [31, 63]
+  PARAM_GRID_LGB: 8 combination(s)
+
+PARAM_GRID_ELASTICNET:
+  model__alpha: [0.01, 0.1, 1.0, 10.0]
+  model__l1_ratio: [0.1, 0.5, 0.9]
+  PARAM_GRID_ELASTICNET: 12 combination(s)
+  Fold 01/18 | held-out P01 | train: 17 pids / 952 rows | test: 56 rows
+    -> [SIS] Ridge(sensor+demo)  MAE=5.551  R2=-22.039
+    -> [OHS] Ridge(sensor+demo)  MAE=15.580  R2=-190.606
+    -> [OKS] Ridge(sensor+demo)  MAE=32.697  R2=-28.592
+    -> [SIS] Baseline-A(demo)    MAE=1.494  R2=-0.652
+    -> [OHS] Baseline-A(demo)    MAE=13.750  R2=-126.050
+    -> [OKS] Baseline-A(demo)    MAE=11.444  R2=-3.316
+    -> [SIS] Baseline-B(mean)    MAE=1.074  R2=-0.014
+    -> [OHS] Baseline-B(mean)    MAE=2.294  R2=-3.509
+    -> [OKS] Baseline-B(mean)    MAE=5.000  R2=-0.140
+    -> [SIS] tuned_ridge   MAE=4.613  R2=-15.975  best={'model__alpha': 100.0}
+    -> [OHS] tuned_ridge   MAE=15.580  R2=-190.606  best={'model__alpha': 1.0}
+    -> [OKS] tuned_ridge   MAE=28.094  R2=-22.350  best={'model__alpha': 100.0}
+    -> [SIS] tuned_elasticnet  MAE=1.126  R2=-0.049  best={'model__alpha': 10.0, 'model__l1_ratio': 0.9}
+    -> [OHS] tuned_elasticnet  MAE=1.925  R2=-2.266  best={'model__alpha': 10.0, 'model__l1_ratio': 0.9}
+    -> [OKS] tuned_elasticnet  MAE=5.188  R2=-0.139  best={'model__alpha': 10.0, 'model__l1_ratio': 0.9}
+    -> [SIS] rf            MAE=2.071  R2=-2.706  best={'model__max_depth': 5, 'model__min_samples_leaf': 2, 'model__n_estimators': 200}
+    -> [OHS] rf            MAE=15.976  R2=-170.639  best={'model__max_depth': 5, 'model__min_samples_leaf': 5, 'model__n_estimators': 200}
+    -> [OKS] rf            MAE=17.145  R2=-7.485  best={'model__max_depth': None, 'model__min_samples_leaf': 5, 'model__n_estimators': 200}
+    -> [SIS] lgbm          MAE=2.067  R2=-3.084  best={'model__learning_rate': 0.1, 'model__n_estimators': 300, 'model__num_leaves': 31}
+    -> [OHS] lgbm          MAE=17.244  R2=-198.662  best={'model__learning_rate': 0.1, 'model__n_estimators': 100, 'model__num_leaves': 63}
+    -> [OKS] lgbm          MAE=17.396  R2=-7.832  best={'model__learning_rate': 0.1, 'model__n_estimators': 100, 'model__num_leaves': 63}
+  Fold 02/18 | held-out P02 | train: 17 pids / 952 rows | test: 56 rows
+    -> [SIS] Ridge(sensor+demo)  MAE=7.810  R2=-13.874
+    -> [OHS] Ridge(sensor+demo)  MAE=31.447  R2=-300.781
+    -> [OKS] Ridge(sensor+demo)  MAE=8.322  R2=-12.657
+    -> [SIS] Baseline-A(demo)    MAE=5.126  R2=-3.893
+    -> [OHS] Baseline-A(demo)    MAE=26.325  R2=-187.934
+    -> [OKS] Baseline-A(demo)    MAE=4.768  R2=-3.163
+    -> [SIS] Baseline-B(mean)    MAE=3.559  R2=-1.876
+    -> [OHS] Baseline-B(mean)    MAE=9.441  R2=-24.172
+    -> [OKS] Baseline-B(mean)    MAE=13.794  R2=-26.473
+    -> [SIS] tuned_ridge   MAE=8.051  R2=-13.498  best={'model__alpha': 100.0}
+    -> [OHS] tuned_ridge   MAE=14.638  R2=-68.016  best={'model__alpha': 100.0}
+    -> [OKS] tuned_ridge   MAE=11.831  R2=-22.479  best={'model__alpha': 100.0}
+    -> [SIS] tuned_elasticnet  MAE=3.774  R2=-2.304  best={'model__alpha': 10.0, 'model__l1_ratio': 0.9}
+    -> [OHS] tuned_elasticnet  MAE=9.440  R2=-25.010  best={'model__alpha': 10.0, 'model__l1_ratio': 0.9}
+    -> [OKS] tuned_elasticnet  MAE=13.547  R2=-27.699  best={'model__alpha': 10.0, 'model__l1_ratio': 0.9}
+    -> [SIS] rf            MAE=4.995  R2=-3.198  best={'model__max_depth': None, 'model__min_samples_leaf': 2, 'model__n_estimators': 200}
+    -> [OHS] rf            MAE=16.307  R2=-76.123  best={'model__max_depth': 5, 'model__min_samples_leaf': 2, 'model__n_estimators': 200}
+    -> [OKS] rf            MAE=8.722  R2=-10.301  best={'model__max_depth': None, 'model__min_samples_leaf': 2, 'model__n_estimators': 200}
+    -> [SIS] lgbm          MAE=4.806  R2=-2.997  best={'model__learning_rate': 0.05, 'model__n_estimators': 100, 'model__num_leaves': 31}
+    -> [OHS] lgbm          MAE=16.842  R2=-85.340  best={'model__learning_rate': 0.1, 'model__n_estimators': 300, 'model__num_leaves': 31}
+    -> [OKS] lgbm          MAE=8.789  R2=-12.174  best={'model__learning_rate': 0.1, 'model__n_estimators': 300, 'model__num_leaves': 31}
+  Fold 03/18 | held-out P03 | train: 17 pids / 952 rows | test: 56 rows
+    -> [SIS] Ridge(sensor+demo)  MAE=2.141  R2=-9.808
+    -> [OHS] Ridge(sensor+demo)  MAE=11.626  R2=0.000
+    -> [OKS] Ridge(sensor+demo)  MAE=18.606  R2=0.000
+    -> [SIS] Baseline-A(demo)    MAE=3.583  R2=-18.673
+    -> [OHS] Baseline-A(demo)    MAE=4.733  R2=0.000
+    -> [OKS] Baseline-A(demo)    MAE=19.417  R2=0.000
+    -> [SIS] Baseline-B(mean)    MAE=0.941  R2=-1.288
+    -> [OHS] Baseline-B(mean)    MAE=0.176  R2=0.000
+    -> [OKS] Baseline-B(mean)    MAE=18.824  R2=0.000
+    -> [SIS] tuned_ridge   MAE=2.034  R2=-7.655  best={'model__alpha': 100.0}
+    -> [OHS] tuned_ridge   MAE=4.455  R2=0.000  best={'model__alpha': 100.0}
+    -> [OKS] tuned_ridge   MAE=18.529  R2=0.000  best={'model__alpha': 100.0}
+    -> [SIS] tuned_elasticnet  MAE=1.036  R2=-1.547  best={'model__alpha': 10.0, 'model__l1_ratio': 0.9}
+    -> [OHS] tuned_elasticnet  MAE=0.328  R2=0.000  best={'model__alpha': 10.0, 'model__l1_ratio': 0.9}
+    -> [OKS] tuned_elasticnet  MAE=19.521  R2=0.000  best={'model__alpha': 10.0, 'model__l1_ratio': 0.9}
+    -> [SIS] rf            MAE=2.319  R2=-11.024  best={'model__max_depth': 5, 'model__min_samples_leaf': 5, 'model__n_estimators': 200}
+    -> [OHS] rf            MAE=3.082  R2=0.000  best={'model__max_depth': 5, 'model__min_samples_leaf': 2, 'model__n_estimators': 200}
+    -> [OKS] rf            MAE=17.062  R2=0.000  best={'model__max_depth': 10, 'model__min_samples_leaf': 2, 'model__n_estimators': 200}
+    -> [SIS] lgbm          MAE=2.402  R2=-11.156  best={'model__learning_rate': 0.05, 'model__n_estimators': 100, 'model__num_leaves': 63}
+    -> [OHS] lgbm          MAE=4.122  R2=0.000  best={'model__learning_rate': 0.05, 'model__n_estimators': 300, 'model__num_leaves': 31}
+    -> [OKS] lgbm          MAE=17.194  R2=0.000  best={'model__learning_rate': 0.1, 'model__n_estimators': 300, 'model__num_leaves': 63}
+  Fold 04/18 | held-out P04 | train: 17 pids / 952 rows | test: 56 rows
+    -> [SIS] Ridge(sensor+demo)  MAE=3.744  R2=-89.103
+    -> [OHS] Ridge(sensor+demo)  MAE=30.317  R2=-623.718
+    -> [OKS] Ridge(sensor+demo)  MAE=7.547  R2=-9.838
+    -> [SIS] Baseline-A(demo)    MAE=7.262  R2=-281.240
+    -> [OHS] Baseline-A(demo)    MAE=16.920  R2=-190.863
+    -> [OKS] Baseline-A(demo)    MAE=10.146  R2=-14.199
+    -> [SIS] Baseline-B(mean)    MAE=2.000  R2=-21.333
+    -> [OHS] Baseline-B(mean)    MAE=13.588  R2=-123.093
+    -> [OKS] Baseline-B(mean)    MAE=9.235  R2=-11.764
+    -> [SIS] tuned_ridge   MAE=3.260  R2=-65.119  best={'model__alpha': 100.0}
+    -> [OHS] tuned_ridge   MAE=19.554  R2=-261.970  best={'model__alpha': 100.0}
+    -> [OKS] tuned_ridge   MAE=8.674  R2=-12.709  best={'model__alpha': 100.0}
+    -> [SIS] tuned_elasticnet  MAE=2.085  R2=-23.162  best={'model__alpha': 10.0, 'model__l1_ratio': 0.9}
+    -> [OHS] tuned_elasticnet  MAE=14.134  R2=-133.197  best={'model__alpha': 10.0, 'model__l1_ratio': 0.9}
+    -> [OKS] tuned_elasticnet  MAE=8.390  R2=-9.729  best={'model__alpha': 10.0, 'model__l1_ratio': 0.5}
+    -> [SIS] rf            MAE=3.511  R2=-66.176  best={'model__max_depth': 10, 'model__min_samples_leaf': 5, 'model__n_estimators': 200}
+    -> [OHS] rf            MAE=13.312  R2=-120.328  best={'model__max_depth': 5, 'model__min_samples_leaf': 5, 'model__n_estimators': 200}
+    -> [OKS] rf            MAE=6.691  R2=-7.202  best={'model__max_depth': 10, 'model__min_samples_leaf': 2, 'model__n_estimators': 200}
+    -> [SIS] lgbm          MAE=1.805  R2=-18.993  best={'model__learning_rate': 0.05, 'model__n_estimators': 100, 'model__num_leaves': 63}
+    -> [OHS] lgbm          MAE=12.362  R2=-108.946  best={'model__learning_rate': 0.1, 'model__n_estimators': 100, 'model__num_leaves': 31}
+    -> [OKS] lgbm          MAE=5.120  R2=-4.001  best={'model__learning_rate': 0.05, 'model__n_estimators': 300, 'model__num_leaves': 63}
+  Fold 05/18 | held-out P05 | train: 17 pids / 952 rows | test: 56 rows
+    -> [SIS] Ridge(sensor+demo)  MAE=7.513  R2=-255.696
+    -> [OHS] Ridge(sensor+demo)  MAE=25.256  R2=-36.183
+    -> [OKS] Ridge(sensor+demo)  MAE=14.442  R2=-72.697
+    -> [SIS] Baseline-A(demo)    MAE=10.668  R2=-455.186
+    -> [OHS] Baseline-A(demo)    MAE=15.226  R2=-12.082
+    -> [OKS] Baseline-A(demo)    MAE=13.737  R2=-51.174
+    -> [SIS] Baseline-B(mean)    MAE=4.912  R2=-96.502
+    -> [OHS] Baseline-B(mean)    MAE=12.794  R2=-8.531
+    -> [OKS] Baseline-B(mean)    MAE=15.382  R2=-64.167
+    -> [SIS] tuned_ridge   MAE=9.951  R2=-433.987  best={'model__alpha': 100.0}
+    -> [OHS] tuned_ridge   MAE=15.441  R2=-14.910  best={'model__alpha': 100.0}
+    -> [OKS] tuned_ridge   MAE=9.220  R2=-38.522  best={'model__alpha': 10.0}
+    -> [SIS] tuned_elasticnet  MAE=7.162  R2=-218.196  best={'model__alpha': 10.0, 'model__l1_ratio': 0.5}
+    -> [OHS] tuned_elasticnet  MAE=10.975  R2=-7.516  best={'model__alpha': 10.0, 'model__l1_ratio': 0.9}
+    -> [OKS] tuned_elasticnet  MAE=9.774  R2=-29.306  best={'model__alpha': 10.0, 'model__l1_ratio': 0.9}
+    -> [SIS] rf            MAE=4.745  R2=-94.900  best={'model__max_depth': 10, 'model__min_samples_leaf': 5, 'model__n_estimators': 200}
+    -> [OHS] rf            MAE=15.620  R2=-13.109  best={'model__max_depth': None, 'model__min_samples_leaf': 5, 'model__n_estimators': 200}
+    -> [OKS] rf            MAE=9.707  R2=-25.302  best={'model__max_depth': None, 'model__min_samples_leaf': 2, 'model__n_estimators': 200}
+    -> [SIS] lgbm          MAE=4.416  R2=-82.240  best={'model__learning_rate': 0.1, 'model__n_estimators': 300, 'model__num_leaves': 63}
+    -> [OHS] lgbm          MAE=17.272  R2=-16.048  best={'model__learning_rate': 0.05, 'model__n_estimators': 100, 'model__num_leaves': 31}
+    -> [OKS] lgbm          MAE=13.775  R2=-51.367  best={'model__learning_rate': 0.1, 'model__n_estimators': 300, 'model__num_leaves': 31}
+  Fold 06/18 | held-out P06 | train: 17 pids / 952 rows | test: 56 rows
+    -> [SIS] Ridge(sensor+demo)  MAE=2.156  R2=-2.904
+    -> [OHS] Ridge(sensor+demo)  MAE=5.133  R2=-0.867
+    -> [OKS] Ridge(sensor+demo)  MAE=11.972  R2=-6.513
+    -> [SIS] Baseline-A(demo)    MAE=4.072  R2=-9.827
+    -> [OHS] Baseline-A(demo)    MAE=13.757  R2=-7.725
+    -> [OKS] Baseline-A(demo)    MAE=16.628  R2=-12.288
+    -> [SIS] Baseline-B(mean)    MAE=1.346  R2=-0.525
+    -> [OHS] Baseline-B(mean)    MAE=6.176  R2=-1.557
+    -> [OKS] Baseline-B(mean)    MAE=3.588  R2=-0.030
+    -> [SIS] tuned_ridge   MAE=2.378  R2=-3.779  best={'model__alpha': 100.0}
+    -> [OHS] tuned_ridge   MAE=4.497  R2=-0.418  best={'model__alpha': 100.0}
+    -> [OKS] tuned_ridge   MAE=4.884  R2=-0.665  best={'model__alpha': 100.0}
+    -> [SIS] tuned_elasticnet  MAE=1.392  R2=-0.640  best={'model__alpha': 10.0, 'model__l1_ratio': 0.9}
+    -> [OHS] tuned_elasticnet  MAE=6.735  R2=-1.851  best={'model__alpha': 10.0, 'model__l1_ratio': 0.9}
+    -> [OKS] tuned_elasticnet  MAE=3.518  R2=-0.119  best={'model__alpha': 10.0, 'model__l1_ratio': 0.9}
+    -> [SIS] rf            MAE=1.356  R2=-0.674  best={'model__max_depth': 5, 'model__min_samples_leaf': 5, 'model__n_estimators': 200}
+    -> [OHS] rf            MAE=4.673  R2=-0.505  best={'model__max_depth': 5, 'model__min_samples_leaf': 5, 'model__n_estimators': 200}
+    -> [OKS] rf            MAE=3.555  R2=-0.029  best={'model__max_depth': 10, 'model__min_samples_leaf': 2, 'model__n_estimators': 200}
+    -> [SIS] lgbm          MAE=1.614  R2=-1.103  best={'model__learning_rate': 0.05, 'model__n_estimators': 300, 'model__num_leaves': 31}
+    -> [OHS] lgbm          MAE=5.141  R2=-0.706  best={'model__learning_rate': 0.05, 'model__n_estimators': 300, 'model__num_leaves': 31}
+    -> [OKS] lgbm          MAE=5.130  R2=-1.086  best={'model__learning_rate': 0.1, 'model__n_estimators': 100, 'model__num_leaves': 31}
+  Fold 07/18 | held-out P07 | train: 17 pids / 952 rows | test: 56 rows
+    -> [SIS] Ridge(sensor+demo)  MAE=3.433  R2=-1.016
+    -> [OHS] Ridge(sensor+demo)  MAE=4.935  R2=-7.173
+    -> [OKS] Ridge(sensor+demo)  MAE=13.872  R2=-277.810
+    -> [SIS] Baseline-A(demo)    MAE=5.694  R2=-4.218
+    -> [OHS] Baseline-A(demo)    MAE=4.679  R2=-3.849
+    -> [OKS] Baseline-A(demo)    MAE=6.074  R2=-49.186
+    -> [SIS] Baseline-B(mean)    MAE=2.765  R2=-0.994
+    -> [OHS] Baseline-B(mean)    MAE=5.382  R2=-5.094
+    -> [OKS] Baseline-B(mean)    MAE=1.353  R2=-2.441
+    -> [SIS] tuned_ridge   MAE=2.772  R2=-0.634  best={'model__alpha': 100.0}
+    -> [OHS] tuned_ridge   MAE=5.243  R2=-8.199  best={'model__alpha': 100.0}
+    -> [OKS] tuned_ridge   MAE=11.751  R2=-207.326  best={'model__alpha': 10.0}
+    -> [SIS] tuned_elasticnet  MAE=2.756  R2=-0.934  best={'model__alpha': 10.0, 'model__l1_ratio': 0.9}
+    -> [OHS] tuned_elasticnet  MAE=5.938  R2=-6.203  best={'model__alpha': 10.0, 'model__l1_ratio': 0.9}
+    -> [OKS] tuned_elasticnet  MAE=2.034  R2=-5.889  best={'model__alpha': 10.0, 'model__l1_ratio': 0.9}
+    -> [SIS] rf            MAE=3.398  R2=-1.352  best={'model__max_depth': 5, 'model__min_samples_leaf': 5, 'model__n_estimators': 200}
+    -> [OHS] rf            MAE=8.245  R2=-11.954  best={'model__max_depth': 5, 'model__min_samples_leaf': 5, 'model__n_estimators': 200}
+    -> [OKS] rf            MAE=10.886  R2=-166.435  best={'model__max_depth': 10, 'model__min_samples_leaf': 5, 'model__n_estimators': 200}
+    -> [SIS] lgbm          MAE=4.139  R2=-1.898  best={'model__learning_rate': 0.1, 'model__n_estimators': 300, 'model__num_leaves': 63}
+    -> [OHS] lgbm          MAE=6.901  R2=-8.173  best={'model__learning_rate': 0.05, 'model__n_estimators': 300, 'model__num_leaves': 31}
+    -> [OKS] lgbm          MAE=9.985  R2=-146.174  best={'model__learning_rate': 0.1, 'model__n_estimators': 100, 'model__num_leaves': 63}
+  Fold 08/18 | held-out P08 | train: 17 pids / 952 rows | test: 56 rows
+    -> [SIS] Ridge(sensor+demo)  MAE=6.544  R2=-5.192
+    -> [OHS] Ridge(sensor+demo)  MAE=2.766  R2=-1.111
+    -> [OKS] Ridge(sensor+demo)  MAE=3.184  R2=-2.602
+    -> [SIS] Baseline-A(demo)    MAE=4.666  R2=-2.561
+    -> [OHS] Baseline-A(demo)    MAE=3.411  R2=-1.062
+    -> [OKS] Baseline-A(demo)    MAE=6.842  R2=-9.025
+    -> [SIS] Baseline-B(mean)    MAE=3.029  R2=-1.080
+    -> [OHS] Baseline-B(mean)    MAE=5.471  R2=-3.990
+    -> [OKS] Baseline-B(mean)    MAE=4.206  R2=-3.410
+    -> [SIS] tuned_ridge   MAE=4.765  R2=-2.984  best={'model__alpha': 100.0}
+    -> [OHS] tuned_ridge   MAE=2.931  R2=-0.571  best={'model__alpha': 100.0}
+    -> [OKS] tuned_ridge   MAE=4.593  R2=-4.621  best={'model__alpha': 10.0}
+    -> [SIS] tuned_elasticnet  MAE=2.942  R2=-1.019  best={'model__alpha': 10.0, 'model__l1_ratio': 0.9}
+    -> [OHS] tuned_elasticnet  MAE=4.949  R2=-3.265  best={'model__alpha': 10.0, 'model__l1_ratio': 0.9}
+    -> [OKS] tuned_elasticnet  MAE=3.551  R2=-2.430  best={'model__alpha': 10.0, 'model__l1_ratio': 0.9}
+    -> [SIS] rf            MAE=2.514  R2=-0.730  best={'model__max_depth': 5, 'model__min_samples_leaf': 5, 'model__n_estimators': 200}
+    -> [OHS] rf            MAE=8.022  R2=-11.319  best={'model__max_depth': 5, 'model__min_samples_leaf': 2, 'model__n_estimators': 200}
+    -> [OKS] rf            MAE=5.118  R2=-4.985  best={'model__max_depth': 5, 'model__min_samples_leaf': 2, 'model__n_estimators': 200}
+    -> [SIS] lgbm          MAE=2.254  R2=-0.509  best={'model__learning_rate': 0.1, 'model__n_estimators': 100, 'model__num_leaves': 63}
+    -> [OHS] lgbm          MAE=6.981  R2=-8.075  best={'model__learning_rate': 0.05, 'model__n_estimators': 100, 'model__num_leaves': 63}
+    -> [OKS] lgbm          MAE=4.181  R2=-3.329  best={'model__learning_rate': 0.05, 'model__n_estimators': 300, 'model__num_leaves': 63}
+  Fold 09/18 | held-out P09 | train: 17 pids / 952 rows | test: 56 rows
+    -> [SIS] Ridge(sensor+demo)  MAE=1.715  R2=-0.155
+    -> [OHS] Ridge(sensor+demo)  MAE=17.104  R2=-112.373
+    -> [OKS] Ridge(sensor+demo)  MAE=18.864  R2=-264.281
+    -> [SIS] Baseline-A(demo)    MAE=3.713  R2=-2.941
+    -> [OHS] Baseline-A(demo)    MAE=23.219  R2=-196.039
+    -> [OKS] Baseline-A(demo)    MAE=12.236  R2=-99.814
+    -> [SIS] Baseline-B(mean)    MAE=2.743  R2=-1.066
+    -> [OHS] Baseline-B(mean)    MAE=10.235  R2=-38.095
+    -> [OKS] Baseline-B(mean)    MAE=9.765  R2=-63.566
+    -> [SIS] tuned_ridge   MAE=1.635  R2=0.162  best={'model__alpha': 100.0}
+    -> [OHS] tuned_ridge   MAE=14.625  R2=-85.574  best={'model__alpha': 100.0}
+    -> [OKS] tuned_ridge   MAE=18.158  R2=-247.573  best={'model__alpha': 10.0}
+    -> [SIS] tuned_elasticnet  MAE=2.698  R2=-0.982  best={'model__alpha': 10.0, 'model__l1_ratio': 0.9}
+    -> [OHS] tuned_elasticnet  MAE=9.747  R2=-34.547  best={'model__alpha': 10.0, 'model__l1_ratio': 0.9}
+    -> [OKS] tuned_elasticnet  MAE=9.118  R2=-55.526  best={'model__alpha': 10.0, 'model__l1_ratio': 0.9}
+    -> [SIS] rf            MAE=4.451  R2=-4.720  best={'model__max_depth': 5, 'model__min_samples_leaf': 5, 'model__n_estimators': 200}
+    -> [OHS] rf            MAE=7.977  R2=-24.455  best={'model__max_depth': 5, 'model__min_samples_leaf': 5, 'model__n_estimators': 200}
+    -> [OKS] rf            MAE=7.156  R2=-42.725  best={'model__max_depth': None, 'model__min_samples_leaf': 5, 'model__n_estimators': 200}
+    -> [SIS] lgbm          MAE=4.222  R2=-3.977  best={'model__learning_rate': 0.1, 'model__n_estimators': 300, 'model__num_leaves': 31}
+    -> [OHS] lgbm          MAE=11.493  R2=-47.918  best={'model__learning_rate': 0.05, 'model__n_estimators': 300, 'model__num_leaves': 31}
+    -> [OKS] lgbm          MAE=4.209  R2=-18.812  best={'model__learning_rate': 0.1, 'model__n_estimators': 300, 'model__num_leaves': 31}
+  Fold 10/18 | held-out P10 | train: 17 pids / 952 rows | test: 56 rows
+    -> [SIS] Ridge(sensor+demo)  MAE=6.360  R2=-36.146
+    -> [OHS] Ridge(sensor+demo)  MAE=15.442  R2=-8.689
+    -> [OKS] Ridge(sensor+demo)  MAE=5.400  R2=-4.248
+    -> [SIS] Baseline-A(demo)    MAE=5.349  R2=-22.890
+    -> [OHS] Baseline-A(demo)    MAE=12.266  R2=-5.144
+    -> [OKS] Baseline-A(demo)    MAE=4.122  R2=-0.403
+    -> [SIS] Baseline-B(mean)    MAE=4.618  R2=-17.058
+    -> [OHS] Baseline-B(mean)    MAE=9.176  R2=-2.879
+    -> [OKS] Baseline-B(mean)    MAE=4.176  R2=-0.443
+    -> [SIS] tuned_ridge   MAE=3.819  R2=-12.307  best={'model__alpha': 100.0}
+    -> [OHS] tuned_ridge   MAE=16.396  R2=-9.315  best={'model__alpha': 100.0}
+    -> [OKS] tuned_ridge   MAE=5.665  R2=-5.473  best={'model__alpha': 10.0}
+    -> [SIS] tuned_elasticnet  MAE=4.559  R2=-16.674  best={'model__alpha': 10.0, 'model__l1_ratio': 0.9}
+    -> [OHS] tuned_elasticnet  MAE=8.743  R2=-2.618  best={'model__alpha': 10.0, 'model__l1_ratio': 0.9}
+    -> [OKS] tuned_elasticnet  MAE=3.879  R2=-0.286  best={'model__alpha': 10.0, 'model__l1_ratio': 0.9}
+    -> [SIS] rf            MAE=5.471  R2=-25.194  best={'model__max_depth': 5, 'model__min_samples_leaf': 5, 'model__n_estimators': 200}
+    -> [OHS] rf            MAE=9.221  R2=-2.759  best={'model__max_depth': 5, 'model__min_samples_leaf': 5, 'model__n_estimators': 200}
+    -> [OKS] rf            MAE=16.225  R2=-21.006  best={'model__max_depth': None, 'model__min_samples_leaf': 5, 'model__n_estimators': 200}
+    -> [SIS] lgbm          MAE=4.789  R2=-20.278  best={'model__learning_rate': 0.1, 'model__n_estimators': 300, 'model__num_leaves': 31}
+    -> [OHS] lgbm          MAE=9.930  R2=-3.784  best={'model__learning_rate': 0.1, 'model__n_estimators': 300, 'model__num_leaves': 31}
+    -> [OKS] lgbm          MAE=16.592  R2=-22.080  best={'model__learning_rate': 0.1, 'model__n_estimators': 100, 'model__num_leaves': 31}
+  Fold 11/18 | held-out P11 | train: 17 pids / 952 rows | test: 56 rows
+    -> [SIS] Ridge(sensor+demo)  MAE=9.197  R2=-59.052
+    -> [OHS] Ridge(sensor+demo)  MAE=30.061  R2=-760.794
+    -> [OKS] Ridge(sensor+demo)  MAE=25.579  R2=-150.030
+    -> [SIS] Baseline-A(demo)    MAE=6.348  R2=-7.327
+    -> [OHS] Baseline-A(demo)    MAE=17.850  R2=-57.931
+    -> [OKS] Baseline-A(demo)    MAE=11.732  R2=-8.248
+    -> [SIS] Baseline-B(mean)    MAE=5.147  R2=-4.817
+    -> [OHS] Baseline-B(mean)    MAE=17.824  R2=-57.760
+    -> [OKS] Baseline-B(mean)    MAE=15.382  R2=-14.179
+    -> [SIS] tuned_ridge   MAE=8.924  R2=-34.197  best={'model__alpha': 100.0}
+    -> [OHS] tuned_ridge   MAE=19.377  R2=-164.351  best={'model__alpha': 100.0}
+    -> [OKS] tuned_ridge   MAE=17.575  R2=-72.658  best={'model__alpha': 10.0}
+    -> [SIS] tuned_elasticnet  MAE=5.954  R2=-8.130  best={'model__alpha': 10.0, 'model__l1_ratio': 0.5}
+    -> [OHS] tuned_elasticnet  MAE=15.876  R2=-47.044  best={'model__alpha': 10.0, 'model__l1_ratio': 0.9}
+    -> [OKS] tuned_elasticnet  MAE=12.482  R2=-10.241  best={'model__alpha': 10.0, 'model__l1_ratio': 0.9}
+    -> [SIS] rf            MAE=2.237  R2=-0.908  best={'model__max_depth': None, 'model__min_samples_leaf': 2, 'model__n_estimators': 200}
+    -> [OHS] rf            MAE=24.799  R2=-111.859  best={'model__max_depth': 5, 'model__min_samples_leaf': 5, 'model__n_estimators': 200}
+    -> [OKS] rf            MAE=16.498  R2=-16.732  best={'model__max_depth': None, 'model__min_samples_leaf': 2, 'model__n_estimators': 200}
+    -> [SIS] lgbm          MAE=2.736  R2=-1.304  best={'model__learning_rate': 0.1, 'model__n_estimators': 300, 'model__num_leaves': 31}
+    -> [OHS] lgbm          MAE=25.159  R2=-115.405  best={'model__learning_rate': 0.1, 'model__n_estimators': 100, 'model__num_leaves': 31}
+    -> [OKS] lgbm          MAE=15.519  R2=-15.013  best={'model__learning_rate': 0.05, 'model__n_estimators': 300, 'model__num_leaves': 63}
+  Fold 12/18 | held-out P12 | train: 17 pids / 952 rows | test: 56 rows
+    -> [SIS] Ridge(sensor+demo)  MAE=3.538  R2=-81.996
+    -> [OHS] Ridge(sensor+demo)  MAE=7.817  R2=-0.855
+    -> [OKS] Ridge(sensor+demo)  MAE=5.938  R2=-1.515
+    -> [SIS] Baseline-A(demo)    MAE=3.578  R2=-68.268
+    -> [OHS] Baseline-A(demo)    MAE=6.250  R2=-0.021
+    -> [OKS] Baseline-A(demo)    MAE=4.250  R2=-0.096
+    -> [SIS] Baseline-B(mean)    MAE=5.176  R2=-142.911
+    -> [OHS] Baseline-B(mean)    MAE=6.250  R2=-0.218
+    -> [OKS] Baseline-B(mean)    MAE=9.500  R2=-3.146
+    -> [SIS] tuned_ridge   MAE=2.873  R2=-57.632  best={'model__alpha': 100.0}
+    -> [OHS] tuned_ridge   MAE=8.216  R2=-1.411  best={'model__alpha': 100.0}
+    -> [OKS] tuned_ridge   MAE=7.550  R2=-1.322  best={'model__alpha': 100.0}
+    -> [SIS] tuned_elasticnet  MAE=5.212  R2=-144.893  best={'model__alpha': 10.0, 'model__l1_ratio': 0.9}
+    -> [OHS] tuned_elasticnet  MAE=6.610  R2=-0.369  best={'model__alpha': 10.0, 'model__l1_ratio': 0.9}
+    -> [OKS] tuned_elasticnet  MAE=9.304  R2=-3.022  best={'model__alpha': 10.0, 'model__l1_ratio': 0.5}
+    -> [SIS] rf            MAE=3.674  R2=-79.341  best={'model__max_depth': None, 'model__min_samples_leaf': 5, 'model__n_estimators': 200}
+    -> [OHS] rf            MAE=7.863  R2=-1.063  best={'model__max_depth': 5, 'model__min_samples_leaf': 2, 'model__n_estimators': 200}
+    -> [OKS] rf            MAE=5.116  R2=-0.122  best={'model__max_depth': 5, 'model__min_samples_leaf': 2, 'model__n_estimators': 200}
+    -> [SIS] lgbm          MAE=4.230  R2=-113.525  best={'model__learning_rate': 0.1, 'model__n_estimators': 100, 'model__num_leaves': 31}
+    -> [OHS] lgbm          MAE=8.011  R2=-1.648  best={'model__learning_rate': 0.05, 'model__n_estimators': 100, 'model__num_leaves': 63}
+    -> [OKS] lgbm          MAE=4.618  R2=0.048  best={'model__learning_rate': 0.05, 'model__n_estimators': 100, 'model__num_leaves': 63}
+  Fold 13/18 | held-out P13 | train: 17 pids / 952 rows | test: 56 rows
+    -> [SIS] Ridge(sensor+demo)  MAE=9.154  R2=-18.233
+    -> [OHS] Ridge(sensor+demo)  MAE=6.905  R2=-14.012
+    -> [OKS] Ridge(sensor+demo)  MAE=9.760  R2=-7.367
+    -> [SIS] Baseline-A(demo)    MAE=12.500  R2=-33.336
+    -> [OHS] Baseline-A(demo)    MAE=7.355  R2=-12.022
+    -> [OKS] Baseline-A(demo)    MAE=10.828  R2=-7.688
+    -> [SIS] Baseline-B(mean)    MAE=2.875  R2=-0.853
+    -> [OHS] Baseline-B(mean)    MAE=1.588  R2=-0.007
+    -> [OKS] Baseline-B(mean)    MAE=4.485  R2=-0.790
+    -> [SIS] tuned_ridge   MAE=6.374  R2=-8.596  best={'model__alpha': 100.0}
+    -> [OHS] tuned_ridge   MAE=4.777  R2=-7.869  best={'model__alpha': 100.0}
+    -> [OKS] tuned_ridge   MAE=8.855  R2=-6.238  best={'model__alpha': 100.0}
+    -> [SIS] tuned_elasticnet  MAE=2.927  R2=-0.945  best={'model__alpha': 10.0, 'model__l1_ratio': 0.9}
+    -> [OHS] tuned_elasticnet  MAE=1.689  R2=-0.032  best={'model__alpha': 10.0, 'model__l1_ratio': 0.9}
+    -> [OKS] tuned_elasticnet  MAE=5.000  R2=-1.348  best={'model__alpha': 10.0, 'model__l1_ratio': 0.5}
+    -> [SIS] rf            MAE=3.224  R2=-2.693  best={'model__max_depth': 5, 'model__min_samples_leaf': 2, 'model__n_estimators': 200}
+    -> [OHS] rf            MAE=2.764  R2=-1.543  best={'model__max_depth': 5, 'model__min_samples_leaf': 2, 'model__n_estimators': 200}
+    -> [OKS] rf            MAE=7.565  R2=-3.658  best={'model__max_depth': 5, 'model__min_samples_leaf': 5, 'model__n_estimators': 200}
+    -> [SIS] lgbm          MAE=3.308  R2=-3.152  best={'model__learning_rate': 0.05, 'model__n_estimators': 100, 'model__num_leaves': 63}
+    -> [OHS] lgbm          MAE=2.294  R2=-1.070  best={'model__learning_rate': 0.05, 'model__n_estimators': 100, 'model__num_leaves': 63}
+    -> [OKS] lgbm          MAE=9.462  R2=-5.867  best={'model__learning_rate': 0.1, 'model__n_estimators': 100, 'model__num_leaves': 31}
+  Fold 14/18 | held-out P14 | train: 17 pids / 952 rows | test: 56 rows
+    -> [SIS] Ridge(sensor+demo)  MAE=13.358  R2=-408.496
+    -> [OHS] Ridge(sensor+demo)  MAE=51.367  R2=-293.974
+    -> [OKS] Ridge(sensor+demo)  MAE=75.342  R2=-6951.635
+    -> [SIS] Baseline-A(demo)    MAE=3.460  R2=-11.975
+    -> [OHS] Baseline-A(demo)    MAE=3.676  R2=-0.987
+    -> [OKS] Baseline-A(demo)    MAE=9.752  R2=-43.479
+    -> [SIS] Baseline-B(mean)    MAE=2.265  R2=-5.129
+    -> [OHS] Baseline-B(mean)    MAE=2.750  R2=-0.301
+    -> [OKS] Baseline-B(mean)    MAE=10.029  R2=-45.984
+    -> [SIS] tuned_ridge   MAE=3.777  R2=-21.051  best={'model__alpha': 100.0}
+    -> [OHS] tuned_ridge   MAE=52.279  R2=-410.118  best={'model__alpha': 100.0}
+    -> [OKS] tuned_ridge   MAE=38.655  R2=-1193.639  best={'model__alpha': 100.0}
+    -> [SIS] tuned_elasticnet  MAE=1.708  R2=-2.803  best={'model__alpha': 10.0, 'model__l1_ratio': 0.9}
+    -> [OHS] tuned_elasticnet  MAE=2.774  R2=-0.200  best={'model__alpha': 10.0, 'model__l1_ratio': 0.9}
+    -> [OKS] tuned_elasticnet  MAE=15.538  R2=-126.311  best={'model__alpha': 10.0, 'model__l1_ratio': 0.5}
+    -> [SIS] rf            MAE=1.796  R2=-3.372  best={'model__max_depth': 10, 'model__min_samples_leaf': 2, 'model__n_estimators': 200}
+    -> [OHS] rf            MAE=3.788  R2=-1.392  best={'model__max_depth': 10, 'model__min_samples_leaf': 5, 'model__n_estimators': 200}
+    -> [OKS] rf            MAE=7.096  R2=-39.893  best={'model__max_depth': 10, 'model__min_samples_leaf': 2, 'model__n_estimators': 200}
+    -> [SIS] lgbm          MAE=2.451  R2=-6.903  best={'model__learning_rate': 0.05, 'model__n_estimators': 100, 'model__num_leaves': 63}
+    -> [OHS] lgbm          MAE=5.150  R2=-2.474  best={'model__learning_rate': 0.05, 'model__n_estimators': 100, 'model__num_leaves': 63}
+    -> [OKS] lgbm          MAE=10.290  R2=-58.725  best={'model__learning_rate': 0.1, 'model__n_estimators': 100, 'model__num_leaves': 31}
+  Fold 15/18 | held-out P15 | train: 17 pids / 952 rows | test: 56 rows
+    -> [SIS] Ridge(sensor+demo)  MAE=8.226  R2=-11.730
+    -> [OHS] Ridge(sensor+demo)  MAE=13.888  R2=-117.161
+    -> [OKS] Ridge(sensor+demo)  MAE=4.482  R2=-21.554
+    -> [SIS] Baseline-A(demo)    MAE=11.822  R2=-20.898
+    -> [OHS] Baseline-A(demo)    MAE=15.739  R2=-113.238
+    -> [OKS] Baseline-A(demo)    MAE=16.811  R2=-129.187
+    -> [SIS] Baseline-B(mean)    MAE=6.471  R2=-6.261
+    -> [OHS] Baseline-B(mean)    MAE=2.559  R2=-2.993
+    -> [OKS] Baseline-B(mean)    MAE=13.735  R2=-86.244
+    -> [SIS] tuned_ridge   MAE=4.781  R2=-3.715  best={'model__alpha': 100.0}
+    -> [OHS] tuned_ridge   MAE=8.858  R2=-49.825  best={'model__alpha': 100.0}
+    -> [OKS] tuned_ridge   MAE=10.499  R2=-62.121  best={'model__alpha': 100.0}
+    -> [SIS] tuned_elasticnet  MAE=6.396  R2=-6.116  best={'model__alpha': 10.0, 'model__l1_ratio': 0.9}
+    -> [OHS] tuned_elasticnet  MAE=2.143  R2=-1.880  best={'model__alpha': 10.0, 'model__l1_ratio': 0.9}
+    -> [OKS] tuned_elasticnet  MAE=12.766  R2=-74.256  best={'model__alpha': 10.0, 'model__l1_ratio': 0.5}
+    -> [SIS] rf            MAE=4.833  R2=-3.741  best={'model__max_depth': 5, 'model__min_samples_leaf': 2, 'model__n_estimators': 200}
+    -> [OHS] rf            MAE=3.975  R2=-9.241  best={'model__max_depth': 10, 'model__min_samples_leaf': 2, 'model__n_estimators': 200}
+    -> [OKS] rf            MAE=10.200  R2=-49.612  best={'model__max_depth': 10, 'model__min_samples_leaf': 5, 'model__n_estimators': 200}
+    -> [SIS] lgbm          MAE=3.953  R2=-2.331  best={'model__learning_rate': 0.1, 'model__n_estimators': 100, 'model__num_leaves': 63}
+    -> [OHS] lgbm          MAE=6.586  R2=-25.202  best={'model__learning_rate': 0.05, 'model__n_estimators': 100, 'model__num_leaves': 31}
+    -> [OKS] lgbm          MAE=9.940  R2=-49.006  best={'model__learning_rate': 0.1, 'model__n_estimators': 300, 'model__num_leaves': 31}
+  Fold 16/18 | held-out P16 | train: 17 pids / 952 rows | test: 56 rows
+    -> [SIS] Ridge(sensor+demo)  MAE=4.189  R2=-5.269
+    -> [OHS] Ridge(sensor+demo)  MAE=12.166  R2=-46.943
+    -> [OKS] Ridge(sensor+demo)  MAE=20.425  R2=-54.632
+    -> [SIS] Baseline-A(demo)    MAE=3.443  R2=-3.214
+    -> [OHS] Baseline-A(demo)    MAE=2.250  R2=-0.007
+    -> [OKS] Baseline-A(demo)    MAE=8.842  R2=-7.627
+    -> [SIS] Baseline-B(mean)    MAE=3.588  R2=-3.492
+    -> [OHS] Baseline-B(mean)    MAE=3.618  R2=-2.301
+    -> [OKS] Baseline-B(mean)    MAE=5.000  R2=-2.439
+    -> [SIS] tuned_ridge   MAE=4.414  R2=-5.334  best={'model__alpha': 100.0}
+    -> [OHS] tuned_ridge   MAE=9.865  R2=-35.636  best={'model__alpha': 100.0}
+    -> [OKS] tuned_ridge   MAE=14.602  R2=-25.050  best={'model__alpha': 100.0}
+    -> [SIS] tuned_elasticnet  MAE=3.698  R2=-3.709  best={'model__alpha': 10.0, 'model__l1_ratio': 0.9}
+    -> [OHS] tuned_elasticnet  MAE=3.191  R2=-1.718  best={'model__alpha': 10.0, 'model__l1_ratio': 0.9}
+    -> [OKS] tuned_elasticnet  MAE=4.139  R2=-1.669  best={'model__alpha': 10.0, 'model__l1_ratio': 0.5}
+    -> [SIS] rf            MAE=2.506  R2=-1.070  best={'model__max_depth': 5, 'model__min_samples_leaf': 2, 'model__n_estimators': 200}
+    -> [OHS] rf            MAE=2.170  R2=-0.059  best={'model__max_depth': 5, 'model__min_samples_leaf': 2, 'model__n_estimators': 200}
+    -> [OKS] rf            MAE=10.725  R2=-12.424  best={'model__max_depth': None, 'model__min_samples_leaf': 5, 'model__n_estimators': 200}
+    -> [SIS] lgbm          MAE=2.726  R2=-1.197  best={'model__learning_rate': 0.05, 'model__n_estimators': 100, 'model__num_leaves': 63}
+    -> [OHS] lgbm          MAE=2.431  R2=-0.439  best={'model__learning_rate': 0.05, 'model__n_estimators': 100, 'model__num_leaves': 31}
+    -> [OKS] lgbm          MAE=11.791  R2=-15.558  best={'model__learning_rate': 0.1, 'model__n_estimators': 300, 'model__num_leaves': 31}
+  Fold 17/18 | held-out P17 | train: 17 pids / 952 rows | test: 56 rows
+    -> [SIS] Ridge(sensor+demo)  MAE=9.290  R2=-36.608
+    -> [OHS] Ridge(sensor+demo)  MAE=13.648  R2=-99.512
+    -> [OKS] Ridge(sensor+demo)  MAE=18.816  R2=-12.309
+    -> [SIS] Baseline-A(demo)    MAE=1.500  R2=-0.176
+    -> [OHS] Baseline-A(demo)    MAE=1.500  R2=-0.144
+    -> [OKS] Baseline-A(demo)    MAE=4.500  R2=-0.070
+    -> [SIS] Baseline-B(mean)    MAE=1.500  R2=-0.166
+    -> [OHS] Baseline-B(mean)    MAE=1.765  R2=-1.132
+    -> [OKS] Baseline-B(mean)    MAE=4.500  R2=-0.254
+    -> [SIS] tuned_ridge   MAE=10.309  R2=-40.464  best={'model__alpha': 100.0}
+    -> [OHS] tuned_ridge   MAE=5.195  R2=-39.825  best={'model__alpha': 100.0}
+    -> [OKS] tuned_ridge   MAE=18.452  R2=-16.902  best={'model__alpha': 100.0}
+    -> [SIS] tuned_elasticnet  MAE=1.527  R2=-0.244  best={'model__alpha': 10.0, 'model__l1_ratio': 0.9}
+    -> [OHS] tuned_elasticnet  MAE=1.478  R2=-0.548  best={'model__alpha': 10.0, 'model__l1_ratio': 0.9}
+    -> [OKS] tuned_elasticnet  MAE=4.475  R2=-0.109  best={'model__alpha': 10.0, 'model__l1_ratio': 0.5}
+    -> [SIS] rf            MAE=2.304  R2=-1.672  best={'model__max_depth': 5, 'model__min_samples_leaf': 2, 'model__n_estimators': 200}
+    -> [OHS] rf            MAE=2.844  R2=-3.126  best={'model__max_depth': 10, 'model__min_samples_leaf': 2, 'model__n_estimators': 200}
+    -> [OKS] rf            MAE=3.879  R2=0.387  best={'model__max_depth': 10, 'model__min_samples_leaf': 5, 'model__n_estimators': 200}
+    -> [SIS] lgbm          MAE=2.132  R2=-1.480  best={'model__learning_rate': 0.05, 'model__n_estimators': 300, 'model__num_leaves': 63}
+    -> [OHS] lgbm          MAE=3.358  R2=-4.187  best={'model__learning_rate': 0.05, 'model__n_estimators': 100, 'model__num_leaves': 31}
+    -> [OKS] lgbm          MAE=3.756  R2=0.403  best={'model__learning_rate': 0.1, 'model__n_estimators': 300, 'model__num_leaves': 31}
+  Fold 18/18 | held-out P18 | train: 17 pids / 952 rows | test: 56 rows
+    -> [SIS] Ridge(sensor+demo)  MAE=4.076  R2=-12.664
+    -> [OHS] Ridge(sensor+demo)  MAE=12.616  R2=-279.942
+    -> [OKS] Ridge(sensor+demo)  MAE=20.518  R2=-117.489
+    -> [SIS] Baseline-A(demo)    MAE=3.735  R2=-8.268
+    -> [OHS] Baseline-A(demo)    MAE=3.092  R2=-13.904
+    -> [OKS] Baseline-A(demo)    MAE=12.199  R2=-35.537
+    -> [SIS] Baseline-B(mean)    MAE=5.176  R2=-15.879
+    -> [OHS] Baseline-B(mean)    MAE=5.735  R2=-47.845
+    -> [OKS] Baseline-B(mean)    MAE=1.750  R2=-0.000
+    -> [SIS] tuned_ridge   MAE=6.030  R2=-26.506  best={'model__alpha': 100.0}
+    -> [OHS] tuned_ridge   MAE=13.166  R2=-343.919  best={'model__alpha': 100.0}
+    -> [OKS] tuned_ridge   MAE=7.642  R2=-18.894  best={'model__alpha': 100.0}
+    -> [SIS] tuned_elasticnet  MAE=5.177  R2=-15.891  best={'model__alpha': 10.0, 'model__l1_ratio': 0.9}
+    -> [OHS] tuned_elasticnet  MAE=5.398  R2=-42.726  best={'model__alpha': 10.0, 'model__l1_ratio': 0.9}
+    -> [OKS] tuned_elasticnet  MAE=2.343  R2=-0.684  best={'model__alpha': 10.0, 'model__l1_ratio': 0.5}
+    -> [SIS] rf            MAE=3.736  R2=-8.468  best={'model__max_depth': 5, 'model__min_samples_leaf': 2, 'model__n_estimators': 200}
+    -> [OHS] rf            MAE=7.527  R2=-166.628  best={'model__max_depth': 10, 'model__min_samples_leaf': 2, 'model__n_estimators': 200}
+    -> [OKS] rf            MAE=2.963  R2=-2.108  best={'model__max_depth': None, 'model__min_samples_leaf': 5, 'model__n_estimators': 200}
+    -> [SIS] lgbm          MAE=2.963  R2=-6.295  best={'model__learning_rate': 0.1, 'model__n_estimators': 100, 'model__num_leaves': 31}
+    -> [OHS] lgbm          MAE=7.061  R2=-127.951  best={'model__learning_rate': 0.05, 'model__n_estimators': 100, 'model__num_leaves': 31}
+    -> [OKS] lgbm          MAE=3.259  R2=-2.368  best={'model__learning_rate': 0.1, 'model__n_estimators': 300, 'model__num_leaves': 63}
+
+=== Fold Summary ===
+ fold  held_out_pid  ridge_mae_sis  ridge_r2_sis  ridge_mae_ohs  ridge_r2_ohs  ridge_mae_oks  ridge_r2_oks  bl_a_mae_sis  bl_a_r2_sis  bl_a_mae_ohs  bl_a_r2_ohs  bl_a_mae_oks  bl_a_r2_oks  bl_b_mae_sis  bl_b_r2_sis  bl_b_mae_ohs  bl_b_r2_ohs  bl_b_mae_oks  bl_b_r2_oks  tuned_ridge_mae_sis  tuned_ridge_r2_sis  tuned_ridge_mae_ohs  tuned_ridge_r2_ohs  tuned_ridge_mae_oks  tuned_ridge_r2_oks  tuned_elasticnet_mae_sis  tuned_elasticnet_r2_sis  tuned_elasticnet_mae_ohs  tuned_elasticnet_r2_ohs  tuned_elasticnet_mae_oks  tuned_elasticnet_r2_oks  rf_mae_sis  rf_r2_sis  rf_mae_ohs  rf_r2_ohs  rf_mae_oks  rf_r2_oks  lgbm_mae_sis  lgbm_r2_sis  lgbm_mae_ohs  lgbm_r2_ohs  lgbm_mae_oks  lgbm_r2_oks
+    1             1         5.5505      -22.0393        15.5803     -190.6060        32.6973      -28.5921        1.4943      -0.6516       13.7505    -126.0499       11.4444      -3.3158        1.0735      -0.0144        2.2941      -3.5087        5.0000      -0.1402               4.6132            -15.9747              15.5803           -190.6060              28.0945            -22.3502                    1.1259                  -0.0488                    1.9246                  -2.2660                    5.1876                  -0.1387      2.0709    -2.7064     15.9763  -170.6390     17.1451    -7.4854        2.0674      -3.0840       17.2444    -198.6619       17.3959      -7.8316
+    2             2         7.8099      -13.8742        31.4469     -300.7812         8.3221      -12.6571        5.1259      -3.8925       26.3250    -187.9339        4.7677      -3.1626        3.5588      -1.8763        9.4412     -24.1724       13.7941     -26.4734               8.0507            -13.4983              14.6376            -68.0164              11.8306            -22.4785                    3.7737                  -2.3041                    9.4404                 -25.0097                   13.5470                 -27.6989      4.9945    -3.1984     16.3068   -76.1228      8.7219   -10.3009        4.8063      -2.9973       16.8417     -85.3396        8.7888     -12.1736
+    3             3         2.1412       -9.8076        11.6261        0.0000        18.6056        0.0000        3.5829     -18.6727        4.7335       0.0000       19.4171       0.0000        0.9412      -1.2885        0.1765       0.0000       18.8235       0.0000               2.0341             -7.6551               4.4553              0.0000              18.5293              0.0000                    1.0362                  -1.5473                    0.3284                   0.0000                   19.5215                   0.0000      2.3191   -11.0236      3.0815     0.0000     17.0621     0.0000        2.4017     -11.1562        4.1225       0.0000       17.1941       0.0000
+    4             4         3.7437      -89.1027        30.3169     -623.7176         7.5470       -9.8378        7.2617    -281.2398       16.9202    -190.8631       10.1462     -14.1994        2.0000     -21.3333       13.5882    -123.0934        9.2353     -11.7642               3.2596            -65.1186              19.5545           -261.9702               8.6740            -12.7093                    2.0852                 -23.1618                   14.1341                -133.1968                    8.3900                  -9.7287      3.5108   -66.1756     13.3117  -120.3281      6.6911    -7.2022        1.8053     -18.9925       12.3621    -108.9459        5.1202      -4.0009
+    5             5         7.5125     -255.6956        25.2562      -36.1833        14.4419      -72.6966       10.6675    -455.1858       15.2260     -12.0824       13.7369     -51.1736        4.9118     -96.5017       12.7941      -8.5310       15.3824     -64.1673               9.9507           -433.9866              15.4411            -14.9101               9.2196            -38.5220                    7.1625                -218.1958                   10.9755                  -7.5160                    9.7737                 -29.3057      4.7448   -94.8998     15.6196   -13.1094      9.7067   -25.3020        4.4158     -82.2396       17.2718     -16.0485       13.7752     -51.3671
+    6             6         2.1556       -2.9039         5.1329       -0.8667        11.9716       -6.5133        4.0722      -9.8269       13.7574      -7.7251       16.6280     -12.2884        1.3456      -0.5249        6.1765      -1.5571        3.5882      -0.0301               2.3784             -3.7789               4.4971             -0.4180               4.8844             -0.6653                    1.3917                  -0.6399                    6.7350                  -1.8510                    3.5177                  -0.1192      1.3560    -0.6741      4.6734    -0.5050      3.5550    -0.0293        1.6137      -1.1026        5.1406      -0.7063        5.1304      -1.0858
+    7             7         3.4333       -1.0158         4.9349       -7.1729        13.8718     -277.8100        5.6943      -4.2180        4.6789      -3.8491        6.0737     -49.1858        2.7647      -0.9943        5.3824      -5.0936        1.3529      -2.4406               2.7716             -0.6345               5.2430             -8.1990              11.7511           -207.3257                    2.7559                  -0.9340                    5.9383                  -6.2026                    2.0340                  -5.8886      3.3980    -1.3519      8.2454   -11.9536     10.8856  -166.4347        4.1389      -1.8976        6.9011      -8.1731        9.9854    -146.1744
+    8             8         6.5442       -5.1918         2.7663       -1.1110         3.1842       -2.6025        4.6657      -2.5611        3.4109      -1.0617        6.8422      -9.0247        3.0294      -1.0797        5.4706      -3.9903        4.2059      -3.4100               4.7654             -2.9835               2.9313             -0.5712               4.5932             -4.6212                    2.9424                  -1.0186                    4.9486                  -3.2649                    3.5505                  -2.4303      2.5140    -0.7297      8.0221   -11.3186      5.1179    -4.9847        2.2543      -0.5095        6.9814      -8.0750        4.1810      -3.3287
+    9             9         1.7151       -0.1555        17.1043     -112.3726        18.8641     -264.2811        3.7132      -2.9414       23.2187    -196.0388       12.2360     -99.8138        2.7426      -1.0659       10.2353     -38.0950        9.7647     -63.5663               1.6346              0.1617              14.6249            -85.5737              18.1583           -247.5730                    2.6978                  -0.9821                    9.7472                 -34.5472                    9.1182                 -55.5261      4.4511    -4.7198      7.9769   -24.4553      7.1557   -42.7248        4.2223      -3.9774       11.4934     -47.9179        4.2088     -18.8125
+   10            10         6.3604      -36.1458        15.4423       -8.6892         5.4003       -4.2477        5.3491     -22.8902       12.2663      -5.1440        4.1217      -0.4026        4.6176     -17.0581        9.1765      -2.8789        4.1765      -0.4429               3.8194            -12.3068              16.3960             -9.3154               5.6646             -5.4729                    4.5592                 -16.6739                    8.7430                  -2.6184                    3.8787                  -0.2859      5.4707   -25.1945      9.2214    -2.7590     16.2250   -21.0064        4.7887     -20.2775        9.9295      -3.7841       16.5925     -22.0803
+   11            11         9.1970      -59.0516        30.0606     -760.7943        25.5795     -150.0299        6.3481      -7.3269       17.8500     -57.9312       11.7318      -8.2478        5.1471      -4.8168       17.8235     -57.7597       15.3824     -14.1793               8.9238            -34.1975              19.3769           -164.3511              17.5751            -72.6581                    5.9537                  -8.1296                   15.8759                 -47.0440                   12.4823                 -10.2412      2.2373    -0.9085     24.7986  -111.8595     16.4979   -16.7325        2.7360      -1.3042       25.1590    -115.4051       15.5185     -15.0129
+   12            12         3.5377      -81.9960         7.8175       -0.8550         5.9377       -1.5146        3.5777     -68.2680        6.2500      -0.0211        4.2500      -0.0958        5.1765    -142.9112        6.2500      -0.2183        9.5000      -3.1460               2.8730            -57.6319               8.2159             -1.4109               7.5497             -1.3225                    5.2119                -144.8928                    6.6103                  -0.3691                    9.3036                  -3.0222      3.6741   -79.3415      7.8627    -1.0633      5.1165    -0.1215        4.2296    -113.5253        8.0109      -1.6484        4.6176       0.0482
+   13            13         9.1536      -18.2332         6.9052      -14.0125         9.7604       -7.3666       12.5004     -33.3357        7.3551     -12.0215       10.8281      -7.6883        2.8750      -0.8533        1.5882      -0.0069        4.4853      -0.7898               6.3744             -8.5957               4.7767             -7.8693               8.8548             -6.2384                    2.9272                  -0.9447                    1.6890                  -0.0319                    5.0000                  -1.3484      3.2237    -2.6934      2.7645    -1.5425      7.5646    -3.6581        3.3080      -3.1523        2.2939      -1.0703        9.4621      -5.8668
+   14            14        13.3582     -408.4961        51.3668     -293.9738        75.3416    -6951.6347        3.4605     -11.9748        3.6762      -0.9874        9.7524     -43.4787        2.2647      -5.1289        2.7500      -0.3009       10.0294     -45.9836               3.7768            -21.0512              52.2786           -410.1184              38.6551          -1193.6387                    1.7083                  -2.8029                    2.7744                  -0.2004                   15.5380                -126.3112      1.7958    -3.3719      3.7882    -1.3923      7.0960   -39.8927        2.4510      -6.9030        5.1498      -2.4738       10.2900     -58.7249
+   15            15         8.2265      -11.7296        13.8882     -117.1606         4.4816      -21.5540       11.8217     -20.8978       15.7388    -113.2381       16.8106    -129.1865        6.4706      -6.2607        2.5588      -2.9932       13.7353     -86.2438               4.7807             -3.7154               8.8575            -49.8254              10.4989            -62.1214                    6.3955                  -6.1163                    2.1432                  -1.8803                   12.7656                 -74.2559      4.8326    -3.7408      3.9755    -9.2412     10.2001   -49.6119        3.9526      -2.3311        6.5857     -25.2021        9.9395     -49.0056
+   16            16         4.1894       -5.2687        12.1665      -46.9427        20.4250      -54.6318        3.4428      -3.2143        2.2500      -0.0072        8.8417      -7.6270        3.5882      -3.4916        3.6176      -2.3011        5.0000      -2.4390               4.4137             -5.3335               9.8650            -35.6356              14.6015            -25.0499                    3.6979                  -3.7086                    3.1912                  -1.7181                    4.1388                  -1.6694      2.5055    -1.0697      2.1700    -0.0592     10.7247   -12.4244        2.7264      -1.1973        2.4312      -0.4392       11.7914     -15.5581
+   17            17         9.2903      -36.6076        13.6481      -99.5118        18.8163      -12.3088        1.5000      -0.1765        1.5000      -0.1442        4.5000      -0.0696        1.5000      -0.1664        1.7647      -1.1324        4.5000      -0.2537              10.3093            -40.4639               5.1951            -39.8251              18.4518            -16.9016                    1.5272                  -0.2443                    1.4782                  -0.5477                    4.4748                  -0.1090      2.3041    -1.6717      2.8438    -3.1262      3.8788     0.3867        2.1315      -1.4796        3.3575      -4.1866        3.7559       0.4032
+   18            18         4.0757      -12.6638        12.6158     -279.9425        20.5178     -117.4890        3.7352      -8.2678        3.0918     -13.9042       12.1988     -35.5366        5.1765     -15.8790        5.7353     -47.8452        1.7500      -0.0002               6.0303            -26.5057              13.1662           -343.9192               7.6421            -18.8944                    5.1770                 -15.8908                    5.3985                 -42.7257                    2.3433                  -0.6842      3.7359    -8.4676      7.5271  -166.6284      2.9625    -2.1085        2.9630      -6.2950        7.0609    -127.9514        3.2594      -2.3676
+
+[OK] 18/18 folds completed
+=== Per-fold baseline results ===
+              model target  fold  held_out_pid  n_train_rows  n_test_rows     mae        r2
+baseline_demo_ridge    sis     1             1           952           56  1.4943   -0.6516
+baseline_demo_ridge    ohs     1             1           952           56 13.7505 -126.0499
+baseline_demo_ridge    oks     1             1           952           56 11.4444   -3.3158
+baseline_naive_mean    sis     1             1           952           56  1.0735   -0.0144
+baseline_naive_mean    ohs     1             1           952           56  2.2941   -3.5087
+baseline_naive_mean    oks     1             1           952           56  5.0000   -0.1402
+baseline_demo_ridge    sis     2             2           952           56  5.1259   -3.8925
+baseline_demo_ridge    ohs     2             2           952           56 26.3250 -187.9339
+baseline_demo_ridge    oks     2             2           952           56  4.7677   -3.1626
+baseline_naive_mean    sis     2             2           952           56  3.5588   -1.8763
+baseline_naive_mean    ohs     2             2           952           56  9.4412  -24.1724
+baseline_naive_mean    oks     2             2           952           56 13.7941  -26.4734
+baseline_demo_ridge    sis     3             3           952           56  3.5829  -18.6727
+baseline_demo_ridge    ohs     3             3           952           56  4.7335    0.0000
+baseline_demo_ridge    oks     3             3           952           56 19.4171    0.0000
+baseline_naive_mean    sis     3             3           952           56  0.9412   -1.2885
+baseline_naive_mean    ohs     3             3           952           56  0.1765    0.0000
+baseline_naive_mean    oks     3             3           952           56 18.8235    0.0000
+baseline_demo_ridge    sis     4             4           952           56  7.2617 -281.2398
+baseline_demo_ridge    ohs     4             4           952           56 16.9202 -190.8631
+baseline_demo_ridge    oks     4             4           952           56 10.1462  -14.1994
+baseline_naive_mean    sis     4             4           952           56  2.0000  -21.3333
+baseline_naive_mean    ohs     4             4           952           56 13.5882 -123.0934
+baseline_naive_mean    oks     4             4           952           56  9.2353  -11.7642
+baseline_demo_ridge    sis     5             5           952           56 10.6675 -455.1858
+baseline_demo_ridge    ohs     5             5           952           56 15.2260  -12.0824
+baseline_demo_ridge    oks     5             5           952           56 13.7369  -51.1736
+baseline_naive_mean    sis     5             5           952           56  4.9118  -96.5017
+baseline_naive_mean    ohs     5             5           952           56 12.7941   -8.5310
+baseline_naive_mean    oks     5             5           952           56 15.3824  -64.1673
+baseline_demo_ridge    sis     6             6           952           56  4.0722   -9.8269
+baseline_demo_ridge    ohs     6             6           952           56 13.7574   -7.7251
+baseline_demo_ridge    oks     6             6           952           56 16.6280  -12.2884
+baseline_naive_mean    sis     6             6           952           56  1.3456   -0.5249
+baseline_naive_mean    ohs     6             6           952           56  6.1765   -1.5571
+baseline_naive_mean    oks     6             6           952           56  3.5882   -0.0301
+baseline_demo_ridge    sis     7             7           952           56  5.6943   -4.2180
+baseline_demo_ridge    ohs     7             7           952           56  4.6789   -3.8491
+baseline_demo_ridge    oks     7             7           952           56  6.0737  -49.1858
+baseline_naive_mean    sis     7             7           952           56  2.7647   -0.9943
+baseline_naive_mean    ohs     7             7           952           56  5.3824   -5.0936
+baseline_naive_mean    oks     7             7           952           56  1.3529   -2.4406
+baseline_demo_ridge    sis     8             8           952           56  4.6657   -2.5611
+baseline_demo_ridge    ohs     8             8           952           56  3.4109   -1.0617
+baseline_demo_ridge    oks     8             8           952           56  6.8422   -9.0247
+baseline_naive_mean    sis     8             8           952           56  3.0294   -1.0797
+baseline_naive_mean    ohs     8             8           952           56  5.4706   -3.9903
+baseline_naive_mean    oks     8             8           952           56  4.2059   -3.4100
+baseline_demo_ridge    sis     9             9           952           56  3.7132   -2.9414
+baseline_demo_ridge    ohs     9             9           952           56 23.2187 -196.0388
+baseline_demo_ridge    oks     9             9           952           56 12.2360  -99.8138
+baseline_naive_mean    sis     9             9           952           56  2.7426   -1.0659
+baseline_naive_mean    ohs     9             9           952           56 10.2353  -38.0950
+baseline_naive_mean    oks     9             9           952           56  9.7647  -63.5663
+baseline_demo_ridge    sis    10            10           952           56  5.3491  -22.8902
+baseline_demo_ridge    ohs    10            10           952           56 12.2663   -5.1440
+baseline_demo_ridge    oks    10            10           952           56  4.1217   -0.4026
+baseline_naive_mean    sis    10            10           952           56  4.6176  -17.0581
+baseline_naive_mean    ohs    10            10           952           56  9.1765   -2.8789
+baseline_naive_mean    oks    10            10           952           56  4.1765   -0.4429
+baseline_demo_ridge    sis    11            11           952           56  6.3481   -7.3269
+baseline_demo_ridge    ohs    11            11           952           56 17.8500  -57.9312
+baseline_demo_ridge    oks    11            11           952           56 11.7318   -8.2478
+baseline_naive_mean    sis    11            11           952           56  5.1471   -4.8168
+baseline_naive_mean    ohs    11            11           952           56 17.8235  -57.7597
+baseline_naive_mean    oks    11            11           952           56 15.3824  -14.1793
+baseline_demo_ridge    sis    12            12           952           56  3.5777  -68.2680
+baseline_demo_ridge    ohs    12            12           952           56  6.2500   -0.0211
+baseline_demo_ridge    oks    12            12           952           56  4.2500   -0.0958
+baseline_naive_mean    sis    12            12           952           56  5.1765 -142.9112
+baseline_naive_mean    ohs    12            12           952           56  6.2500   -0.2183
+baseline_naive_mean    oks    12            12           952           56  9.5000   -3.1460
+baseline_demo_ridge    sis    13            13           952           56 12.5004  -33.3357
+baseline_demo_ridge    ohs    13            13           952           56  7.3551  -12.0215
+baseline_demo_ridge    oks    13            13           952           56 10.8281   -7.6883
+baseline_naive_mean    sis    13            13           952           56  2.8750   -0.8533
+baseline_naive_mean    ohs    13            13           952           56  1.5882   -0.0069
+baseline_naive_mean    oks    13            13           952           56  4.4853   -0.7898
+baseline_demo_ridge    sis    14            14           952           56  3.4605  -11.9748
+baseline_demo_ridge    ohs    14            14           952           56  3.6762   -0.9874
+baseline_demo_ridge    oks    14            14           952           56  9.7524  -43.4787
+baseline_naive_mean    sis    14            14           952           56  2.2647   -5.1289
+baseline_naive_mean    ohs    14            14           952           56  2.7500   -0.3009
+baseline_naive_mean    oks    14            14           952           56 10.0294  -45.9836
+baseline_demo_ridge    sis    15            15           952           56 11.8217  -20.8978
+baseline_demo_ridge    ohs    15            15           952           56 15.7388 -113.2381
+baseline_demo_ridge    oks    15            15           952           56 16.8106 -129.1865
+baseline_naive_mean    sis    15            15           952           56  6.4706   -6.2607
+baseline_naive_mean    ohs    15            15           952           56  2.5588   -2.9932
+baseline_naive_mean    oks    15            15           952           56 13.7353  -86.2438
+baseline_demo_ridge    sis    16            16           952           56  3.4428   -3.2143
+baseline_demo_ridge    ohs    16            16           952           56  2.2500   -0.0072
+baseline_demo_ridge    oks    16            16           952           56  8.8417   -7.6270
+baseline_naive_mean    sis    16            16           952           56  3.5882   -3.4916
+baseline_naive_mean    ohs    16            16           952           56  3.6176   -2.3011
+baseline_naive_mean    oks    16            16           952           56  5.0000   -2.4390
+baseline_demo_ridge    sis    17            17           952           56  1.5000   -0.1765
+baseline_demo_ridge    ohs    17            17           952           56  1.5000   -0.1442
+baseline_demo_ridge    oks    17            17           952           56  4.5000   -0.0696
+baseline_naive_mean    sis    17            17           952           56  1.5000   -0.1664
+baseline_naive_mean    ohs    17            17           952           56  1.7647   -1.1324
+baseline_naive_mean    oks    17            17           952           56  4.5000   -0.2537
+baseline_demo_ridge    sis    18            18           952           56  3.7352   -8.2678
+baseline_demo_ridge    ohs    18            18           952           56  3.0918  -13.9042
+baseline_demo_ridge    oks    18            18           952           56 12.1988  -35.5366
+baseline_naive_mean    sis    18            18           952           56  5.1765  -15.8790
+baseline_naive_mean    ohs    18            18           952           56  5.7353  -47.8452
+baseline_naive_mean    oks    18            18           952           56  1.7500   -0.0002
+
+=== Baseline Summary (mean +/- std across folds) ===
+                            mae_mean  mae_std  r2_mean    r2_std
+model               target                                      
+baseline_demo_ridge ohs      10.6666   7.5804 -51.6113   74.7098
+                    oks      10.2404   4.5991 -26.3609   36.7628
+                    sis       5.4452   3.2221 -53.0857  119.5744
+baseline_naive_mean ohs       6.4902   4.8083 -17.9710   31.7647
+                    oks       8.3170   5.2923 -18.0817   27.5469
+                    sis       3.2880   1.6482 -17.8469   38.4337
+
+[OK] Saved -> /home/alessio/Projects/MAISON-ML/Development AG/outputs/run_v8/tables/baselines.csv
+[OK] 2 models x 3 targets x 18 folds = 108 rows
+=== All Model Results -- Summary (mean +/- std across LOPO folds) ===
+
+  Target: SIS
+              model             MAE                  R2
+baseline_demo_ridge 5.445 +/- 3.222 -53.086 +/- 119.574
+baseline_naive_mean 3.288 +/- 1.648  -17.847 +/- 38.434
+               lgbm 3.167 +/- 1.074  -15.690 +/- 30.930
+                 rf 3.285 +/- 1.228  -17.330 +/- 29.884
+  ridge_sensor_demo 6.000 +/- 3.153 -59.443 +/- 105.972
+   tuned_elasticnet 3.452 +/- 1.907  -24.902 +/- 58.734
+        tuned_ridge 5.042 +/- 2.693  -41.848 +/- 99.742
+
+  Target: OHS
+              model               MAE                   R2
+baseline_demo_ridge  10.667 +/- 7.580   -51.611 +/- 74.710
+baseline_naive_mean   6.490 +/- 4.808   -17.971 +/- 31.765
+               lgbm   9.352 +/- 6.267   -42.002 +/- 59.368
+                 rf   8.787 +/- 6.178   -40.339 +/- 60.160
+  ridge_sensor_demo 17.115 +/- 12.314 -160.816 +/- 221.493
+   tuned_elasticnet   6.226 +/- 4.500   -17.277 +/- 32.858
+        tuned_ridge 13.061 +/- 11.223  -94.030 +/- 127.655
+
+  Target: OKS
+              model               MAE                    R2
+baseline_demo_ridge  10.240 +/- 4.599    -26.361 +/- 36.763
+baseline_naive_mean   8.317 +/- 5.292    -18.082 +/- 27.547
+               lgbm   9.500 +/- 4.991    -22.941 +/- 35.949
+                 rf   9.239 +/- 4.754    -22.757 +/- 39.130
+  ridge_sensor_demo 17.543 +/- 16.477 -444.209 +/- 1626.379
+   tuned_elasticnet   8.031 +/- 5.076    -19.376 +/- 34.020
+        tuned_ridge  13.624 +/- 8.736  -108.808 +/- 279.611
+
+[OK] Saved -> /home/alessio/Projects/MAISON-ML/Development AG/outputs/run_v8/tables/lopo_metrics_per_participant.csv
+[OK] Saved -> /home/alessio/Projects/MAISON-ML/Development AG/outputs/run_v8/tables/lopo_metrics_summary.csv
+[OK] 7 models x 3 targets x 18 folds = 378 rows
+[OK] Saved -> /home/alessio/Projects/MAISON-ML/Development AG/outputs/run_v8/figures/model_comparison_sis.png
+[OK] Saved -> /home/alessio/Projects/MAISON-ML/Development AG/outputs/run_v8/figures/model_comparison_ohs.png
+[OK] Saved -> /home/alessio/Projects/MAISON-ML/Development AG/outputs/run_v8/figures/model_comparison_oks.png
+[OK] model_comparison_sis.png: 71,479 bytes
+[OK] model_comparison_ohs.png: 74,878 bytes
+[OK] model_comparison_oks.png: 79,091 bytes
+[OK] Model comparison figures complete
+=== Best-Param Frequency Summary (across 18 LOPO folds) ===
+
+  [TUNED_RIDGE] target=SIS
+    {'model__alpha': 100.0}  ->  18/18 folds
+
+  [TUNED_RIDGE] target=OHS
+    {'model__alpha': 100.0}  ->  17/18 folds
+    {'model__alpha': 1.0}  ->  1/18 folds
+
+  [TUNED_RIDGE] target=OKS
+    {'model__alpha': 100.0}  ->  12/18 folds
+    {'model__alpha': 10.0}  ->  6/18 folds
+
+  [TUNED_ELASTICNET] target=SIS
+    {'model__alpha': 10.0, 'model__l1_ratio': 0.9}  ->  16/18 folds
+    {'model__alpha': 10.0, 'model__l1_ratio': 0.5}  ->  2/18 folds
+
+  [TUNED_ELASTICNET] target=OHS
+    {'model__alpha': 10.0, 'model__l1_ratio': 0.9}  ->  18/18 folds
+
+  [TUNED_ELASTICNET] target=OKS
+    {'model__alpha': 10.0, 'model__l1_ratio': 0.9}  ->  10/18 folds
+    {'model__alpha': 10.0, 'model__l1_ratio': 0.5}  ->  8/18 folds
+
+  [RF] target=SIS
+    {'model__max_depth': 5, 'model__min_samples_leaf': 2, 'model__n_estimators': 200}  ->  6/18 folds
+    {'model__max_depth': 5, 'model__min_samples_leaf': 5, 'model__n_estimators': 200}  ->  6/18 folds
+    {'model__max_depth': None, 'model__min_samples_leaf': 2, 'model__n_estimators': 200}  ->  2/18 folds
+    {'model__max_depth': 10, 'model__min_samples_leaf': 5, 'model__n_estimators': 200}  ->  2/18 folds
+    {'model__max_depth': None, 'model__min_samples_leaf': 5, 'model__n_estimators': 200}  ->  1/18 folds
+    {'model__max_depth': 10, 'model__min_samples_leaf': 2, 'model__n_estimators': 200}  ->  1/18 folds
+
+  [RF] target=OHS
+    {'model__max_depth': 5, 'model__min_samples_leaf': 5, 'model__n_estimators': 200}  ->  7/18 folds
+    {'model__max_depth': 5, 'model__min_samples_leaf': 2, 'model__n_estimators': 200}  ->  6/18 folds
+    {'model__max_depth': 10, 'model__min_samples_leaf': 2, 'model__n_estimators': 200}  ->  3/18 folds
+    {'model__max_depth': None, 'model__min_samples_leaf': 5, 'model__n_estimators': 200}  ->  1/18 folds
+    {'model__max_depth': 10, 'model__min_samples_leaf': 5, 'model__n_estimators': 200}  ->  1/18 folds
+
+  [RF] target=OKS
+    {'model__max_depth': None, 'model__min_samples_leaf': 5, 'model__n_estimators': 200}  ->  5/18 folds
+    {'model__max_depth': 10, 'model__min_samples_leaf': 2, 'model__n_estimators': 200}  ->  4/18 folds
+    {'model__max_depth': None, 'model__min_samples_leaf': 2, 'model__n_estimators': 200}  ->  3/18 folds
+    {'model__max_depth': 10, 'model__min_samples_leaf': 5, 'model__n_estimators': 200}  ->  3/18 folds
+    {'model__max_depth': 5, 'model__min_samples_leaf': 2, 'model__n_estimators': 200}  ->  2/18 folds
+    {'model__max_depth': 5, 'model__min_samples_leaf': 5, 'model__n_estimators': 200}  ->  1/18 folds
+
+  [LGBM] target=SIS
+    {'model__learning_rate': 0.05, 'model__n_estimators': 100, 'model__num_leaves': 63}  ->  5/18 folds
+    {'model__learning_rate': 0.1, 'model__n_estimators': 300, 'model__num_leaves': 31}  ->  4/18 folds
+    {'model__learning_rate': 0.1, 'model__n_estimators': 300, 'model__num_leaves': 63}  ->  2/18 folds
+    {'model__learning_rate': 0.1, 'model__n_estimators': 100, 'model__num_leaves': 63}  ->  2/18 folds
+    {'model__learning_rate': 0.1, 'model__n_estimators': 100, 'model__num_leaves': 31}  ->  2/18 folds
+    {'model__learning_rate': 0.05, 'model__n_estimators': 100, 'model__num_leaves': 31}  ->  1/18 folds
+    {'model__learning_rate': 0.05, 'model__n_estimators': 300, 'model__num_leaves': 31}  ->  1/18 folds
+    {'model__learning_rate': 0.05, 'model__n_estimators': 300, 'model__num_leaves': 63}  ->  1/18 folds
+
+  [LGBM] target=OHS
+    {'model__learning_rate': 0.05, 'model__n_estimators': 100, 'model__num_leaves': 31}  ->  5/18 folds
+    {'model__learning_rate': 0.05, 'model__n_estimators': 300, 'model__num_leaves': 31}  ->  4/18 folds
+    {'model__learning_rate': 0.05, 'model__n_estimators': 100, 'model__num_leaves': 63}  ->  4/18 folds
+    {'model__learning_rate': 0.1, 'model__n_estimators': 300, 'model__num_leaves': 31}  ->  2/18 folds
+    {'model__learning_rate': 0.1, 'model__n_estimators': 100, 'model__num_leaves': 31}  ->  2/18 folds
+    {'model__learning_rate': 0.1, 'model__n_estimators': 100, 'model__num_leaves': 63}  ->  1/18 folds
+
+  [LGBM] target=OKS
+    {'model__learning_rate': 0.1, 'model__n_estimators': 300, 'model__num_leaves': 31}  ->  6/18 folds
+    {'model__learning_rate': 0.1, 'model__n_estimators': 100, 'model__num_leaves': 31}  ->  4/18 folds
+    {'model__learning_rate': 0.05, 'model__n_estimators': 300, 'model__num_leaves': 63}  ->  3/18 folds
+    {'model__learning_rate': 0.1, 'model__n_estimators': 100, 'model__num_leaves': 63}  ->  2/18 folds
+    {'model__learning_rate': 0.1, 'model__n_estimators': 300, 'model__num_leaves': 63}  ->  2/18 folds
+    {'model__learning_rate': 0.05, 'model__n_estimators': 100, 'model__num_leaves': 63}  ->  1/18 folds
+
+[OK] Saved -> /home/alessio/Projects/MAISON-ML/Development AG/outputs/run_v8/figures/oof_scatter_actual_vs_predicted.png
+Participant baselines (SIS / OHS / OKS at earliest clinical block):
+ participant  baseline_sis  baseline_ohs  baseline_oks
+           1            25            25            31
+           2            18            18            39
+           3            26            28            48
+           4            26            41            23
+           5            28            36            44
+           6            26            42            39
+           7            24            35            31
+           8            23            24            24
+           9            25            19            21
+          10            19            19            26
+          11            15            47            48
+          12            29            31            16
+          13            22            28            39
+          14            25            27            19
+          15            17            28            19
+          16            28            28            21
+          17            23            28            32
+          18            27            24            32
+
+  sis_delta: min=-7.0  max=6.0  mean=0.19  std=2.68  n_unique=14
+  ohs_delta: min=-15.0  max=10.0  mean=-1.17  std=4.06  n_unique=20
+  oks_delta: min=-14.0  max=14.0  mean=-0.44  std=4.89  n_unique=22
+
+[OK] df_model_delta ready: (1008, 61)
+=== Delta-Target LOPO-CV ===
+  Folds    : 18
+  Targets  : sis_delta, ohs_delta, oks_delta
+  Models   : ['tuned_ridge', 'tuned_elasticnet', 'rf', 'lgbm']
+  Fold 01/18 | held-out P01
+    -> [sis_delta] naive_mean          MAE=1.265  R2=-1.066
+    -> [ohs_delta] naive_mean          MAE=2.294  R2=-3.509
+    -> [oks_delta] naive_mean          MAE=5.000  R2=-0.185
+    -> [sis_delta] tuned_ridge         MAE=1.743  R2=-1.772
+    -> [ohs_delta] tuned_ridge         MAE=3.684  R2=-11.578
+    -> [oks_delta] tuned_ridge         MAE=6.628  R2=-0.908
+    -> [sis_delta] tuned_elasticnet    MAE=1.270  R2=-1.089
+    -> [ohs_delta] tuned_elasticnet    MAE=2.390  R2=-3.809
+    -> [oks_delta] tuned_elasticnet    MAE=5.002  R2=-0.175
+    -> [sis_delta] rf                  MAE=1.515  R2=-1.902
+    -> [ohs_delta] rf                  MAE=1.646  R2=-1.445
+    -> [oks_delta] rf                  MAE=5.374  R2=-0.372
+    -> [sis_delta] lgbm                MAE=2.006  R2=-3.544
+    -> [ohs_delta] lgbm                MAE=1.715  R2=-1.569
+    -> [oks_delta] lgbm                MAE=5.644  R2=-0.431
+  Fold 02/18 | held-out P02
+    -> [sis_delta] naive_mean          MAE=2.500  R2=-0.883
+    -> [ohs_delta] naive_mean          MAE=2.559  R2=-1.776
+    -> [oks_delta] naive_mean          MAE=4.971  R2=-3.437
+    -> [sis_delta] tuned_ridge         MAE=3.416  R2=-2.093
+    -> [ohs_delta] tuned_ridge         MAE=3.843  R2=-7.743
+    -> [oks_delta] tuned_ridge         MAE=10.164  R2=-15.849
+    -> [sis_delta] tuned_elasticnet    MAE=2.553  R2=-0.894
+    -> [ohs_delta] tuned_elasticnet    MAE=2.503  R2=-1.794
+    -> [oks_delta] tuned_elasticnet    MAE=4.972  R2=-3.507
+    -> [sis_delta] rf                  MAE=2.749  R2=-1.078
+    -> [ohs_delta] rf                  MAE=4.579  R2=-6.457
+    -> [oks_delta] rf                  MAE=4.809  R2=-3.018
+    -> [sis_delta] lgbm                MAE=2.857  R2=-1.065
+    -> [ohs_delta] lgbm                MAE=3.845  R2=-4.122
+    -> [oks_delta] lgbm                MAE=4.495  R2=-2.474
+  Fold 03/18 | held-out P03
+    -> [sis_delta] naive_mean          MAE=1.529  R2=-3.402
+    -> [ohs_delta] naive_mean          MAE=1.235  R2=0.000
+    -> [oks_delta] naive_mean          MAE=0.471  R2=0.000
+    -> [sis_delta] tuned_ridge         MAE=1.982  R2=-7.169
+    -> [ohs_delta] tuned_ridge         MAE=2.516  R2=0.000
+    -> [oks_delta] tuned_ridge         MAE=3.120  R2=0.000
+    -> [sis_delta] tuned_elasticnet    MAE=1.482  R2=-3.284
+    -> [ohs_delta] tuned_elasticnet    MAE=1.321  R2=0.000
+    -> [oks_delta] tuned_elasticnet    MAE=0.565  R2=0.000
+    -> [sis_delta] rf                  MAE=1.413  R2=-3.163
+    -> [ohs_delta] rf                  MAE=4.641  R2=0.000
+    -> [oks_delta] rf                  MAE=0.855  R2=0.000
+    -> [sis_delta] lgbm                MAE=1.353  R2=-2.869
+    -> [ohs_delta] lgbm                MAE=3.290  R2=0.000
+    -> [oks_delta] lgbm                MAE=1.534  R2=0.000
+  Fold 04/18 | held-out P04
+    -> [sis_delta] naive_mean          MAE=0.471  R2=-1.181
+    -> [ohs_delta] naive_mean          MAE=1.618  R2=-1.017
+    -> [oks_delta] naive_mean          MAE=2.000  R2=-0.172
+    -> [sis_delta] tuned_ridge         MAE=3.865  R2=-97.781
+    -> [ohs_delta] tuned_ridge         MAE=6.450  R2=-30.673
+    -> [oks_delta] tuned_ridge         MAE=2.952  R2=-1.057
+    -> [sis_delta] tuned_elasticnet    MAE=0.313  R2=-0.521
+    -> [ohs_delta] tuned_elasticnet    MAE=1.665  R2=-1.163
+    -> [oks_delta] tuned_elasticnet    MAE=2.002  R2=-0.146
+    -> [sis_delta] rf                  MAE=0.630  R2=-2.517
+    -> [ohs_delta] rf                  MAE=2.049  R2=-2.815
+    -> [oks_delta] rf                  MAE=3.161  R2=-0.732
+    -> [sis_delta] lgbm                MAE=0.986  R2=-6.584
+    -> [ohs_delta] lgbm                MAE=2.115  R2=-3.254
+    -> [oks_delta] lgbm                MAE=2.974  R2=-0.765
+  Fold 05/18 | held-out P05
+    -> [sis_delta] naive_mean          MAE=0.500  R2=-0.419
+    -> [ohs_delta] naive_mean          MAE=5.735  R2=-1.714
+    -> [oks_delta] naive_mean          MAE=1.507  R2=-0.434
+    -> [sis_delta] tuned_ridge         MAE=2.781  R2=-52.209
+    -> [ohs_delta] tuned_ridge         MAE=8.680  R2=-5.328
+    -> [oks_delta] tuned_ridge         MAE=3.339  R2=-7.047
+    -> [sis_delta] tuned_elasticnet    MAE=0.533  R2=-0.621
+    -> [ohs_delta] tuned_elasticnet    MAE=5.693  R2=-1.693
+    -> [oks_delta] tuned_elasticnet    MAE=1.682  R2=-0.574
+    -> [sis_delta] rf                  MAE=0.740  R2=-2.421
+    -> [ohs_delta] rf                  MAE=4.362  R2=-0.874
+    -> [oks_delta] rf                  MAE=2.093  R2=-1.355
+    -> [sis_delta] lgbm                MAE=1.024  R2=-5.051
+    -> [ohs_delta] lgbm                MAE=5.700  R2=-1.646
+    -> [oks_delta] lgbm                MAE=2.925  R2=-2.940
+  Fold 06/18 | held-out P06
+    -> [sis_delta] naive_mean          MAE=1.529  R2=-1.386
+    -> [ohs_delta] naive_mean          MAE=7.618  R2=-2.137
+    -> [oks_delta] naive_mean          MAE=8.000  R2=-2.844
+    -> [sis_delta] tuned_ridge         MAE=3.819  R2=-9.702
+    -> [ohs_delta] tuned_ridge         MAE=6.906  R2=-1.385
+    -> [oks_delta] tuned_ridge         MAE=8.479  R2=-2.971
+    -> [sis_delta] tuned_elasticnet    MAE=1.433  R2=-1.235
+    -> [ohs_delta] tuned_elasticnet    MAE=7.589  R2=-2.103
+    -> [oks_delta] tuned_elasticnet    MAE=7.973  R2=-2.806
+    -> [sis_delta] rf                  MAE=1.944  R2=-2.934
+    -> [ohs_delta] rf                  MAE=7.648  R2=-2.090
+    -> [oks_delta] rf                  MAE=7.456  R2=-2.230
+    -> [sis_delta] lgbm                MAE=2.386  R2=-4.067
+    -> [ohs_delta] lgbm                MAE=7.655  R2=-2.025
+    -> [oks_delta] lgbm                MAE=7.444  R2=-2.156
+  Fold 07/18 | held-out P07
+    -> [sis_delta] naive_mean          MAE=3.118  R2=-1.264
+    -> [ohs_delta] naive_mean          MAE=2.250  R2=-0.067
+    -> [oks_delta] naive_mean          MAE=1.000  R2=-1.333
+    -> [sis_delta] tuned_ridge         MAE=2.568  R2=-0.190
+    -> [ohs_delta] tuned_ridge         MAE=5.486  R2=-8.390
+    -> [oks_delta] tuned_ridge         MAE=3.440  R2=-32.477
+    -> [sis_delta] tuned_elasticnet    MAE=2.978  R2=-1.150
+    -> [ohs_delta] tuned_elasticnet    MAE=2.244  R2=-0.049
+    -> [oks_delta] tuned_elasticnet    MAE=1.097  R2=-1.616
+    -> [sis_delta] rf                  MAE=2.765  R2=-0.766
+    -> [ohs_delta] rf                  MAE=4.190  R2=-3.070
+    -> [oks_delta] rf                  MAE=1.028  R2=-1.081
+    -> [sis_delta] lgbm                MAE=2.825  R2=-0.771
+    -> [ohs_delta] lgbm                MAE=4.896  R2=-4.611
+    -> [oks_delta] lgbm                MAE=0.815  R2=-0.438
+  Fold 08/18 | held-out P08
+    -> [sis_delta] naive_mean          MAE=2.324  R2=-0.635
+    -> [ohs_delta] naive_mean          MAE=2.500  R2=-0.004
+    -> [oks_delta] naive_mean          MAE=2.853  R2=-1.569
+    -> [sis_delta] tuned_ridge         MAE=2.039  R2=-0.175
+    -> [ohs_delta] tuned_ridge         MAE=3.030  R2=-0.890
+    -> [oks_delta] tuned_ridge         MAE=3.400  R2=-2.311
+    -> [sis_delta] tuned_elasticnet    MAE=2.291  R2=-0.618
+    -> [ohs_delta] tuned_elasticnet    MAE=2.500  R2=-0.010
+    -> [oks_delta] tuned_elasticnet    MAE=2.967  R2=-1.697
+    -> [sis_delta] rf                  MAE=2.244  R2=-0.627
+    -> [ohs_delta] rf                  MAE=2.504  R2=0.014
+    -> [oks_delta] rf                  MAE=2.308  R2=-0.968
+    -> [sis_delta] lgbm                MAE=3.826  R2=-1.852
+    -> [ohs_delta] lgbm                MAE=2.525  R2=-0.052
+    -> [oks_delta] lgbm                MAE=2.605  R2=-1.308
+  Fold 09/18 | held-out P09
+    -> [sis_delta] naive_mean          MAE=3.647  R2=-2.838
+    -> [ohs_delta] naive_mean          MAE=1.500  R2=-0.181
+    -> [oks_delta] naive_mean          MAE=1.000  R2=-0.148
+    -> [sis_delta] tuned_ridge         MAE=5.443  R2=-6.532
+    -> [ohs_delta] tuned_ridge         MAE=1.360  R2=-0.147
+    -> [oks_delta] tuned_ridge         MAE=3.808  R2=-12.760
+    -> [sis_delta] tuned_elasticnet    MAE=3.615  R2=-2.788
+    -> [ohs_delta] tuned_elasticnet    MAE=1.500  R2=-0.234
+    -> [oks_delta] tuned_elasticnet    MAE=1.000  R2=-0.218
+    -> [sis_delta] rf                  MAE=4.713  R2=-4.980
+    -> [ohs_delta] rf                  MAE=3.219  R2=-5.279
+    -> [oks_delta] rf                  MAE=1.483  R2=-1.470
+    -> [sis_delta] lgbm                MAE=5.058  R2=-6.241
+    -> [ohs_delta] lgbm                MAE=2.453  R2=-2.297
+    -> [oks_delta] lgbm                MAE=1.536  R2=-1.010
+  Fold 10/18 | held-out P10
+    -> [sis_delta] naive_mean          MAE=1.000  R2=-0.084
+    -> [ohs_delta] naive_mean          MAE=4.132  R2=-0.106
+    -> [oks_delta] naive_mean          MAE=2.794  R2=-0.536
+    -> [sis_delta] tuned_ridge         MAE=2.042  R2=-3.299
+    -> [ohs_delta] tuned_ridge         MAE=5.587  R2=-0.897
+    -> [oks_delta] tuned_ridge         MAE=7.776  R2=-5.092
+    -> [sis_delta] tuned_elasticnet    MAE=1.012  R2=-0.116
+    -> [ohs_delta] tuned_elasticnet    MAE=4.159  R2=-0.117
+    -> [oks_delta] tuned_elasticnet    MAE=2.836  R2=-0.581
+    -> [sis_delta] rf                  MAE=1.438  R2=-1.410
+    -> [ohs_delta] rf                  MAE=4.465  R2=-0.250
+    -> [oks_delta] rf                  MAE=2.555  R2=0.205
+    -> [sis_delta] lgbm                MAE=1.672  R2=-2.482
+    -> [ohs_delta] lgbm                MAE=4.343  R2=-0.151
+    -> [oks_delta] lgbm                MAE=2.169  R2=0.426
+  Fold 11/18 | held-out P11
+    -> [sis_delta] naive_mean          MAE=4.029  R2=-2.952
+    -> [ohs_delta] naive_mean          MAE=1.559  R2=-0.142
+    -> [oks_delta] naive_mean          MAE=3.250  R2=-0.529
+    -> [sis_delta] tuned_ridge         MAE=4.916  R2=-9.090
+    -> [ohs_delta] tuned_ridge         MAE=6.995  R2=-31.207
+    -> [oks_delta] tuned_ridge         MAE=5.366  R2=-9.908
+    -> [sis_delta] tuned_elasticnet    MAE=4.210  R2=-3.222
+    -> [ohs_delta] tuned_elasticnet    MAE=1.559  R2=-0.148
+    -> [oks_delta] tuned_elasticnet    MAE=3.335  R2=-0.518
+    -> [sis_delta] rf                  MAE=3.826  R2=-2.323
+    -> [ohs_delta] rf                  MAE=2.654  R2=-1.674
+    -> [oks_delta] rf                  MAE=3.276  R2=-0.573
+    -> [sis_delta] lgbm                MAE=4.011  R2=-2.682
+    -> [ohs_delta] lgbm                MAE=2.111  R2=-0.532
+    -> [oks_delta] lgbm                MAE=2.829  R2=0.136
+  Fold 12/18 | held-out P12
+    -> [sis_delta] naive_mean          MAE=0.471  R2=-1.181
+    -> [ohs_delta] naive_mean          MAE=6.250  R2=-0.539
+    -> [oks_delta] naive_mean          MAE=6.029  R2=-1.267
+    -> [sis_delta] tuned_ridge         MAE=2.173  R2=-34.063
+    -> [ohs_delta] tuned_ridge         MAE=5.818  R2=-0.169
+    -> [oks_delta] tuned_ridge         MAE=7.963  R2=-2.237
+    -> [sis_delta] tuned_elasticnet    MAE=0.351  R2=-0.721
+    -> [ohs_delta] tuned_elasticnet    MAE=6.258  R2=-0.541
+    -> [oks_delta] tuned_elasticnet    MAE=6.064  R2=-1.291
+    -> [sis_delta] rf                  MAE=1.615  R2=-14.137
+    -> [ohs_delta] rf                  MAE=6.022  R2=-0.114
+    -> [oks_delta] rf                  MAE=4.991  R2=-0.711
+    -> [sis_delta] lgbm                MAE=1.700  R2=-16.609
+    -> [ohs_delta] lgbm                MAE=6.027  R2=-0.151
+    -> [oks_delta] lgbm                MAE=4.854  R2=-0.462
+  Fold 13/18 | held-out P13
+    -> [sis_delta] naive_mean          MAE=3.765  R2=-3.024
+    -> [ohs_delta] naive_mean          MAE=2.118  R2=-0.339
+    -> [oks_delta] naive_mean          MAE=5.426  R2=-1.879
+    -> [sis_delta] tuned_ridge         MAE=2.248  R2=-0.673
+    -> [ohs_delta] tuned_ridge         MAE=4.069  R2=-4.781
+    -> [oks_delta] tuned_ridge         MAE=4.540  R2=-0.649
+    -> [sis_delta] tuned_elasticnet    MAE=4.049  R2=-3.488
+    -> [ohs_delta] tuned_elasticnet    MAE=2.167  R2=-0.396
+    -> [oks_delta] tuned_elasticnet    MAE=5.392  R2=-1.830
+    -> [sis_delta] rf                  MAE=3.780  R2=-2.713
+    -> [ohs_delta] rf                  MAE=6.246  R2=-10.347
+    -> [oks_delta] rf                  MAE=5.418  R2=-1.582
+    -> [sis_delta] lgbm                MAE=4.044  R2=-3.295
+    -> [ohs_delta] lgbm                MAE=5.080  R2=-8.408
+    -> [oks_delta] lgbm                MAE=5.688  R2=-1.842
+  Fold 14/18 | held-out P14
+    -> [sis_delta] naive_mean          MAE=1.000  R2=-0.728
+    -> [ohs_delta] naive_mean          MAE=3.346  R2=-0.014
+    -> [oks_delta] naive_mean          MAE=2.324  R2=-2.468
+    -> [sis_delta] tuned_ridge         MAE=14.336  R2=-395.069
+    -> [ohs_delta] tuned_ridge         MAE=9.558  R2=-13.225
+    -> [oks_delta] tuned_ridge         MAE=36.687  R2=-1195.251
+    -> [sis_delta] tuned_elasticnet    MAE=0.972  R2=-0.582
+    -> [ohs_delta] tuned_elasticnet    MAE=2.785  R2=0.065
+    -> [oks_delta] tuned_elasticnet    MAE=2.326  R2=-2.472
+    -> [sis_delta] rf                  MAE=2.020  R2=-3.973
+    -> [ohs_delta] rf                  MAE=2.486  R2=0.333
+    -> [oks_delta] rf                  MAE=2.383  R2=-2.646
+    -> [sis_delta] lgbm                MAE=2.330  R2=-5.190
+    -> [ohs_delta] lgbm                MAE=2.117  R2=0.480
+    -> [oks_delta] lgbm                MAE=1.835  R2=-2.160
+  Fold 15/18 | held-out P15
+    -> [sis_delta] naive_mean          MAE=1.831  R2=-0.052
+    -> [ohs_delta] naive_mean          MAE=1.699  R2=-0.601
+    -> [oks_delta] naive_mean          MAE=1.566  R2=-0.874
+    -> [sis_delta] tuned_ridge         MAE=2.723  R2=-0.796
+    -> [ohs_delta] tuned_ridge         MAE=2.729  R2=-4.246
+    -> [oks_delta] tuned_ridge         MAE=2.800  R2=-4.698
+    -> [sis_delta] tuned_elasticnet    MAE=1.794  R2=-0.105
+    -> [ohs_delta] tuned_elasticnet    MAE=1.657  R2=-0.517
+    -> [oks_delta] tuned_elasticnet    MAE=1.521  R2=-0.763
+    -> [sis_delta] rf                  MAE=2.587  R2=-0.257
+    -> [ohs_delta] rf                  MAE=1.632  R2=-0.488
+    -> [oks_delta] rf                  MAE=2.345  R2=-3.514
+    -> [sis_delta] lgbm                MAE=2.368  R2=-0.111
+    -> [ohs_delta] lgbm                MAE=2.271  R2=-2.309
+    -> [oks_delta] lgbm                MAE=2.574  R2=-3.741
+  Fold 16/18 | held-out P16
+    -> [sis_delta] naive_mean          MAE=1.375  R2=-0.271
+    -> [ohs_delta] naive_mean          MAE=2.728  R2=-0.856
+    -> [oks_delta] naive_mean          MAE=5.235  R2=-2.674
+    -> [sis_delta] tuned_ridge         MAE=4.721  R2=-9.540
+    -> [ohs_delta] tuned_ridge         MAE=5.411  R2=-7.578
+    -> [oks_delta] tuned_ridge         MAE=4.833  R2=-2.190
+    -> [sis_delta] tuned_elasticnet    MAE=1.338  R2=-0.274
+    -> [ohs_delta] tuned_elasticnet    MAE=2.691  R2=-0.799
+    -> [oks_delta] tuned_elasticnet    MAE=5.358  R2=-2.801
+    -> [sis_delta] rf                  MAE=2.310  R2=-1.605
+    -> [ohs_delta] rf                  MAE=2.376  R2=-0.136
+    -> [oks_delta] rf                  MAE=4.934  R2=-2.446
+    -> [sis_delta] lgbm                MAE=2.890  R2=-2.308
+    -> [ohs_delta] lgbm                MAE=2.344  R2=-0.280
+    -> [oks_delta] lgbm                MAE=3.907  R2=-0.894
+  Fold 17/18 | held-out P17
+    -> [sis_delta] naive_mean          MAE=1.500  R2=-0.695
+    -> [ohs_delta] naive_mean          MAE=1.500  R2=-0.045
+    -> [oks_delta] naive_mean          MAE=4.500  R2=-0.563
+    -> [sis_delta] tuned_ridge         MAE=3.165  R2=-4.818
+    -> [ohs_delta] tuned_ridge         MAE=5.089  R2=-13.295
+    -> [oks_delta] tuned_ridge         MAE=10.241  R2=-5.541
+    -> [sis_delta] tuned_elasticnet    MAE=1.512  R2=-0.747
+    -> [ohs_delta] tuned_elasticnet    MAE=1.476  R2=-0.015
+    -> [oks_delta] tuned_elasticnet    MAE=4.499  R2=-0.544
+    -> [sis_delta] rf                  MAE=1.748  R2=-1.023
+    -> [ohs_delta] rf                  MAE=5.740  R2=-16.138
+    -> [oks_delta] rf                  MAE=7.452  R2=-2.298
+    -> [sis_delta] lgbm                MAE=1.971  R2=-0.975
+    -> [ohs_delta] lgbm                MAE=6.419  R2=-15.941
+    -> [oks_delta] lgbm                MAE=7.895  R2=-3.110
+  Fold 18/18 | held-out P18
+    -> [sis_delta] naive_mean          MAE=1.699  R2=-1.608
+    -> [ohs_delta] naive_mean          MAE=0.750  R2=-0.011
+    -> [oks_delta] naive_mean          MAE=1.750  R2=-0.456
+    -> [sis_delta] tuned_ridge         MAE=6.065  R2=-27.240
+    -> [ohs_delta] tuned_ridge         MAE=3.299  R2=-26.996
+    -> [oks_delta] tuned_ridge         MAE=3.416  R2=-3.974
+    -> [sis_delta] tuned_elasticnet    MAE=1.698  R2=-1.585
+    -> [ohs_delta] tuned_elasticnet    MAE=0.790  R2=-0.189
+    -> [oks_delta] tuned_elasticnet    MAE=1.778  R2=-0.487
+    -> [sis_delta] rf                  MAE=2.569  R2=-3.797
+    -> [ohs_delta] rf                  MAE=2.153  R2=-7.090
+    -> [oks_delta] rf                  MAE=3.418  R2=-2.847
+    -> [sis_delta] lgbm                MAE=2.684  R2=-4.535
+    -> [ohs_delta] lgbm                MAE=1.400  R2=-2.594
+    -> [oks_delta] lgbm                MAE=2.951  R2=-2.094
+
+[OK] 18/18 delta folds completed
+=== Delta-Target Results (mean +/- std across LOPO folds) ===
+
+  Target: SIS_DELTA
+              model             MAE                 R2
+baseline_naive_mean 1.864 +/- 1.135   -1.315 +/- 1.053
+               lgbm 2.555 +/- 1.112   -3.902 +/- 3.679
+                 rf 2.256 +/- 1.064   -2.868 +/- 3.085
+   tuned_elasticnet 1.856 +/- 1.197   -1.280 +/- 1.125
+        tuned_ridge 3.891 +/- 2.909 -36.789 +/- 92.771
+
+  Target: OHS_DELTA
+              model             MAE                R2
+baseline_naive_mean 2.855 +/- 1.896  -0.726 +/- 0.973
+               lgbm 3.684 +/- 1.878  -2.748 +/- 3.948
+                 rf 3.812 +/- 1.781  -3.218 +/- 4.397
+   tuned_elasticnet 2.830 +/- 1.878  -0.751 +/- 1.021
+        tuned_ridge 5.028 +/- 2.179 -9.363 +/- 10.324
+
+  Target: OKS_DELTA
+              model             MAE                  R2
+baseline_naive_mean 3.315 +/- 2.104    -1.187 +/- 1.065
+               lgbm 3.593 +/- 2.023    -1.403 +/- 1.212
+                 rf 3.630 +/- 2.006    -1.536 +/- 1.099
+   tuned_elasticnet 3.354 +/- 2.084    -1.224 +/- 1.080
+        tuned_ridge 7.164 +/- 7.783 -72.496 +/- 280.311
+=== Delta-Target Results (mean +/- std across LOPO folds) ===
+
+  Target: SIS_DELTA
+              model             MAE                 R2
+baseline_naive_mean 1.864 +/- 1.135   -1.315 +/- 1.053
+               lgbm 2.555 +/- 1.112   -3.902 +/- 3.679
+                 rf 2.256 +/- 1.064   -2.868 +/- 3.085
+   tuned_elasticnet 1.856 +/- 1.197   -1.280 +/- 1.125
+        tuned_ridge 3.891 +/- 2.909 -36.789 +/- 92.771
+
+  Target: OHS_DELTA
+              model             MAE                R2
+baseline_naive_mean 2.855 +/- 1.896  -0.726 +/- 0.973
+               lgbm 3.684 +/- 1.878  -2.748 +/- 3.948
+                 rf 3.812 +/- 1.781  -3.218 +/- 4.397
+   tuned_elasticnet 2.830 +/- 1.878  -0.751 +/- 1.021
+        tuned_ridge 5.028 +/- 2.179 -9.363 +/- 10.324
+
+  Target: OKS_DELTA
+              model             MAE                  R2
+baseline_naive_mean 3.315 +/- 2.104    -1.187 +/- 1.065
+               lgbm 3.593 +/- 2.023    -1.403 +/- 1.212
+                 rf 3.630 +/- 2.006    -1.536 +/- 1.099
+   tuned_elasticnet 3.354 +/- 2.084    -1.224 +/- 1.080
+        tuned_ridge 7.164 +/- 7.783 -72.496 +/- 280.311
+[OK] Saved -> /home/alessio/Projects/MAISON-ML/Development AG/outputs/run_v8/figures/model_comparison_sis_delta.png
+[OK] Saved -> /home/alessio/Projects/MAISON-ML/Development AG/outputs/run_v8/figures/model_comparison_ohs_delta.png
+[OK] Saved -> /home/alessio/Projects/MAISON-ML/Development AG/outputs/run_v8/figures/model_comparison_oks_delta.png
+[OK] lopo_metrics_per_participant_delta.csv: 11,077 bytes
+[OK] lopo_metrics_summary_delta.csv: 797 bytes
+[OK] model_comparison_sis_delta.png: 62,197 bytes
+[OK] model_comparison_ohs_delta.png: 58,732 bytes
+[OK] model_comparison_oks_delta.png: 61,263 bytes
+
+[OK] All delta outputs saved.
