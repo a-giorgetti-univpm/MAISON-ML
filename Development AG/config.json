@@ -1,5 +1,5 @@
 {
-  "seed": 69,
+  "seed": 42,
   "data_dir": "data",
   "features_file": "maison-llf-features.csv",
   "demographics_file": "maison-llf-demographics.csv",
