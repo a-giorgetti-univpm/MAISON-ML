@@ -187,7 +187,7 @@ FEAT_COLS_ROLLED = ALL_NUM_COLS + ANA_QUAL_COLS
 ## df_modelq = pp.quartile_creation(df_model)  ## TODO: creazione dei quartili
 
 # Hyperparameter grids used in the inner CV search
-with open("param.json", "r", encoding="utf-8") as file:
+with open("param_v2.json", "r", encoding="utf-8") as file:
     parameters = json.load(file)
 
 # Main LOPO loop:
