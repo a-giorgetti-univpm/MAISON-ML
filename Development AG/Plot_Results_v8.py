@@ -6,8 +6,8 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-TABLES_DIR = Path("outputs/run_v7/tables")
-FIGURES_DIR = Path("outputs/run_v7/figures")
+TABLES_DIR = Path("outputs/run_v8/tables")
+FIGURES_DIR = Path("outputs/run_v8/figures")
 FIGURES_DIR.mkdir(parents=True, exist_ok=True)
 
 summary_path = TABLES_DIR / "lopo_metrics_summary.csv"
