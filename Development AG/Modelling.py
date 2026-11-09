@@ -12,6 +12,11 @@ from sklearn.metrics import (
 from sklearn.model_selection import GroupKFold, GridSearchCV
 from sklearn.ensemble import RandomForestRegressor
 from lightgbm import LGBMRegressor
+from xgboost import XGBRegressor
+from catboost import CatBoostRegressor
+from sklearn.tree import DecisionTreeRegressor
+from sklearn.svm import SVR
+
 
 import pandas as pd
 import numpy as np
@@ -193,6 +198,10 @@ def run_models(num_ana, df_model, logo, groups, n_folds, MAX_FOLDS, PARTICIPANT_
             ('tuned_elasticnet', ElasticNet, dict(max_iter=10000, random_state=seed), param_grid["PARAM_GRID_ELASTICNET"], None),
             ('rf', RandomForestRegressor, dict(random_state=seed, n_jobs=1), param_grid["PARAM_GRID_RF"], None),
             ('lgbm', LGBMRegressor, dict(random_state=seed, verbosity=-1, n_jobs=1), param_grid["PARAM_GRID_LGB"], None),
+            ('xgb', XGBRegressor(eval_metric="rmse", tree_method="hist", random_state=seed), param_grid["PARAM_GRID_XGBOOST"], None),
+            ('catoboost', CatBoostRegressor(eval_metric="RMSE", verbose=False, random_seed=seed), param_grid["PARAM_GRID_CATBOOST"], None),
+            ('dt', DecisionTreeRegressor(random_state=seed), param_grid["PARAM_GRID_DECISIONTREE"], None),
+            ('svr', SVR(), param_grid["PARAM_GRID_SVR"], None)
         ]
 
         for model_tag, model_cls, model_kwargs, model_grid, selector in Model_SPECS:
@@ -287,6 +296,10 @@ def run_delta_model(df_model_delta, ana, param_grid, logo_d, groups_d, MAX_FOLDS
     ('tuned_elasticnet', ElasticNet, dict(max_iter=10000, random_state=seed), param_grid["PARAM_GRID_ELASTICNET"], None),
     ('rf', RandomForestRegressor, dict(random_state=seed, n_jobs=1), param_grid["PARAM_GRID_RF"], None),
     ('lgbm', LGBMRegressor, dict(random_state=seed, verbosity=-1, n_jobs=1), param_grid["PARAM_GRID_LGB"], None),
+    ('xgb', XGBRegressor(eval_metric="rmse", tree_method="hist", random_state=seed), param_grid["PARAM_GRID_XGBOOST"], None),
+    ('catoboost', CatBoostRegressor(eval_metric="RMSE", verbose=False, random_seed=seed), param_grid["PARAM_GRID_CATBOOST"], None),
+    ('dt', DecisionTreeRegressor(random_state=seed), param_grid["PARAM_GRID_DECISIONTREE"], None),
+    ('svr', SVR(), param_grid["PARAM_GRID_SVR"], None)
     ]
 
     print(f"  Models   : {[s[0] for s in DELTA_SPECS]}")
