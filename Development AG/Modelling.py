@@ -124,6 +124,7 @@ def _merge_demographics(df, demographics, participant_col):
     )
 
 
+
 def run_models(num_ana, df_model, logo, groups, n_folds, MAX_FOLDS, PARTICIPANT_COL, WINDOWS, TARGET_SIS, TARGET_OHS, TARGET_OKS, ANA_QUAN_COLS, ANA_QUAL_COLS, DEMO_FEAT_COLS, ALL_NUM_COLS, FEAT_COLS_ROLLED, DATE_COL, SAFE_SENSOR_COLS, seed, param_grid):
 
     fold_records = []
@@ -198,10 +199,10 @@ def run_models(num_ana, df_model, logo, groups, n_folds, MAX_FOLDS, PARTICIPANT_
             ('tuned_elasticnet', ElasticNet, dict(max_iter=10000, random_state=seed), param_grid["PARAM_GRID_ELASTICNET"], None),
             ('rf', RandomForestRegressor, dict(random_state=seed, n_jobs=1), param_grid["PARAM_GRID_RF"], None),
             ('lgbm', LGBMRegressor, dict(random_state=seed, verbosity=-1, n_jobs=1), param_grid["PARAM_GRID_LGB"], None),
-            ('xgb', XGBRegressor(eval_metric="rmse", tree_method="hist", random_state=seed), param_grid["PARAM_GRID_XGBOOST"], None),
-            ('catoboost', CatBoostRegressor(eval_metric="RMSE", verbose=False, random_seed=seed), param_grid["PARAM_GRID_CATBOOST"], None),
-            ('dt', DecisionTreeRegressor(random_state=seed), param_grid["PARAM_GRID_DECISIONTREE"], None),
-            ('svr', SVR(), param_grid["PARAM_GRID_SVR"], None)
+            ('xgb', XGBRegressor, dict(eval_metric="rmse", tree_method="hist", random_state=seed), param_grid["PARAM_GRID_XGBOOST"], None),
+            ('catboost', CatBoostRegressor, dict(eval_metric="RMSE", verbose=False, random_seed=seed), param_grid["PARAM_GRID_CATBOOST"], None),
+            ('dt', DecisionTreeRegressor, dict(random_state=seed), param_grid["PARAM_GRID_DECISIONTREE"], None),
+            ('svr', SVR, dict(), param_grid["PARAM_GRID_SVR"], None)
         ]
 
         for model_tag, model_cls, model_kwargs, model_grid, selector in Model_SPECS:
@@ -238,7 +239,7 @@ def run_models(num_ana, df_model, logo, groups, n_folds, MAX_FOLDS, PARTICIPANT_
                     f"MAE={mae:.3f}  R2={r2:.3f}  best={search.best_params_}")
 
         # Make sure the OOF keys exist for later scatter plots
-        for m_tag in ['tuned_elasticnet', 'lgbm']:
+        for m_tag in ['tuned_elasticnet', 'lgbm', 'xgb', 'catboost', 'dt', 'svr']:
             for _t in [TARGET_SIS, TARGET_OHS, TARGET_OKS]:
                 key = f'{m_tag}_{_t}'
                 if key not in oof_pred_store:
@@ -268,7 +269,7 @@ def print_summary(fold_records, MAX_FOLDS):
 def hyperparameter_frequency(df_fold_summary,TARGET_SIS, TARGET_OHS, TARGET_OKS):
     # Count how often each best-parameter setting was selected across folds
 
-    TUNED_TAGS = ['tuned_ridge', 'tuned_elasticnet', 'rf', 'lgbm']
+    TUNED_TAGS = ['tuned_ridge', 'tuned_elasticnet', 'rf', 'lgbm', 'xgb', 'catboost', 'dt', 'svr']
     TARGETS_ALL = [TARGET_SIS, TARGET_OHS, TARGET_OKS]
 
     print('=== Best-Param Frequency Summary (across 18 LOPO folds) ===\n')
@@ -296,10 +297,10 @@ def run_delta_model(df_model_delta, ana, param_grid, logo_d, groups_d, MAX_FOLDS
     ('tuned_elasticnet', ElasticNet, dict(max_iter=10000, random_state=seed), param_grid["PARAM_GRID_ELASTICNET"], None),
     ('rf', RandomForestRegressor, dict(random_state=seed, n_jobs=1), param_grid["PARAM_GRID_RF"], None),
     ('lgbm', LGBMRegressor, dict(random_state=seed, verbosity=-1, n_jobs=1), param_grid["PARAM_GRID_LGB"], None),
-    ('xgb', XGBRegressor(eval_metric="rmse", tree_method="hist", random_state=seed), param_grid["PARAM_GRID_XGBOOST"], None),
-    ('catoboost', CatBoostRegressor(eval_metric="RMSE", verbose=False, random_seed=seed), param_grid["PARAM_GRID_CATBOOST"], None),
-    ('dt', DecisionTreeRegressor(random_state=seed), param_grid["PARAM_GRID_DECISIONTREE"], None),
-    ('svr', SVR(), param_grid["PARAM_GRID_SVR"], None)
+    ('xgb', XGBRegressor, dict(eval_metric="rmse", tree_method="hist", random_state=seed), param_grid["PARAM_GRID_XGBOOST"], None),
+    ('catboost', CatBoostRegressor, dict(eval_metric="RMSE", verbose=False, random_seed=seed), param_grid["PARAM_GRID_CATBOOST"], None),
+    ('dt', DecisionTreeRegressor, dict(random_state=seed), param_grid["PARAM_GRID_DECISIONTREE"], None),
+    ('svr', SVR, dict(), param_grid["PARAM_GRID_SVR"], None)
     ]
 
     print(f"  Models   : {[s[0] for s in DELTA_SPECS]}")
