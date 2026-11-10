@@ -66,7 +66,7 @@ def save_baseline(fold_records, TARGET_SIS, TARGET_OHS, TARGET_OKS, TABLES_DIR):
 
 def save_long_table(fold_records, TARGET_SIS, TARGET_OHS, TARGET_OKS, TABLES_DIR):
 
-    ALL_MODEL_MAP = {
+    ALL_MODEL_MAP = {         ## TODO: aggiungere i miei modelli in automatico
     'baseline_demo_ridge' : 'bl_a_',
     'baseline_naive_mean' : 'bl_b_',
     'ridge_sensor_demo'   : 'ridge_',
@@ -74,6 +74,10 @@ def save_long_table(fold_records, TARGET_SIS, TARGET_OHS, TARGET_OKS, TABLES_DIR
     'tuned_elasticnet'    : 'tuned_elasticnet_',
     'rf'                  : 'rf_',
     'lgbm'                : 'lgbm_',
+    'xgb'                 : 'xgb_',
+    'catboost'            : 'catboost_',
+    'dt'                  : 'dt_',
+    'svr'                 : 'svr_'
     }
 
     metrics_rows = []
@@ -152,12 +156,16 @@ def save_long_table(fold_records, TARGET_SIS, TARGET_OHS, TARGET_OKS, TABLES_DIR
 
 def save_delta_summary(delta_records, TARGET_SIS_DELTA, TARGET_OHS_DELTA, TARGET_OKS_DELTA, TABLES_DIR):
 
-    DELTA_MODEL_MAP = {
+    DELTA_MODEL_MAP = {           ## TODO: aggiungere i miei modelli in automatico
     'baseline_naive_mean' : 'naive_mean_',
     'tuned_ridge'         : 'tuned_ridge_',
     'tuned_elasticnet'    : 'tuned_elasticnet_',
     'rf'                  : 'rf_',
     'lgbm'                : 'lgbm_',
+    'xgb'                 : 'xgb_',
+    'catboost'            : 'catboost_',
+    'dt'                  : 'dt_',
+    'svr'                 : 'svr_'
     }
 
     delta_metric_rows = []

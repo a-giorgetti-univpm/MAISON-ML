@@ -137,7 +137,7 @@ def run_models(num_ana, df_model, logo, groups, n_folds, MAX_FOLDS, PARTICIPANT_
         if fold_idx >= MAX_FOLDS:  ### se vuoi fermarti prima invece di fare la LOPO su ogni paziente
             break
 
-        #if fold_idx >= 1:  ### TODO: TEST
+        #if fold_idx >= 1:  ### TODO: TEST only
         #            break
 
         # Split into train and test

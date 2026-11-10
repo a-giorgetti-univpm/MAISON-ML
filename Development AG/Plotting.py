@@ -63,7 +63,7 @@ def _make_comparison_fig(summary, target, out_path, df_all_metrics, MODEL_ORDER,
 
 def make_model_comparison_figures(df_all_metrics, summary, TARGET_SIS, TARGET_OHS, TARGET_OKS, FIGURES_DIR):
     
-    MODEL_ORDER = [
+    MODEL_ORDER = [                 ## TODO: aggiungere i miei modelli in automatico
         'baseline_naive_mean',
         'baseline_demo_ridge',
         'ridge_sensor_demo',
@@ -71,9 +71,13 @@ def make_model_comparison_figures(df_all_metrics, summary, TARGET_SIS, TARGET_OH
         'tuned_elasticnet',
         'rf',
         'lgbm',
+        'xgb',
+        'catboost',
+        'dt',
+        'svr'
     ]
     
-    MODEL_LABELS = {
+    MODEL_LABELS = {                ## TODO: aggiungere i miei modelli in automatico
         'baseline_naive_mean' : 'Naive\nMean',
         'baseline_demo_ridge' : 'Demo\nRidge',
         'ridge_sensor_demo'   : 'Ridge\n(untuned)',
@@ -81,10 +85,14 @@ def make_model_comparison_figures(df_all_metrics, summary, TARGET_SIS, TARGET_OH
         'tuned_elasticnet'    : 'Elastic\nNet',
         'rf'                  : 'Random\nForest',
         'lgbm'                : 'LightGBM',
+        'xgb'                 : 'XGBoost',
+        'catboost'            : 'CatBoost',
+        'dt'                  : 'Decision\nTree',
+        'svr'                 : 'Support\nVector Regression'
     }
 
     # Baselines in red, sensor models in blue/green/orange
-    PALETTE = ['#c0392b', '#e07b54', '#5b9bd5', '#2980b9', '#16a085', '#27ae60', '#e67e22']
+    PALETTE = ['#c0392b', '#e07b54', '#5b9bd5', '#2980b9', '#16a085', '#27ae60', '#e67e22', '#8e44ad', '#f39c12', '#d35400', '#7f8c8d'] 
 
     _make_comparison_fig(summary, TARGET_SIS, FIGURES_DIR / 'model_comparison_sis.png', df_all_metrics, MODEL_ORDER, MODEL_LABELS, PALETTE)
     _make_comparison_fig(summary, TARGET_OHS, FIGURES_DIR / 'model_comparison_ohs.png', df_all_metrics, MODEL_ORDER, MODEL_LABELS, PALETTE)
@@ -103,7 +111,7 @@ def make_model_comparison_figures(df_all_metrics, summary, TARGET_SIS, TARGET_OH
 
 
 
-def plot_actual_predicted(oof_pred_store, TARGET_SIS, TARGET_OHS, TARGET_OKS, FIGURES_DIR):
+def plot_actual_predicted(oof_pred_store, TARGET_SIS, TARGET_OHS, TARGET_OKS, FIGURES_DIR):     ### TODO: valutare altri modelli per gli scatter
     
     # Plot pooled out-of-fold predictions for ElasticNet and LightGBM
 
@@ -221,15 +229,19 @@ def make_delta_comparison_figures(delta_summary, df_delta_metrics, TARGET_SIS_DE
             lambda r: f"{r['r2_mean']:.3f} +/- {r['r2_std']:.3f}", axis=1)
         print(_sub[['model', 'MAE', 'R2']].to_string(index=False))
 
-    # Delta comparison figures
-    DELTA_MODEL_ORDER  = ['tuned_ridge', 'tuned_elasticnet', 'rf', 'lgbm']
+    # Delta comparison figures    ## TODO: aggiungere i miei modelli in automatico
+    DELTA_MODEL_ORDER  = ['tuned_ridge', 'tuned_elasticnet', 'rf', 'lgbm', 'xgb', 'catboost', 'dt', 'svr']
     DELTA_MODEL_LABELS = {
         'tuned_ridge'      : 'Ridge\n(tuned)',
         'tuned_elasticnet' : 'Elastic\nNet',
         'rf'               : 'Random\nForest',
         'lgbm'             : 'LightGBM',
+        'xgb'              : 'XGBoost',
+        'catboost'         : 'CatBoost',
+        'dt'               : 'Decision\nTree',
+        'svr'              : 'Support\nVector Regression'
     }
-    DELTA_PALETTE = ['#2980b9', '#16a085', '#27ae60', '#e67e22']
+    DELTA_PALETTE = ['#2980b9', '#16a085', '#27ae60', '#e67e22', '#8e44ad', '#f39c12', '#d35400', '#7f8c8d']
 
     _make_delta_fig(delta_summary, df_delta_metrics, TARGET_SIS_DELTA, FIGURES_DIR / 'model_comparison_sis_delta.png', DELTA_MODEL_ORDER, DELTA_MODEL_LABELS, DELTA_PALETTE)
     _make_delta_fig(delta_summary, df_delta_metrics, TARGET_OHS_DELTA, FIGURES_DIR / 'model_comparison_ohs_delta.png', DELTA_MODEL_ORDER, DELTA_MODEL_LABELS, DELTA_PALETTE)
