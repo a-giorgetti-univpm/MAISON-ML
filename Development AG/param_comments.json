@@ -1,0 +1,51 @@
+{
+"PARAM_GRID_RIDGE" : {
+    "model__alpha": [0.01, 0.1, 1.0, 10.0, 100.0]
+},
+
+"PARAM_GRID_RF" : {
+    "model__n_estimators"    : [200],
+    "model__max_depth"       : [5, 10, null],
+    "model__min_samples_leaf": [2, 5]
+},
+
+"PARAM_GRID_LGB" : {
+    "model__n_estimators" : [20, 50, 100, 300],
+    "model__learning_rate": [0.001, 0.05, 0.1],
+    "model__num_leaves"   : [15, 31, 63],
+	"model__max_depth": [5, 10, 20, 50]
+	#"subsample": [0.8, 1.0],
+    #"colsample_bytree": [0.8, 1.0],
+},
+
+"PARAM_GRID_ELASTICNET" : {
+    "model__alpha"   : [0.01, 0.1, 1.0, 10.0],
+    "model__l1_ratio": [0.1, 0.5, 0.9]
+},
+
+"PARAM_GRID_XGBOOST": {
+	"model__n_estimators": [20, 50],
+	"model__max_depth": [5, 10, 20, 50],
+	"model__learning_rate": [0.001, 0.01]   ### 0.3
+},
+
+"PARAM_GRID_CATBOOST": {
+	"model__iterations": [20, 50],    ### parameters different from "1000", "3" and "0.1" in the reference paper
+	"model__depth": [5, 10], ## maximum tree depth is 16
+	"model__learning_rate": [0.001, 0.01]            #"l2_leaf_reg": [3, 10],
+},
+
+"PARAM_GRID_DECISIONTREE": {
+	"model__max_depth": [5, 10, 20, 50]  ### 8
+    #"min_samples_split": [2, 5, 10],
+	#"min_samples_leaf": [1, 2, 5],
+	#"criterion": ["mse", "friedman_mse", "mae", "poisson"],  # lascialo commentato se vuoi
+},
+
+"PARAM_GRID_SVR": {
+	"model__kernel": ["rbf"],  ## "poly" --> sconsigliato per fare SVR
+	"model__C": [1, 10],
+	"model__epsilon": [0.01, 0.2],  ### 0.1
+	"model__gamma": ["scale"],
+ }
+}
